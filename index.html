@@ -4,44 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dion Prayoga — Sales Honda Bandung</title>
-<meta name="description" content="Katalog Honda Daya Motor Cibiru, Bandung. Cek stok, harga OTR, simulasi kredit.">
+<meta name="description" content="Katalog Honda Daya Motor Cibiru, Bandung. Harga OTR & simulasi kredit FIFGROUP.">
 <meta name="theme-color" content="#1c1c1e">
 <style>
 :root{
-  --bg:#f5f5f7;
-  --bg-glass:rgba(245,245,247,0.75);
-  --surface:#ffffff;
-  --surface-2:#fafafa;
-
-  --label:#1d1d1f;
-  --label-2:#6e6e73;
-  --label-3:#86868b;
-
+  --bg:#f5f5f7; --bg-glass:rgba(245,245,247,0.75);
+  --surface:#fff; --surface-2:#fafafa;
+  --label:#1d1d1f; --label-2:#6e6e73; --label-3:#86868b;
   --separator:rgba(60,60,67,0.08);
-  --fill:rgba(120,120,128,0.08);
-  --fill-2:rgba(120,120,128,0.12);
-
-  --accent:#ff9500;
-  --accent-2:#f58a00;
-  --accent-text:#1c1c1e;
+  --fill:rgba(120,120,128,0.08); --fill-2:rgba(120,120,128,0.12);
+  --accent:#ff9500; --accent-2:#f58a00; --accent-text:#1c1c1e;
   --accent-soft:rgba(255,149,0,0.12);
-
-  --wa:#25d366;
-  --wa-2:#1da851;
-  --wa-glass:rgba(37,211,102,0.9);
-
+  --wa:#25d366; --wa-2:#1da851; --wa-glass:rgba(37,211,102,0.9);
   --shadow-card:0 1px 3px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
   --shadow-float:0 8px 24px rgba(37,211,102,.35),0 2px 8px rgba(0,0,0,.1);
-
-  --radius-card:20px;
-  --radius-button:14px;
-  --radius-pill:999px;
-
-  --spring:cubic-bezier(0.34,1.56,0.64,1);
-  --smooth:cubic-bezier(0.4,0,0.2,1);
+  --radius-card:20px; --radius-button:14px; --radius-pill:999px;
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --smooth:cubic-bezier(.4,0,.2,1);
   --nav-duration:400ms;
-  --nav-easing:cubic-bezier(0.32,0.72,0,1);
-
+  --nav-easing:cubic-bezier(.32,.72,0,1);
   --blur-glass:blur(24px) saturate(180%);
   --blur-glass-sm:blur(20px) saturate(180%);
 }
@@ -55,11 +36,10 @@ body{
 #app{position:fixed;inset:0;overflow:hidden}
 button,a{touch-action:manipulation}
 
+/* SCREEN SYSTEM */
 .screen{
-  position:absolute;inset:0;
-  overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  background:var(--bg);
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;background:var(--bg);
   transform:translateX(100%);visibility:hidden;will-change:transform;
   transition:transform var(--nav-duration) var(--nav-easing),
              visibility 0s linear var(--nav-duration);
@@ -90,8 +70,8 @@ a{color:inherit;text-decoration:none}
   border:2px solid rgba(0,0,0,.15);border-top-color:var(--label);
   animation:spin .7s linear infinite;
 }
-.wa-btn.is-loading::after,.wa-btn.is-loading,.stok-btn.is-loading,.harga-cta.is-loading{color:transparent}
-.wa-btn.is-loading::after,.stok-btn.is-loading::after{border-color:rgba(255,255,255,.3);border-top-color:#fff}
+.wa-btn.is-loading::after,.wa-btn.is-loading{color:transparent}
+.wa-btn.is-loading::after{border-color:rgba(255,255,255,.3);border-top-color:#fff}
 .hero-cta.is-loading{color:transparent!important}
 .hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -99,11 +79,10 @@ a{color:inherit;text-decoration:none}
 /* HERO */
 .hero{
   background:
-    radial-gradient(ellipse at 85% 0%,rgba(255,149,0,0.22) 0%,transparent 55%),
-    radial-gradient(ellipse at 0% 100%,rgba(255,100,0,0.12) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 0%,rgba(255,149,0,.22) 0%,transparent 55%),
+    radial-gradient(ellipse at 0% 100%,rgba(255,100,0,.12) 0%,transparent 50%),
     linear-gradient(180deg,#1c1c1e 0%,#2c2c2e 100%);
-  color:#fff;
-  padding:calc(20px + env(safe-area-inset-top)) 0 28px;
+  color:#fff;padding:calc(20px + env(safe-area-inset-top)) 0 28px;
   position:relative;overflow:hidden;
   border-bottom-left-radius:28px;border-bottom-right-radius:28px;
 }
@@ -118,46 +97,40 @@ a{color:inherit;text-decoration:none}
 }
 .profile-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .profile-info{min-width:0}
-.profile-info strong{display:block;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.profile-info span{display:block;font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profile-info strong{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profile-info span{display:block;font-size:12px;color:rgba(255,255,255,.6);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .badge{
   display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
   padding:5px 10px;border-radius:var(--radius-pill);
   font-size:11px;font-weight:600;flex-shrink:0;
   backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
 }
 .badge .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)}
-  70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}
-  100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}
-}
-.hero h1{font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)}70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.hero h1{font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
 .hero p{font-size:14.5px;color:rgba(255,255,255,.7);margin-bottom:22px;line-height:1.5}
 .hero-cta{
   display:flex;align-items:center;justify-content:center;gap:10px;
   width:100%;background:var(--accent);color:var(--accent-text);
-  font-weight:700;font-size:16px;letter-spacing:-0.01em;
+  font-weight:700;font-size:16px;letter-spacing:-.01em;
   padding:17px;border-radius:var(--radius-button);
-  box-shadow:0 4px 12px rgba(255,149,0,0.3),0 1px 2px rgba(0,0,0,0.15);
+  box-shadow:0 4px 12px rgba(255,149,0,.3),0 1px 2px rgba(0,0,0,.15);
   transition:transform .2s var(--spring),background .15s;
   cursor:pointer;position:relative;
 }
 .hero-cta:active{transform:scale(.97);background:var(--accent-2)}
 
-/* SECTIONS */
 section{padding:8px 0 0}
 .section-head{
   position:sticky;top:0;z-index:5;
-  padding:20px 20px 14px;
-  margin:0 -20px 10px;
+  padding:20px 20px 14px;margin:0 -20px 10px;
   background:var(--bg-glass);
   backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   transition:box-shadow .2s ease;
 }
-.section-head.is-stuck{box-shadow:0 1px 0 rgba(60,60,67,0.08)}
-.section-title{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;color:var(--label)}
+.section-head.is-stuck{box-shadow:0 1px 0 rgba(60,60,67,.08)}
+.section-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;color:var(--label)}
 .section-sub{font-size:13.5px;color:var(--label-2);margin:0}
 
 /* SOCIAL */
@@ -174,8 +147,7 @@ section{padding:8px 0 0}
 .social-tiktok .social-icon{background:#000}
 .social-ig .social-icon{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
 .social-yt .social-icon{background:#ff0000}
-.social span{font-size:11.5px;font-weight:600;color:var(--label);text-align:center;line-height:1.2;
-  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.social span{font-size:11.5px;font-weight:600;color:var(--label);text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* ACTIONS */
 .actions{display:grid;gap:10px}
@@ -188,7 +160,7 @@ section{padding:8px 0 0}
 .action:active{transform:scale(.98)}
 .action-ico{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);display:grid;place-items:center;font-size:22px;flex-shrink:0}
 .action-body{flex:1;min-width:0}
-.action-body strong{display:block;font-size:15.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
+.action-body strong{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.01em;color:var(--label)}
 .action-body span{display:block;font-size:13px;color:var(--label-2);margin-top:2px}
 .action-arrow{color:var(--label-3);font-size:20px;font-weight:300}
 
@@ -200,26 +172,26 @@ section{padding:8px 0 0}
   transition:transform .2s var(--spring);cursor:pointer;display:block;
 }
 .model:active{transform:scale(.98)}
-.model-img{height:155px;display:grid;place-items:center;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:60px}
+.model-img{height:155px;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:60px}
 .model-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .model-img .tag{
   position:absolute;top:12px;left:12px;
-  background:rgba(255,149,0,0.82);
+  background:rgba(255,149,0,.82);
   backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
   color:#fff;font-size:11px;font-weight:800;padding:6px 12px;
-  border-radius:var(--radius-pill);letter-spacing:0.04em;z-index:2;
-  border:1px solid rgba(255,255,255,0.25);
+  border-radius:var(--radius-pill);letter-spacing:.04em;z-index:2;
+  border:1px solid rgba(255,255,255,.25);
   box-shadow:0 2px 6px rgba(255,149,0,.25);
 }
-.model-img .tag.tag-dark{background:rgba(28,28,30,0.78);border-color:rgba(255,255,255,0.15);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.model-img .tag.tag-dark{background:rgba(28,28,30,.78);border-color:rgba(255,255,255,.15);box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .model-body{padding:16px 18px 18px}
-.model-body h3{font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;color:var(--label)}
-.model-body p{font-size:13px;color:var(--label-2);margin-bottom:14px;line-height:1.5}
+.model-body h3{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;color:var(--label)}
+.model-body p{font-size:13px;color:var(--label-2);margin-bottom:10px;line-height:1.5}
+.model-body .model-price{font-size:14px;font-weight:700;color:var(--accent-2);margin-bottom:12px;letter-spacing:-.01em}
 .model-btn{
   display:inline-flex;align-items:center;gap:6px;
   background:var(--accent);color:var(--accent-text);
-  font-weight:700;font-size:13.5px;letter-spacing:-0.01em;
+  font-weight:700;font-size:13.5px;letter-spacing:-.01em;
   padding:12px 16px;border-radius:11px;
   width:100%;justify-content:center;transition:background .15s;
 }
@@ -229,20 +201,18 @@ section{padding:8px 0 0}
 .trust{background:var(--surface);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden}
 .trust-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px}
 .trust-item + .trust-item{border-top:1px solid var(--separator)}
-.trust-ico{width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent-2);
-  display:grid;place-items:center;font-size:14px;font-weight:800;flex-shrink:0}
-.trust-item strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
+.trust-ico{width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent-2);display:grid;place-items:center;font-size:14px;font-weight:800;flex-shrink:0}
+.trust-item strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--label)}
 .trust-item span{display:block;font-size:13px;color:var(--label-2);margin-top:3px;line-height:1.45}
 
 /* TERMS */
 .terms{background:var(--surface);border-radius:var(--radius-card);padding:16px 18px;box-shadow:var(--shadow-card)}
-.terms h3{font-size:13px;font-weight:700;color:var(--label);letter-spacing:-0.01em;margin-bottom:8px}
+.terms h3{font-size:13px;font-weight:700;color:var(--label);letter-spacing:-.01em;margin-bottom:8px}
 .terms p{font-size:12.5px;color:var(--label-2);line-height:1.55}
 
 /* DETAIL HEADER */
 .detail-header{
-  position:sticky;top:0;z-index:10;
-  background:var(--bg-glass);
+  position:sticky;top:0;z-index:10;background:var(--bg-glass);
   backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   border-bottom:1px solid var(--separator);
   display:flex;align-items:center;padding:10px 14px;gap:8px;
@@ -256,22 +226,22 @@ section{padding:8px 0 0}
   backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
 }
 .back-btn:active{background:var(--fill-2);transform:scale(.93)}
-.detail-title{flex:1;font-size:16px;font-weight:700;text-align:center;letter-spacing:-0.02em;
+.detail-title{flex:1;font-size:16px;font-weight:700;text-align:center;letter-spacing:-.02em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--label)}
 
 /* MODEL DETAIL */
 .model-hero{height:260px;display:grid;place-items:center;position:relative;overflow:hidden;
   background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:110px}
 .model-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.model-hero .tag{position:absolute;top:20px;left:20px;background:rgba(255,149,0,0.82);
+.model-hero .tag{position:absolute;top:20px;left:20px;background:rgba(255,149,0,.82);
   backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);color:#fff;
   font-size:12px;font-weight:800;padding:7px 14px;border-radius:var(--radius-pill);z-index:2;
-  border:1px solid rgba(255,255,255,0.25);box-shadow:0 2px 8px rgba(255,149,0,.25)}
-.model-hero .tag.tag-dark{background:rgba(28,28,30,0.78);border-color:rgba(255,255,255,0.15)}
-.detail-h2{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px;color:var(--label)}
-.detail-tagline{font-size:15px;color:var(--accent-2);font-weight:600;margin-bottom:16px;letter-spacing:-0.01em}
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 8px rgba(255,149,0,.25)}
+.model-hero .tag.tag-dark{background:rgba(28,28,30,.78);border-color:rgba(255,255,255,.15)}
+.detail-h2{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;color:var(--label);line-height:1.2}
+.detail-tagline{font-size:15px;color:var(--accent-2);font-weight:600;margin-bottom:16px;letter-spacing:-.01em}
 .detail-desc{font-size:15px;color:var(--label-2);margin-bottom:20px;line-height:1.55}
-.detail-h3{font-size:17px;font-weight:800;margin-bottom:12px;letter-spacing:-0.02em;color:var(--label)}
+.detail-h3{font-size:17px;font-weight:800;margin-bottom:12px;letter-spacing:-.02em;color:var(--label)}
 .highlights{list-style:none;background:var(--surface);border-radius:var(--radius-card);padding:0;
   margin-bottom:20px;box-shadow:var(--shadow-card);overflow:hidden}
 .highlights li{font-size:14.5px;color:var(--label);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
@@ -283,96 +253,120 @@ section{padding:8px 0 0}
 .wa-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
   background:var(--wa);color:#fff;font-weight:700;font-size:15.5px;
-  letter-spacing:-0.01em;padding:16px;border-radius:var(--radius-button);
+  letter-spacing:-.01em;padding:16px;border-radius:var(--radius-button);
   transition:transform .2s var(--spring),background .15s;
   cursor:pointer;text-align:center;
-  box-shadow:0 4px 12px rgba(37,211,102,.2),0 1px 2px rgba(0,0,0,0.08);
+  box-shadow:0 4px 12px rgba(37,211,102,.2),0 1px 2px rgba(0,0,0,.08);
   position:relative;
 }
 .wa-btn:active{background:var(--wa-2);transform:scale(.97)}
 .wa-btn-outline{background:var(--surface);color:var(--label);box-shadow:var(--shadow-card)}
 .wa-btn-outline:active{background:var(--surface-2)}
 
-/* HARGA CARD (detail model) */
+/* HARGA CARD */
 .harga-card{
   background:var(--surface);border-radius:var(--radius-card);
   box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:20px;
 }
 .harga-section{padding:16px 18px}
 .harga-section + .harga-section{border-top:1px solid var(--separator)}
-.harga-stok-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .harga-label{
   font-size:11px;font-weight:700;color:var(--label-2);
-  text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;
 }
-.harga-value{font-size:22px;font-weight:800;letter-spacing:-0.02em;color:var(--label);line-height:1.1}
+.harga-value{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--label);line-height:1.1}
 .harga-value small{font-size:13px;font-weight:600;color:var(--label-3);margin-left:2px}
 .harga-note{font-size:12px;color:var(--label-2);margin-top:6px;line-height:1.45}
 .harga-cta{
   display:flex;align-items:center;justify-content:center;gap:6px;
   padding:14px;background:var(--accent-soft);color:var(--accent-2);
   font-weight:700;font-size:13.5px;border:none;width:100%;cursor:pointer;
-  transition:background .15s;font-family:inherit;letter-spacing:-0.01em;
+  transition:background .15s;font-family:inherit;letter-spacing:-.01em;
   position:relative;
 }
 .harga-cta:active{background:rgba(255,149,0,.2)}
 
-/* STOK BADGE */
-.stock-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:5px 11px;border-radius:var(--radius-pill);
-  font-size:11.5px;font-weight:700;letter-spacing:-0.01em;
-  white-space:nowrap;flex-shrink:0;
+/* FILTER BAR (stok & kredit) */
+.filter-bar{padding:16px 0 12px;margin-bottom:4px}
+.search-wrap{margin-bottom:10px}
+.search-input{
+  width:100%;padding:13px 16px;border-radius:12px;
+  border:none;background:var(--surface);
+  box-shadow:var(--shadow-card);
+  font-size:14px;font-family:inherit;
+  -webkit-appearance:none;appearance:none;
+  color:var(--label);
 }
-.stock-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
-.stock-ready{background:rgba(52,199,89,.14);color:#1a8a3f}
-.stock-indent{background:rgba(255,149,0,.16);color:#b86a00}
-.stock-out{background:rgba(255,59,48,.14);color:#c11c15}
-.stock-ask{background:var(--fill-2);color:var(--label-2)}
+.search-input::placeholder{color:var(--label-3)}
+.cat-tabs{
+  display:flex;gap:8px;overflow-x:auto;
+  padding:2px 20px 6px;margin:0 -20px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-chip{
+  flex-shrink:0;padding:9px 15px;border-radius:99px;
+  background:var(--surface);border:1px solid rgba(0,0,0,.06);
+  font-size:13px;font-weight:600;cursor:pointer;
+  color:var(--label-2);transition:all .2s;
+  font-family:inherit;
+}
+.cat-chip.is-active{
+  background:var(--label);color:#fff;border-color:var(--label);
+}
+.cat-chip:active{transform:scale(.96)}
 
-/* STOK LIST */
-.stok-card{
-  background:var(--surface);border-radius:var(--radius-card);
-  box-shadow:var(--shadow-card);overflow:hidden;
-  padding:16px 18px;
+/* STOK ITEMS */
+.stok-group{margin-bottom:20px}
+.stok-group-title{
+  font-size:12px;font-weight:700;color:var(--label-2);
+  text-transform:uppercase;letter-spacing:.05em;
+  padding:0 0 8px;margin-top:8px;
 }
-.stok-card + .stok-card{margin-top:12px}
-.stok-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
-.stok-emoji{
-  width:42px;height:42px;border-radius:12px;background:var(--accent-soft);
-  display:grid;place-items:center;font-size:20px;flex-shrink:0;
+.stok-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;border-radius:16px;
+  background:var(--surface);box-shadow:var(--shadow-card);
+  margin-bottom:8px;cursor:pointer;
+  transition:transform .15s;
 }
-.stok-title{flex:1;min-width:0}
-.stok-title strong{display:block;font-size:15.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
-.stok-title span{display:block;font-size:12px;color:var(--label-2);margin-top:2px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.stok-price-row{
-  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:12px 0;border-top:1px solid var(--separator);border-bottom:1px solid var(--separator);
-  margin-bottom:14px;
+.stok-item:active{transform:scale(.985)}
+.stok-item-emoji{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--accent-soft);display:grid;place-items:center;
+  font-size:20px;flex-shrink:0;
 }
-.stok-price-label{font-size:11.5px;font-weight:700;color:var(--label-2);
-  text-transform:uppercase;letter-spacing:0.04em}
-.stok-price{font-size:20px;font-weight:800;letter-spacing:-0.02em;color:var(--label);
-  text-align:right;line-height:1.1}
-.stok-price small{font-size:11.5px;font-weight:600;color:var(--label-3);display:block;margin-top:2px}
-.stok-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:13px;background:var(--wa);color:#fff;
-  font-weight:700;font-size:13.5px;letter-spacing:-0.01em;
-  border-radius:11px;cursor:pointer;
-  transition:transform .15s var(--spring),background .15s;
-  position:relative;
+.stok-item-info{flex:1;min-width:0}
+.stok-item-info strong{
+  display:block;font-size:14.5px;font-weight:700;
+  letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.stok-btn:active{transform:scale(.98);background:var(--wa-2)}
+.stok-item-info span{
+  display:block;font-size:13px;font-weight:700;
+  color:var(--accent-2);margin-top:2px;
+}
+.stok-item-cta{
+  flex-shrink:0;width:38px;height:38px;
+  border-radius:50%;background:var(--wa);color:#fff;
+  display:grid;place-items:center;
+}
+.stok-item-cta svg{width:18px;height:18px}
+
+/* EMPTY STATE */
+.empty-state{
+  padding:40px 20px;text-align:center;
+  color:var(--label-2);font-size:14px;
+}
 
 /* KREDIT ACCORDION */
 .kredit-card{
   background:var(--surface);border-radius:var(--radius-card);
   box-shadow:var(--shadow-card);overflow:hidden;
+  margin-bottom:10px;
   scroll-margin-top:80px;
 }
-.kredit-card + .kredit-card{margin-top:12px}
 .kredit-head{
   display:flex;align-items:center;gap:12px;
   padding:14px 16px;cursor:pointer;width:100%;
@@ -387,11 +381,12 @@ section{padding:8px 0 0}
   font-size:21px;flex-shrink:0;
 }
 .kredit-info{flex:1;min-width:0}
-.kredit-info strong{display:block;font-size:15.5px;font-weight:700;
-  letter-spacing:-0.01em;color:var(--label)}
+.kredit-info strong{display:block;font-size:14.5px;font-weight:700;
+  letter-spacing:-.01em;color:var(--label);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .kredit-info .kredit-mulai{
   display:block;font-size:12.5px;color:var(--accent-2);
-  font-weight:700;margin-top:2px;letter-spacing:-0.01em;
+  font-weight:700;margin-top:2px;letter-spacing:-.01em;
 }
 .kredit-info .kredit-otr{
   display:block;font-size:11.5px;color:var(--label-3);
@@ -406,7 +401,7 @@ section{padding:8px 0 0}
 .kredit-card.open .kredit-chevron{transform:rotate(90deg);color:var(--accent)}
 .kredit-detail{
   display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .35s cubic-bezier(0.32,0.72,0,1);
+  transition:grid-template-rows .35s cubic-bezier(.32,.72,0,1);
 }
 .kredit-card.open .kredit-detail{grid-template-rows:1fr}
 .kredit-detail-inner{overflow:hidden;min-height:0}
@@ -416,28 +411,43 @@ section{padding:8px 0 0}
   margin-top:2px;
 }
 .kredit-body-inner{padding-top:14px}
+
+/* DP SELECT */
+.dp-label{
+  display:block;font-size:11px;font-weight:700;
+  color:var(--label-2);text-transform:uppercase;
+  letter-spacing:.04em;margin-bottom:6px;
+}
+.dp-select{
+  width:100%;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(0,0,0,.08);background:var(--bg);
+  font-size:14px;font-weight:600;font-family:inherit;
+  color:var(--label);margin-bottom:14px;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:12px;
+  padding-right:36px;
+  cursor:pointer;
+}
+
+/* TENOR LIST */
 .tenor-list{
-  background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;
+  background:var(--bg);border-radius:14px;
+  overflow:hidden;margin-bottom:14px;
 }
 .tenor-row{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:11px 14px;font-size:13px;
+  padding:12px 14px;font-size:13px;
 }
 .tenor-row + .tenor-row{border-top:1px solid var(--separator)}
-.tenor-left{display:flex;flex-direction:column;gap:2px;min-width:0}
-.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-0.01em}
-.tenor-dp{color:var(--label-3);font-size:11.5px}
-.tenor-right{text-align:right;flex-shrink:0}
+.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-.01em}
 .tenor-cicilan{
   font-weight:800;color:var(--accent-2);font-size:14.5px;
-  letter-spacing:-0.02em;
+  letter-spacing:-.02em;
 }
 .tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px}
-.kredit-empty{
-  font-size:13px;color:var(--label-2);padding:14px;
-  background:var(--bg);border-radius:12px;margin-bottom:14px;
-  text-align:center;line-height:1.5;
-}
 
 /* FLOAT WA */
 .float-wa{
@@ -446,45 +456,29 @@ section{padding:8px 0 0}
   background:var(--wa-glass);
   backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   color:#fff;display:grid;place-items:center;
-  box-shadow:var(--shadow-float),inset 0 0 0 1px rgba(255,255,255,0.2);
+  box-shadow:var(--shadow-float),inset 0 0 0 1px rgba(255,255,255,.2);
   z-index:100;cursor:pointer;transform-origin:center bottom;
   transition:transform .45s var(--spring),opacity .35s var(--smooth),box-shadow .2s var(--smooth);
 }
 .float-wa:active{transform:scale(.9)}
-.float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.15))}
+.float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
 .float-wa.is-hidden{
   opacity:0;transform:scale(.6) translateY(24px);
   pointer-events:none;box-shadow:none;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));
-  transform:translateX(-50%) translateY(20px);
-  background:rgba(28,28,30,0.82);
-  backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
-  color:#fff;padding:13px 22px;border-radius:var(--radius-pill);
-  font-size:13.5px;font-weight:600;letter-spacing:-0.01em;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s var(--smooth),transform .3s var(--spring);
-  z-index:200;white-space:nowrap;
-  box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,0.08);
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
 footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)}
 .not-found{padding:80px 24px;text-align:center}
-.not-found h2{font-size:22px;margin-bottom:12px;color:var(--label);letter-spacing:-0.02em}
+.not-found h2{font-size:22px;margin-bottom:12px;color:var(--label);letter-spacing:-.02em}
 .not-found p{color:var(--label-2);margin-bottom:20px;font-size:14px}
 
 @supports not ((backdrop-filter:blur(24px)) or (-webkit-backdrop-filter:blur(24px))){
   .section-head{background:var(--bg)}
   .detail-header{background:var(--bg)}
   .float-wa{background:var(--wa)}
-  .toast{background:rgba(28,28,30,0.95)}
   .model-img .tag{background:var(--accent)}
   .model-img .tag.tag-dark{background:var(--label)}
-  .badge{background:rgba(255,255,255,0.16)}
+  .badge{background:rgba(255,255,255,.16)}
 }
 </style>
 </head>
@@ -496,76 +490,187 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 5.56-13.56ZM12.05 18.5h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.58 6.58 0 0 1-1.01-3.51 6.6 6.6 0 0 1 6.6-6.6 6.56 6.56 0 0 1 4.66 1.93 6.6 6.6 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.17-.58-1.35-.65-.18-.06-.32-.1-.45.1-.14.2-.53.65-.65.78-.12.13-.24.14-.44.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.12-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.13-.2.2-.34.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.33-.34-.45-.34h-.38c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.66 0 .98.72 1.93.82 2.06.1.13 1.4 2.14 3.4 3 .48.2.85.33 1.14.42.48.15.91.13 1.26.08.38-.06 1.17-.48 1.34-.94.17-.46.17-.85.12-.93-.05-.08-.18-.13-.38-.23Z"/></svg>
 </a>
 
-<div class="toast" id="toast"></div>
-
-<script src="data.js" onerror="window.DATA=window.DATA||{models:{}}"></script>
+<script src="data.js"></script>
 <script>
 /* ============================================================
-   KONFIGURASI
+   KONFIGURASI — EDIT DI SINI
    ============================================================ */
 const CONFIG = {
   phone: "6285155070692",
   brand: "Daya Motor Cibiru, Bandung",
   salesName: "Dion Prayoga",
   salesRole: "Sales Resmi Daya Motor Cibiru",
-
   socials: {
     tiktok:  "bandung_honda",
     ig:      "bandunghonda_",
     youtube: "bandung_honda"
   },
-
-  defaultMessage: "Halo Dion, saya lihat katalog Honda-nya. Mau tanya-tanya soal motor.",
-
+  defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
   images: {
     profil: "",
-    beat:   "",
-    scoopy: "",
-    vario:  "",
-    pcx:    "",
-    adv:    ""
+    "New BeAT CBS": "",
+    "SCOOPY Energetic & Fashion": "",
+    "All New Vario 125 CBS": "",
+    "PCX 160 CBS": "",
+    "ADV 160 CBS": ""
   }
 };
-
-/* Ambil DATA dari data.js (kalau belum ada, fallback kosong) */
-const DATA = (typeof window.DATA === 'object' && window.DATA && window.DATA.models)
-  ? window.DATA
-  : { models: {} };
 /* ============================================================ */
 
-const MODELS = {
-  beat: {
-    key:"beat", name:"Honda Beat", emoji:"🛵", tag:"TERLARIS",
-    tagline:"Paling irit untuk harian, cocok untuk pemula",
-    description:"Skuter matic paling populer di Indonesia. Irit bahan bakar, ringan, dan cocok untuk mobilitas harian di kota maupun penggunaan sehari-hari.",
-    highlights:["Konsumsi BBM sangat irit","Ringan dan mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]
+const DATA_MOTOR = window.DATA_MOTOR || {};
+
+/* Featured di home */
+const FEATURED_KEYS = [
+  "New BeAT CBS",
+  "SCOOPY Energetic & Fashion",
+  "All New Vario 125 CBS",
+  "PCX 160 CBS",
+  "ADV 160 CBS"
+];
+
+/* Tag & tagline custom untuk featured. Model lain pakai default. */
+const MODEL_OVERRIDES = {
+  "New BeAT CBS": {
+    tag: "TERLARIS",
+    tagline: "Paling irit untuk harian, cocok pemula",
+    highlights: ["Konsumsi BBM sangat irit","Ringan & mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]
   },
-  scoopy: {
-    key:"scoopy", name:"Honda Scoopy", emoji:"🛵", tag:"RETRO",
-    tagline:"Gaya retro unik, cocok untuk gaya hidup",
-    description:"Skuter matic bergaya retro yang stylish dan unik. Cocok untuk kamu yang ingin tampil beda dengan kendaraan harian.",
-    highlights:["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]
+  "SCOOPY Energetic & Fashion": {
+    tag: "RETRO",
+    tagline: "Gaya retro unik, cocok untuk gaya hidup",
+    highlights: ["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]
   },
-  vario: {
-    key:"vario", name:"Honda Vario", emoji:"🛵",
-    tagline:"Nyaman untuk harian & jarak menengah",
-    description:"Skuter matic premium dengan bagasi lega dan posisi berkendara nyaman. Cocok untuk mobilitas harian maupun perjalanan jarak menengah.",
-    highlights:["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]
+  "All New Vario 125 CBS": {
+    tagline: "Nyaman untuk harian & jarak menengah",
+    highlights: ["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]
   },
-  pcx: {
-    key:"pcx", name:"Honda PCX", emoji:"🏍️", tag:"PREMIUM",
-    tagline:"Premium untuk jarak jauh",
-    description:"Skuter matic premium dengan fitur lengkap dan kenyamanan maksimal untuk perjalanan jarak jauh.",
-    highlights:["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]
+  "PCX 160 CBS": {
+    tag: "PREMIUM",
+    tagline: "Premium untuk jarak jauh",
+    highlights: ["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]
   },
-  adv: {
-    key:"adv", name:"Honda ADV", emoji:"🏍️",
-    tagline:"Gaya adventure, tangguh di segala medan",
-    description:"Skuter adventure dengan gaya tangguh dan performa andal untuk segala medan.",
-    highlights:["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]
+  "ADV 160 CBS": {
+    tagline: "Gaya adventure, tangguh di segala medan",
+    highlights: ["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]
   }
 };
 
+/* Kategori untuk filter di /stok dan /kredit */
+const CATEGORIES = [
+  { key: "matic", label: "Skutik", icon: "🛵", models: [
+    "New BeAT CBS","New BeAT CBS ISS DELUXE","New BeAT CBS ISS DELUXE SMARTKEY","New BeAT Street",
+    "GENIO CBS","GENIO CBS White & White Red Blue","GENIO CBS ISS",
+    "SCOOPY Energetic & Fashion","SCOOPY Prestige & Stylish",
+    "All New Vario 125 CBS","All New Vario 125 CBS ISS","New Vario 125 Street",
+    "All New Vario 160 CBS","All New Vario 160 CBS ISS SP","All New Vario 160 ABS",
+    "VARIO EVO 160 CBS","VARIO EVO 160 CBS NITRO","VARIO EVO 160 ABS",
+    "PCX 160 CBS","PCX 160 ABS","PCX 160 ABS ROADSYNC",
+    "ADV 160 CBS","ADV 160 ABS","ADV 160 ABS ROADSYNC",
+    "New Stylo 160 CBS","New Stylo 160 ABS","New Stylo 160 ABS SE",
+    "FORZA"
+  ]},
+  { key: "bebek", label: "Bebek", icon: "🏍️", models: [
+    "NEW REVO FIT FI MMC","NEW REVO X",
+    "New Supra X 125 FI SW","New Supra X 125 FI CW",
+    "New Supra GTR 150 Sporty","New Supra GTR 150 Exclusive",
+    "NEW SONIC 150 Standar MMC","SONIC 150 R SE Racing Red & Matte Black"
+  ]},
+  { key: "sport", label: "Sport", icon: "🏁", models: [
+    "CB 150 X SE","CB 150 X STD",
+    "ALL NEW CB 150 R STREETFIRE STD","ALL NEW CB 150 R STREETFIRE SE",
+    "CBR 150 R STD - BK","CBR 150 R STD - MH - RD","CBR 150 R ABS - BK","CBR 150 R ABS - RD",
+    "NEW CBR 250 RR STANDAR BLACK FREEDOM","NEW CBR 250 RR STANDAR MAT GUNPOWDER BLACK METALIC",
+    "NEW CBR 250 RR ABS MYSTIQUE BLUE","NEW CBR 250 RR ABS QS BRAVERY RED BLACK","NEW CBR 250 RR QS RACING RED & TRI-COLOR",
+    "CRF 250 RALLY","CRF 250 L",
+    "CB150 VERZA STD","CB150 VERZA CW"
+  ]},
+  { key: "lifestyle", label: "Lifestyle", icon: "✨", models: [
+    "MONKEY 125","ST 125 DAX","SUPERCUB C125","CT 125"
+  ]},
+  { key: "ev", label: "EV", icon: "⚡", models: [
+    "EM1 e: + Charger","EM1 e Plus: + Charger","CUV eplus: + Charger","ICON E"
+  ]}
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const formatRp = n => (n === null || n === undefined || isNaN(n)) ? '—' : 'Rp ' + Number(n).toLocaleString('id-ID');
+
+function getAllModelNames() {
+  return Object.keys(DATA_MOTOR);
+}
+
+function getModelData(name) {
+  return DATA_MOTOR[name] || null;
+}
+
+function getCategoryOf(name) {
+  return CATEGORIES.find(c => c.models.includes(name));
+}
+
+function getEmojiFor(name) {
+  const cat = getCategoryOf(name);
+  return cat ? cat.icon : '🏍️';
+}
+
+function getModelMeta(name) {
+  const ov = MODEL_OVERRIDES[name] || {};
+  const cat = getCategoryOf(name);
+  return {
+    key: name,
+    name: name,
+    emoji: getEmojiFor(name),
+    category: cat ? cat.key : '',
+    tag: ov.tag || null,
+    tagline: ov.tagline || (cat ? 'Honda ' + name : 'Cek harga OTR & simulasi kredit'),
+    description: ov.description || `Motor Honda ${name}. Harga OTR terbaru dan simulasi kredit FIFGROUP tersedia.`,
+    highlights: ov.highlights || ['Harga OTR terbaru','Simulasi kredit tersedia','Konsultasi via WhatsApp','Sales resmi Honda']
+  };
+}
+
+function getMinCicilan(model) {
+  let min = null;
+  for (const dp in model.tabel) {
+    for (const tenor in model.tabel[dp]) {
+      const c = model.tabel[dp][tenor];
+      if (min === null || c < min.cicilan) min = { dp: +dp, tenor: +tenor, cicilan: c };
+    }
+  }
+  return min;
+}
+
+function getDpOptions(model) {
+  return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b);
+}
+
+function getDefaultDp(model) {
+  const opts = getDpOptions(model);
+  if (!opts.length) return null;
+  const target = (model.harga || 0) * 0.20;
+  return opts.reduce((best, cur) =>
+    Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
+}
+
+function getTenors(model, dp) {
+  const t = model.tabel[String(dp)];
+  if (!t) return [];
+  return Object.keys(t).map(Number).sort((a,b)=>a-b);
+}
+
+function getImageForModel(name) {
+  return CONFIG.images[name] || '';
+}
+
+function imgTag(src, alt) {
+  if (!src) return '';
+  return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 const NAV_DURATION = 400;
 const app = document.getElementById('app');
 const floatWa = document.getElementById('floatWa');
@@ -574,38 +679,6 @@ let animating = false;
 let pendingKreditModel = null;
 
 const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-function getModelData(key) {
-  return (DATA.models && DATA.models[key]) || null;
-}
-
-function formatRp(n) {
-  if (n === null || n === undefined || isNaN(n)) return '—';
-  return 'Rp ' + Number(n).toLocaleString('id-ID');
-}
-
-function stokBadge(stok) {
-  if (!stok || String(stok).trim() === '') {
-    return '<span class="stock-badge stock-ask">Tanya ketersediaan</span>';
-  }
-  const lower = String(stok).toLowerCase();
-  if (/(kosong|habis|sold)/.test(lower)) {
-    return `<span class="stock-badge stock-out">${esc(stok)}</span>`;
-  }
-  if (/(indent|po\b|pre-?order|tunggu)/.test(lower)) {
-    return `<span class="stock-badge stock-indent">${esc(stok)}</span>`;
-  }
-  return `<span class="stock-badge stock-ready">${esc(stok)}</span>`;
-}
-
-function lowestCicilan(kredit) {
-  if (!Array.isArray(kredit) || !kredit.length) return null;
-  return kredit.reduce((min, t) => {
-    if (!t || !t.cicilan) return min;
-    return (min === null || t.cicilan < min.cicilan) ? t : min;
-  }, null);
-}
 
 function openWa(msg, btnEl) {
   if (btnEl && btnEl.classList.contains('is-loading')) return;
@@ -614,11 +687,6 @@ function openWa(msg, btnEl) {
     window.open(waLink(msg), '_blank', 'noopener');
     if (btnEl) setTimeout(() => btnEl.classList.remove('is-loading'), 250);
   }, 320);
-}
-
-function imgTag(src, alt) {
-  if (!src) return '';
-  return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
 }
 
 function updateFloatWa(screen) {
@@ -644,8 +712,8 @@ function setupStickyHeads(screen) {
   screen._stickyOnScroll = onScroll;
 }
 
-function expandKreditModel(screenEl, key) {
-  const card = screenEl.querySelector(`[data-kredit-card="${key}"]`);
+function expandKreditModel(screenEl, name) {
+  const card = screenEl.querySelector(`[data-kredit-card="${CSS.escape(name)}"]`);
   if (!card) return;
   screenEl.querySelectorAll('.kredit-card.open').forEach(c => {
     if (c !== card) c.classList.remove('open');
@@ -656,7 +724,9 @@ function expandKreditModel(screenEl, key) {
   }, 100);
 }
 
-/* ============ RENDERERS ============ */
+/* ============================================================
+   RENDER — HERO & HOME
+   ============================================================ */
 function renderHero() {
   const initial = (CONFIG.salesName || 'S').trim().charAt(0).toUpperCase();
   return `
@@ -676,7 +746,7 @@ function renderHero() {
           <div class="badge"><span class="dot"></span> Online</div>
         </div>
         <h1>Sales Resmi Honda Bandung</h1>
-        <p>Unit ready, proses cepat. Cek stok, harga OTR, atau simulasi kredit langsung di sini.</p>
+        <p>Harga OTR & simulasi kredit FIFGROUP. Tanya stok, kredit, atau test ride via WhatsApp.</p>
         <a class="hero-cta" data-msg="${esc(CONFIG.defaultMessage)}">💬 Chat WhatsApp</a>
       </div>
     </header>
@@ -708,21 +778,28 @@ function renderSocials() {
   `;
 }
 
-function renderModelCards() {
-  return Object.values(MODELS).map(m => `
-    <a class="model" data-nav="/model/${m.key}">
-      <div class="model-img">
-        ${imgTag(CONFIG.images[m.key], m.name)}
-        ${m.tag ? `<span class="tag${m.tag === 'PREMIUM' ? ' tag-dark' : ''}">${m.tag}</span>` : ''}
-        <span>${m.emoji}</span>
-      </div>
-      <div class="model-body">
-        <h3>${esc(m.name)}</h3>
-        <p>${esc(m.tagline)}</p>
-        <span class="model-btn">Lihat Detail →</span>
-      </div>
-    </a>
-  `).join('');
+function renderFeaturedCards() {
+  return FEATURED_KEYS.map(name => {
+    const data = getModelData(name);
+    if (!data) return '';
+    const meta = getModelMeta(name);
+    const tagCls = meta.tag === 'PREMIUM' ? ' tag-dark' : '';
+    return `
+      <a class="model" data-nav="/model/${encodeURIComponent(name)}">
+        <div class="model-img">
+          ${imgTag(getImageForModel(name), name)}
+          ${meta.tag ? `<span class="tag${tagCls}">${meta.tag}</span>` : ''}
+          <span>${meta.emoji}</span>
+        </div>
+        <div class="model-body">
+          <h3>${esc(name)}</h3>
+          <p>${esc(meta.tagline)}</p>
+          <div class="model-price">OTR ${formatRp(data.harga)}</div>
+          <span class="model-btn">Lihat Detail →</span>
+        </div>
+      </a>
+    `;
+  }).join('');
 }
 
 function renderHome() {
@@ -733,17 +810,17 @@ function renderHome() {
       <section class="anim-in">
         <div class="section-head">
           <h2 class="section-title">Pilih Kebutuhanmu</h2>
-          <p class="section-sub">Cek stok & harga, atau simulasi kredit.</p>
+          <p class="section-sub">Cek harga OTR & stok, atau simulasi kredit.</p>
         </div>
         <div class="actions">
           <a class="action" data-nav="/stok">
             <div class="action-ico">🏍️</div>
-            <div class="action-body"><strong>Tanya Stok & Harga</strong><span>Lihat OTR & ketersediaan unit</span></div>
+            <div class="action-body"><strong>Tanya Stok & Harga</strong><span>${getAllModelNames().length} model Honda</span></div>
             <div class="action-arrow">›</div>
           </a>
           <a class="action" data-nav="/kredit">
             <div class="action-ico">💰</div>
-            <div class="action-body"><strong>Simulasi Kredit</strong><span>Lihat cicilan per tenor</span></div>
+            <div class="action-body"><strong>Simulasi Kredit</strong><span>DP & cicilan FIFGROUP</span></div>
             <div class="action-arrow">›</div>
           </a>
         </div>
@@ -753,7 +830,7 @@ function renderHome() {
           <h2 class="section-title">Model Favorit</h2>
           <p class="section-sub">Klik model untuk lihat detail & harga.</p>
         </div>
-        <div class="models">${renderModelCards()}</div>
+        <div class="models">${renderFeaturedCards()}</div>
       </section>
       <section class="anim-in">
         <div class="section-head">
@@ -769,7 +846,7 @@ function renderHome() {
       <section class="anim-in">
         <div class="terms">
           <h3>Syarat & Ketentuan</h3>
-          <p>Harga OTR dan simulasi kredit bersifat estimasi, dapat berubah sewaktu-waktu tanpa pemberitahuan. Beberapa tipe motor belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
+          <p>Harga OTR dan simulasi kredit bersifat estimasi berdasarkan pricelist FIFGROUP, dapat berubah sewaktu-waktu tanpa pemberitahuan. Beberapa tipe motor belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
         </div>
       </section>
     </main>
@@ -777,6 +854,9 @@ function renderHome() {
   `;
 }
 
+/* ============================================================
+   RENDER — DETAIL MODEL
+   ============================================================ */
 function renderBackHeader(title) {
   return `
     <header class="detail-header anim-in">
@@ -789,29 +869,15 @@ function renderBackHeader(title) {
   `;
 }
 
-function renderHargaCard(key, modelName) {
-  const md = getModelData(key);
-  if (!md) {
-    return `
-      <div class="harga-card anim-in">
-        <div class="harga-section">
-          <div class="harga-label">Harga OTR</div>
-          <div class="harga-note" style="margin-top:2px">Harga belum tersedia. Tanyakan langsung via WhatsApp.</div>
-        </div>
-      </div>
-    `;
-  }
-  const cicilanMin = lowestCicilan(md.kredit);
+function renderHargaCard(name) {
+  const data = getModelData(name);
+  if (!data) return '';
+  const cicilanMin = getMinCicilan(data);
   return `
     <div class="harga-card anim-in">
       <div class="harga-section">
-        <div class="harga-stok-row">
-          <div>
-            <div class="harga-label">Harga OTR</div>
-            <div class="harga-value">${md.otr ? formatRp(md.otr) : '—'}</div>
-          </div>
-          ${stokBadge(md.stok)}
-        </div>
+        <div class="harga-label">Harga OTR</div>
+        <div class="harga-value">${formatRp(data.harga)}</div>
       </div>
       ${cicilanMin ? `
         <div class="harga-section">
@@ -820,136 +886,192 @@ function renderHargaCard(key, modelName) {
           <div class="harga-note">Tenor ${cicilanMin.tenor} bulan · DP ${formatRp(cicilanMin.dp)}</div>
         </div>
       ` : ''}
-      ${(md.kredit && md.kredit.length) ? `
-        <a class="harga-cta" data-nav="/kredit" data-expand-kredit="${esc(key)}">
-          Lihat Semua Simulasi Kredit →
-        </a>
-      ` : ''}
+      <a class="harga-cta" data-nav="/kredit" data-expand-kredit="${esc(name)}">
+        Lihat Semua Simulasi Kredit →
+      </a>
     </div>
   `;
 }
 
-function renderModelDetail(key) {
-  const m = MODELS[key];
-  if (!m) return renderNotFound();
+function renderModelDetail(name) {
+  const data = getModelData(name);
+  if (!data) return renderNotFound();
+  const meta = getModelMeta(name);
   return `
-    ${renderBackHeader(m.name)}
+    ${renderBackHeader(name)}
     <div class="model-hero anim-in">
-      ${imgTag(CONFIG.images[m.key], m.name)}
-      ${m.tag ? `<span class="tag${m.tag === 'PREMIUM' ? ' tag-dark' : ''}">${m.tag}</span>` : ''}
-      <span>${m.emoji}</span>
+      ${imgTag(getImageForModel(name), name)}
+      ${meta.tag ? `<span class="tag${meta.tag === 'PREMIUM' ? ' tag-dark' : ''}">${meta.tag}</span>` : ''}
+      <span>${meta.emoji}</span>
     </div>
     <div class="wrap" style="padding-top:24px">
-      <h2 class="detail-h2 anim-in">${esc(m.name)}</h2>
-      <p class="detail-tagline anim-in">${esc(m.tagline)}</p>
-      <p class="detail-desc anim-in">${esc(m.description)}</p>
-      ${renderHargaCard(key, m.name)}
+      <h2 class="detail-h2 anim-in">${esc(name)}</h2>
+      <p class="detail-tagline anim-in">${esc(meta.tagline)}</p>
+      <p class="detail-desc anim-in">${esc(meta.description)}</p>
+      ${renderHargaCard(name)}
       <div class="anim-in">
         <h3 class="detail-h3">Keunggulan</h3>
-        <ul class="highlights">${m.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
+        <ul class="highlights">${meta.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
       </div>
       <div class="cta-block anim-in">
-        <a class="wa-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau tanya stok & harga ${esc(m.name)}.">💬 Tanya Stok & Harga ${esc(m.name)}</a>
+        <a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok & harga ${esc(name)}.">💬 Tanya Stok & Harga</a>
       </div>
     </div>
   `;
 }
 
-/* Halaman Tanya Stok & Harga */
+/* ============================================================
+   RENDER — STOK PAGE
+   ============================================================ */
+const stokFilter = { q: '', cat: 'all' };
+const kreditFilter = { q: '', cat: 'all' };
+
+function filterModelsByState(f) {
+  let names = getAllModelNames();
+  if (f.cat !== 'all') {
+    const cat = CATEGORIES.find(c => c.key === f.cat);
+    if (cat) names = names.filter(n => cat.models.includes(n));
+  }
+  if (f.q) {
+    const q = f.q.toLowerCase();
+    names = names.filter(n => n.toLowerCase().includes(q));
+  }
+  return names;
+}
+
+function renderFilterBar(f, prefix) {
+  return `
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <input type="search" class="search-input" data-search="${prefix}"
+               placeholder="Cari model... (mis. Beat, Vario, PCX)"
+               value="${esc(f.q)}" autocomplete="off">
+      </div>
+      <div class="cat-tabs">
+        <button class="cat-chip${f.cat === 'all' ? ' is-active' : ''}" data-cat="${prefix}:all">Semua</button>
+        ${CATEGORIES.map(c => `
+          <button class="cat-chip${f.cat === c.key ? ' is-active' : ''}" data-cat="${prefix}:${c.key}">${esc(c.label)}</button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderStokList() {
+  const names = filterModelsByState(stokFilter);
+  if (!names.length) {
+    return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
+  }
+  return names.map(name => {
+    const data = getModelData(name);
+    if (!data) return '';
+    const meta = getModelMeta(name);
+    const safeName = esc(name);
+    return `
+      <a class="stok-item" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok & harga ${safeName}.">
+        <div class="stok-item-emoji">${meta.emoji}</div>
+        <div class="stok-item-info">
+          <strong>${esc(name)}</strong>
+          <span>OTR ${formatRp(data.harga)}</span>
+        </div>
+        <div class="stok-item-cta">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 5.56-13.56Z"/></svg>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
 function renderStok() {
   return `
     ${renderBackHeader('Stok & Harga')}
-    <div class="wrap" style="padding-top:20px">
-      <p class="detail-desc anim-in">Harga OTR dan ketersediaan unit terbaru. Untuk ketersediaan spesifik warna/tipe, tanya langsung via WhatsApp.</p>
-      <div class="anim-in">
-        ${Object.values(MODELS).map(m => {
-          const md = getModelData(m.key);
-          const otr = md && md.otr ? formatRp(md.otr) : null;
-          const stok = md ? md.stok : null;
-          return `
-            <div class="stok-card">
-              <div class="stok-head">
-                <div class="stok-emoji">${m.emoji}</div>
-                <div class="stok-title">
-                  <strong>${esc(m.name)}</strong>
-                  <span>${esc(m.tagline)}</span>
-                </div>
-              </div>
-              <div class="stok-price-row">
-                <div class="stok-price-label">Harga OTR</div>
-                <div class="stok-price">
-                  ${otr || '<span style="font-size:13px;font-weight:600;color:var(--label-3)">Belum tersedia</span>'}
-                  <small>${stokBadge(stok)}</small>
-                </div>
-              </div>
-              <a class="stok-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau tanya ketersediaan & harga ${esc(m.name)}.">
-                💬 Tanya ${esc(m.name)}
-              </a>
-            </div>
-          `;
-        }).join('')}
-      </div>
+    <div class="wrap" style="padding-top:8px">
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Daftar harga OTR semua model Honda. Tanya ketersediaan warna/tipe via WhatsApp.</p>
+      ${renderFilterBar(stokFilter, 'stok')}
+      <div id="stok-list-container" class="anim-in">${renderStokList()}</div>
     </div>
   `;
 }
 
-/* Halaman Simulasi Kredit (accordion) */
+/* ============================================================
+   RENDER — KREDIT PAGE
+   ============================================================ */
+function renderTenorRows(name, dp) {
+  const data = getModelData(name);
+  if (!data) return '';
+  const tenors = getTenors(data, dp);
+  const tbl = data.tabel[String(dp)] || {};
+  return tenors.map(t => `
+    <div class="tenor-row">
+      <div class="tenor-dur">${t} bulan</div>
+      <div class="tenor-cicilan">${formatRp(tbl[t])}<small>/bln</small></div>
+    </div>
+  `).join('');
+}
+
+function renderDpSelect(name, defaultDp) {
+  const data = getModelData(name);
+  if (!data) return '';
+  const opts = getDpOptions(data);
+  return `
+    <label class="dp-label">Pilih DP</label>
+    <select class="dp-select" data-model="${esc(name)}">
+      ${opts.map(dp => `
+        <option value="${dp}"${dp === defaultDp ? ' selected' : ''}>DP ${formatRp(dp)}</option>
+      `).join('')}
+    </select>
+  `;
+}
+
+function renderKreditCardsList() {
+  const names = filterModelsByState(kreditFilter);
+  if (!names.length) {
+    return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kata lain.</div>`;
+  }
+  return names.map(name => {
+    const data = getModelData(name);
+    if (!data) return '';
+    const meta = getModelMeta(name);
+    const cicilanMin = getMinCicilan(data);
+    const defaultDp = getDefaultDp(data);
+    return `
+      <div class="kredit-card" data-kredit-card="${esc(name)}">
+        <button class="kredit-head" data-toggle-kredit="${esc(name)}" type="button">
+          <div class="kredit-emoji">${meta.emoji}</div>
+          <div class="kredit-info">
+            <strong>${esc(name)}</strong>
+            ${cicilanMin
+              ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanMin.cicilan)}/bln</span>`
+              : `<span class="kredit-mulai" style="color:var(--label-3)">Belum tersedia</span>`}
+            <span class="kredit-otr">OTR ${formatRp(data.harga)}</span>
+          </div>
+          <div class="kredit-chevron">›</div>
+        </button>
+        <div class="kredit-detail">
+          <div class="kredit-detail-inner">
+            <div class="kredit-body">
+              <div class="kredit-body-inner">
+                ${renderDpSelect(name, defaultDp)}
+                <div class="tenor-list" data-tenor-list="${esc(name)}">
+                  ${renderTenorRows(name, defaultDp)}
+                </div>
+                <a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau konsultasi kredit ${esc(name)}.">💬 Konsultasi Kredit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 function renderKredit() {
   return `
     ${renderBackHeader('Simulasi Kredit')}
-    <div class="wrap" style="padding-top:20px">
-      <p class="detail-desc anim-in">Pilih model untuk lihat simulasi cicilan per tenor. Angka bersifat estimasi, konfirmasi final via WhatsApp.</p>
-      <div class="anim-in">
-        ${Object.values(MODELS).map(m => {
-          const md = getModelData(m.key);
-          const otr = md && md.otr ? formatRp(md.otr) : null;
-          const cicilanMin = md ? lowestCicilan(md.kredit) : null;
-          const tenorList = md && Array.isArray(md.kredit) ? md.kredit : [];
-          return `
-            <div class="kredit-card" data-kredit-card="${m.key}">
-              <button class="kredit-head" data-toggle-kredit="${m.key}" type="button">
-                <div class="kredit-emoji">${m.emoji}</div>
-                <div class="kredit-info">
-                  <strong>${esc(m.name)}</strong>
-                  ${cicilanMin
-                    ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanMin.cicilan)}/bln</span>`
-                    : `<span class="kredit-mulai" style="color:var(--label-3)">Simulasi belum tersedia</span>`}
-                  ${otr ? `<span class="kredit-otr">OTR ${otr}</span>` : ''}
-                </div>
-                <div class="kredit-chevron">›</div>
-              </button>
-              <div class="kredit-detail">
-                <div class="kredit-detail-inner">
-                  <div class="kredit-body">
-                    <div class="kredit-body-inner">
-                      ${tenorList.length ? `
-                        <div class="tenor-list">
-                          ${tenorList.map(t => `
-                            <div class="tenor-row">
-                              <div class="tenor-left">
-                                <span class="tenor-dur">${t.tenor} bulan</span>
-                                <span class="tenor-dp">DP ${formatRp(t.dp)}</span>
-                              </div>
-                              <div class="tenor-right">
-                                <span class="tenor-cicilan">${formatRp(t.cicilan)}<small>/bln</small></span>
-                              </div>
-                            </div>
-                          `).join('')}
-                        </div>
-                      ` : `
-                        <div class="kredit-empty">Simulasi kredit belum tersedia untuk model ini. Tanyakan langsung via WhatsApp.</div>
-                      `}
-                      <a class="wa-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau konsultasi kredit ${esc(m.name)}. Bisa info DP & cicilan?">
-                        💬 Konsultasi Kredit ${esc(m.name)}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('')}
-      </div>
+    <div class="wrap" style="padding-top:8px">
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
+      ${renderFilterBar(kreditFilter, 'kredit')}
+      <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
   `;
 }
@@ -965,15 +1087,37 @@ function renderNotFound() {
   `;
 }
 
+/* ============================================================
+   ROUTER
+   ============================================================ */
 function renderRoute(route) {
   if (route === '/') return renderHome();
-  if (route.indexOf('/model/') === 0) return renderModelDetail(route.slice(7));
+  if (route.startsWith('/model/')) {
+    const name = decodeURIComponent(route.slice(7));
+    return renderModelDetail(name);
+  }
   if (route === '/stok') return renderStok();
   if (route === '/kredit') return renderKredit();
   return renderNotFound();
 }
 
-/* NAVIGATION */
+function routeToHash(route) {
+  if (route.startsWith('/model/')) {
+    return '/model/' + encodeURIComponent(route.slice(7));
+  }
+  return route;
+}
+function hashToRoute(hash) {
+  const path = hash.startsWith('#') ? hash.slice(1) : hash;
+  if (path.startsWith('/model/')) {
+    return '/model/' + decodeURIComponent(path.slice(7));
+  }
+  return path || '/';
+}
+
+/* ============================================================
+   NAVIGATION ENGINE
+   ============================================================ */
 function makeScreen(route) {
   const el = document.createElement('section');
   el.className = 'screen';
@@ -1055,22 +1199,35 @@ function navigate(route) {
   if (animating) return;
   const current = stack[stack.length - 1];
   if (current && current.dataset.route === route) return;
-  history.pushState({ index: stack.length, route }, '', '#' + route);
+  history.pushState({ index: stack.length, route }, '', '#' + routeToHash(route));
   pushScreen(route, true);
 }
 
-/* EVENTS */
+function refreshActiveList(prefix) {
+  const screen = stack[stack.length - 1];
+  if (!screen) return;
+  if (prefix === 'stok') {
+    const c = screen.querySelector('#stok-list-container');
+    if (c) c.innerHTML = renderStokList();
+  } else if (prefix === 'kredit') {
+    const c = screen.querySelector('#kredit-list-container');
+    if (c) c.innerHTML = renderKreditCardsList();
+  }
+}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
 app.addEventListener('click', e => {
   if (animating) return;
 
-  // Toggle accordion kredit
+  // Toggle accordion
   const toggleEl = e.target.closest('[data-toggle-kredit]');
   if (toggleEl) {
     e.preventDefault();
     const card = toggleEl.closest('.kredit-card');
     if (!card) return;
     const wasOpen = card.classList.contains('open');
-    // Tutup semua card lain
     card.parentElement.querySelectorAll('.kredit-card.open').forEach(c => {
       if (c !== card) c.classList.remove('open');
     });
@@ -1078,7 +1235,21 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Navigasi + optional expand kredit
+  // Category chip
+  const catEl = e.target.closest('[data-cat]');
+  if (catEl) {
+    e.preventDefault();
+    const [prefix, cat] = catEl.dataset.cat.split(':');
+    const target = prefix === 'stok' ? stokFilter : kreditFilter;
+    target.cat = cat;
+    // Update active state
+    catEl.parentElement.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('is-active'));
+    catEl.classList.add('is-active');
+    refreshActiveList(prefix);
+    return;
+  }
+
+  // Navigasi
   const navEl = e.target.closest('[data-nav]');
   if (navEl) {
     e.preventDefault();
@@ -1095,6 +1266,30 @@ app.addEventListener('click', e => {
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
+// DP select change
+app.addEventListener('change', e => {
+  if (e.target.matches('.dp-select')) {
+    const name = e.target.dataset.model;
+    const dp = e.target.value;
+    const card = e.target.closest('.kredit-card');
+    if (!card) return;
+    const tenorList = card.querySelector('[data-tenor-list]');
+    if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+  }
+});
+
+// Search input
+let searchTimer;
+app.addEventListener('input', e => {
+  if (e.target.matches('.search-input')) {
+    const prefix = e.target.dataset.search;
+    const target = prefix === 'stok' ? stokFilter : kreditFilter;
+    target.q = e.target.value;
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => refreshActiveList(prefix), 150);
+  }
+});
+
 floatWa.addEventListener('click', e => {
   e.preventDefault();
   openWa(CONFIG.defaultMessage, e.currentTarget);
@@ -1109,16 +1304,18 @@ window.addEventListener('popstate', e => {
   else if (state.route) pushScreen(state.route, true);
 });
 
-/* INIT */
+/* ============================================================
+   INIT
+   ============================================================ */
 (function init() {
-  const initialRoute = location.hash.slice(1) || '/';
+  const initialRoute = hashToRoute(location.hash) || '/';
   history.replaceState({ index: 0, route: '/' }, '', '#/');
   const homeEl = makeScreen('/');
   homeEl.classList.add('no-transition', 'is-active');
   app.appendChild(homeEl);
   stack.push(homeEl);
   if (initialRoute !== '/' && initialRoute !== '') {
-    history.pushState({ index: 1, route: initialRoute }, '', '#' + initialRoute);
+    history.pushState({ index: 1, route: initialRoute }, '', '#' + routeToHash(initialRoute));
     const detailEl = makeScreen(initialRoute);
     detailEl.classList.add('no-transition', 'is-active');
     homeEl.classList.remove('is-active');
