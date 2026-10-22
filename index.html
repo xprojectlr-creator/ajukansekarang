@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dion Prayoga — Sales Honda Bandung</title>
-<meta name="description" content="Katalog Honda Daya Motor Cibiru, Bandung. Harga OTR & simulasi kredit FIFGROUP.">
 <meta name="theme-color" content="#1c1c1e">
 <style>
 :root{
-  --bg:#f5f5f7; --bg-glass:rgba(245,245,247,0.75);
+  --bg:#f5f5f7;
+  --bg-glass:rgba(245,245,247,0.65);
   --surface:#fff; --surface-2:#fafafa;
   --label:#1d1d1f; --label-2:#6e6e73; --label-3:#86868b;
   --separator:rgba(60,60,67,0.08);
   --fill:rgba(120,120,128,0.08); --fill-2:rgba(120,120,128,0.12);
   --accent:#ff9500; --accent-2:#f58a00; --accent-text:#1c1c1e;
   --accent-soft:rgba(255,149,0,0.12);
-  --wa:#25d366; --wa-2:#1da851; --wa-glass:rgba(37,211,102,0.9);
+  --wa:#25d366; --wa-2:#1da851; --wa-glass:rgba(37,211,102,0.92);
   --shadow-card:0 1px 3px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
   --shadow-float:0 8px 24px rgba(37,211,102,.35),0 2px 8px rgba(0,0,0,.1);
   --radius-card:20px; --radius-button:14px; --radius-pill:999px;
@@ -23,8 +23,8 @@
   --smooth:cubic-bezier(.4,0,.2,1);
   --nav-duration:400ms;
   --nav-easing:cubic-bezier(.32,.72,0,1);
-  --blur-glass:blur(24px) saturate(180%);
-  --blur-glass-sm:blur(20px) saturate(180%);
+  --blur-glass:blur(12px) saturate(150%);
+  --blur-glass-sm:blur(10px) saturate(150%);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;background:var(--bg)}
@@ -36,7 +36,6 @@ body{
 #app{position:fixed;inset:0;overflow:hidden}
 button,a{touch-action:manipulation}
 
-/* SCREEN SYSTEM */
 .screen{
   position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
   -webkit-overflow-scrolling:touch;background:var(--bg);
@@ -63,7 +62,6 @@ button,a{touch-action:manipulation}
 .wrap{max-width:520px;margin:0 auto;padding:0 20px}
 a{color:inherit;text-decoration:none}
 
-/* SPINNER */
 .is-loading{pointer-events:none;position:relative;color:transparent!important}
 .is-loading::after{
   content:"";position:absolute;width:16px;height:16px;border-radius:50%;
@@ -76,7 +74,6 @@ a{color:inherit;text-decoration:none}
 .hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* HERO */
 .hero{
   background:
     radial-gradient(ellipse at 85% 0%,rgba(255,149,0,.22) 0%,transparent 55%),
@@ -133,7 +130,6 @@ section{padding:8px 0 0}
 .section-title{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;color:var(--label)}
 .section-sub{font-size:13.5px;color:var(--label-2);margin:0}
 
-/* SOCIAL */
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
 .social{
   display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -149,7 +145,6 @@ section{padding:8px 0 0}
 .social-yt .social-icon{background:#ff0000}
 .social span{font-size:11.5px;font-weight:600;color:var(--label);text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* ACTIONS */
 .actions{display:grid;gap:10px}
 .action{
   display:flex;align-items:center;gap:14px;padding:16px;
@@ -164,7 +159,6 @@ section{padding:8px 0 0}
 .action-body span{display:block;font-size:13px;color:var(--label-2);margin-top:2px}
 .action-arrow{color:var(--label-3);font-size:20px;font-weight:300}
 
-/* MODEL CARDS */
 .models{display:grid;gap:14px}
 .model{
   border-radius:var(--radius-card);background:var(--surface);
@@ -197,7 +191,6 @@ section{padding:8px 0 0}
 }
 .model:active .model-btn{background:var(--accent-2)}
 
-/* TRUST */
 .trust{background:var(--surface);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden}
 .trust-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px}
 .trust-item + .trust-item{border-top:1px solid var(--separator)}
@@ -205,12 +198,10 @@ section{padding:8px 0 0}
 .trust-item strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--label)}
 .trust-item span{display:block;font-size:13px;color:var(--label-2);margin-top:3px;line-height:1.45}
 
-/* TERMS */
 .terms{background:var(--surface);border-radius:var(--radius-card);padding:16px 18px;box-shadow:var(--shadow-card)}
 .terms h3{font-size:13px;font-weight:700;color:var(--label);letter-spacing:-.01em;margin-bottom:8px}
 .terms p{font-size:12.5px;color:var(--label-2);line-height:1.55}
 
-/* DETAIL HEADER */
 .detail-header{
   position:sticky;top:0;z-index:10;background:var(--bg-glass);
   backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
@@ -229,7 +220,6 @@ section{padding:8px 0 0}
 .detail-title{flex:1;font-size:16px;font-weight:700;text-align:center;letter-spacing:-.02em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--label)}
 
-/* MODEL DETAIL */
 .model-hero{height:260px;display:grid;place-items:center;position:relative;overflow:hidden;
   background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:110px}
 .model-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -263,7 +253,6 @@ section{padding:8px 0 0}
 .wa-btn-outline{background:var(--surface);color:var(--label);box-shadow:var(--shadow-card)}
 .wa-btn-outline:active{background:var(--surface-2)}
 
-/* HARGA CARD */
 .harga-card{
   background:var(--surface);border-radius:var(--radius-card);
   box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:20px;
@@ -286,7 +275,6 @@ section{padding:8px 0 0}
 }
 .harga-cta:active{background:rgba(255,149,0,.2)}
 
-/* FILTER BAR */
 .filter-bar{padding:16px 0 12px;margin-bottom:4px}
 .search-wrap{margin-bottom:10px}
 .search-input{
@@ -312,18 +300,17 @@ section{padding:8px 0 0}
   color:var(--label-2);transition:all .2s;
   font-family:inherit;
 }
-.cat-chip.is-active{
-  background:var(--label);color:#fff;border-color:var(--label);
-}
+.cat-chip.is-active{background:var(--label);color:#fff;border-color:var(--label);}
 .cat-chip:active{transform:scale(.96)}
 
-/* STOK ITEMS */
+/* STOK ITEM */
 .stok-item{
   display:flex;align-items:center;gap:12px;
   padding:14px;border-radius:16px;
   background:var(--surface);box-shadow:var(--shadow-card);
   margin-bottom:8px;cursor:pointer;
   transition:transform .15s;
+  color:inherit;text-decoration:none;
 }
 .stok-item:active{transform:scale(.985)}
 .stok-item-emoji{
@@ -333,59 +320,37 @@ section{padding:8px 0 0}
 }
 .stok-item-info{flex:1;min-width:0}
 .stok-item-info strong{
-  display:block;font-size:14.5px;font-weight:700;
-  letter-spacing:-.01em;
+  display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.stok-item-info span{
-  display:block;font-size:13px;font-weight:700;
-  color:var(--accent-2);margin-top:2px;
-}
-.stok-item-cta{
-  flex-shrink:0;width:38px;height:38px;
-  border-radius:50%;background:var(--wa);color:#fff;
+.stok-item-info span{display:block;font-size:13px;font-weight:700;color:var(--accent-2);margin-top:2px;}
+.stok-item-arrow{
+  flex-shrink:0;width:32px;height:32px;
+  border-radius:50%;background:var(--fill);
+  color:var(--label-3);
   display:grid;place-items:center;
 }
-.stok-item-cta svg{width:18px;height:18px}
 
-/* EMPTY STATE */
-.empty-state{
-  padding:40px 20px;text-align:center;
-  color:var(--label-2);font-size:14px;
-}
+.empty-state{padding:40px 20px;text-align:center;color:var(--label-2);font-size:14px;}
 
-/* KREDIT ACCORDION */
+/* KREDIT */
 .kredit-card{
   background:var(--surface);border-radius:var(--radius-card);
   box-shadow:var(--shadow-card);overflow:hidden;
-  margin-bottom:10px;
-  scroll-margin-top:80px;
+  margin-bottom:10px;scroll-margin-top:80px;
 }
 .kredit-head{
   display:flex;align-items:center;gap:12px;
   padding:14px 16px;cursor:pointer;width:100%;
   background:transparent;border:none;text-align:left;
-  font-family:inherit;color:inherit;
-  transition:background .15s;
+  font-family:inherit;color:inherit;transition:background .15s;
 }
 .kredit-head:active{background:var(--surface-2)}
-.kredit-emoji{
-  width:44px;height:44px;border-radius:12px;
-  background:var(--accent-soft);display:grid;place-items:center;
-  font-size:21px;flex-shrink:0;
-}
+.kredit-emoji{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;font-size:21px;flex-shrink:0;}
 .kredit-info{flex:1;min-width:0}
-.kredit-info strong{display:block;font-size:14.5px;font-weight:700;
-  letter-spacing:-.01em;color:var(--label);
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.kredit-info .kredit-mulai{
-  display:block;font-size:12.5px;color:var(--accent-2);
-  font-weight:700;margin-top:2px;letter-spacing:-.01em;
-}
-.kredit-info .kredit-otr{
-  display:block;font-size:11.5px;color:var(--label-3);
-  font-weight:500;margin-top:2px;
-}
+.kredit-info strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--label);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.kredit-info .kredit-mulai{display:block;font-size:12.5px;color:var(--accent-2);font-weight:700;margin-top:2px;letter-spacing:-.01em;}
+.kredit-info .kredit-otr{display:block;font-size:11.5px;color:var(--label-3);font-weight:500;margin-top:2px;}
 .kredit-chevron{
   width:24px;height:24px;display:grid;place-items:center;
   color:var(--label-3);font-size:20px;
@@ -393,43 +358,23 @@ section{padding:8px 0 0}
   flex-shrink:0;font-weight:300;
 }
 .kredit-card.open .kredit-chevron{transform:rotate(90deg);color:var(--accent)}
-.kredit-detail{
-  display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .35s cubic-bezier(.32,.72,0,1);
-}
+.kredit-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.32,.72,0,1);}
 .kredit-card.open .kredit-detail{grid-template-rows:1fr}
 .kredit-detail-inner{overflow:hidden;min-height:0}
-.kredit-body{
-  padding:0 16px 16px;
-  border-top:1px solid var(--separator);
-  margin-top:2px;
-}
+.kredit-body{padding:0 16px 16px;border-top:1px solid var(--separator);margin-top:2px;}
 .kredit-body-inner{padding-top:14px}
 
 /* DP SLIDER */
-.dp-slider-wrap{
-  background:var(--bg);border-radius:14px;
-  padding:14px 16px;margin-bottom:14px;
-}
-.dp-display{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:10px;margin-bottom:6px;
-}
-.dp-display-label{
-  font-size:11px;font-weight:700;color:var(--label-2);
-  text-transform:uppercase;letter-spacing:.04em;
-}
-.dp-display-value{
-  font-size:20px;font-weight:800;color:var(--accent-2);
-  letter-spacing:-.02em;line-height:1.1;
-}
+.dp-slider-wrap{background:var(--bg);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+.dp-display{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px;}
+.dp-display-label{font-size:11px;font-weight:700;color:var(--label-2);text-transform:uppercase;letter-spacing:.04em;display:block;}
+.dp-display-sub{font-size:10px;font-weight:600;color:var(--label-3);letter-spacing:0;display:block;margin-top:2px;text-transform:none;}
+.dp-display-value{font-size:20px;font-weight:800;color:var(--accent-2);letter-spacing:-.02em;line-height:1.1;}
 .dp-slider{
   -webkit-appearance:none;appearance:none;
   width:100%;height:6px;border-radius:3px;
-  background:var(--fill-2);
-  outline:none;cursor:pointer;
-  margin:14px 0 8px;
-  touch-action:pan-y;
+  background:var(--fill-2);outline:none;cursor:pointer;
+  margin:14px 0 8px;touch-action:pan-y;
 }
 .dp-slider::-webkit-slider-runnable-track{
   height:6px;border-radius:3px;
@@ -439,59 +384,95 @@ section{padding:8px 0 0}
     var(--fill-2) var(--pct,0%),
     var(--fill-2) 100%);
 }
-.dp-slider::-moz-range-track{
-  height:6px;border-radius:3px;background:var(--fill-2);
-}
-.dp-slider::-moz-range-progress{
-  height:6px;border-radius:3px;background:var(--accent);
-}
+.dp-slider::-moz-range-track{height:6px;border-radius:3px;background:var(--fill-2);}
+.dp-slider::-moz-range-progress{height:6px;border-radius:3px;background:var(--accent);}
 .dp-slider::-webkit-slider-thumb{
   -webkit-appearance:none;appearance:none;
   width:24px;height:24px;border-radius:50%;
-  background:#fff;
-  border:2px solid var(--accent);
+  background:#fff;border:2px solid var(--accent);
   box-shadow:0 2px 8px rgba(255,149,0,.4),0 0 0 3px rgba(255,255,255,.6);
-  cursor:pointer;margin-top:-9px;
-  transition:transform .15s ease;
+  cursor:pointer;margin-top:-9px;transition:transform .15s ease;
 }
 .dp-slider:active::-webkit-slider-thumb{transform:scale(1.15)}
 .dp-slider::-moz-range-thumb{
   width:22px;height:22px;border-radius:50%;
   background:#fff;border:2px solid var(--accent);
-  box-shadow:0 2px 8px rgba(255,149,0,.4);
-  cursor:pointer;
+  box-shadow:0 2px 8px rgba(255,149,0,.4);cursor:pointer;
 }
-.dp-slider-labels{
-  display:flex;justify-content:space-between;
-  margin-top:4px;
+.dp-slider-labels{display:flex;justify-content:space-between;margin-top:4px;}
+.dp-slider-labels span{font-size:11px;font-weight:600;color:var(--label-3);letter-spacing:-.01em;}
+
+.dp-note{
+  font-size:11.5px;color:var(--label-3);
+  margin-top:10px;line-height:1.4;font-style:italic;
+  display:flex;align-items:flex-start;gap:4px;
 }
-.dp-slider-labels span{
-  font-size:11px;font-weight:600;color:var(--label-3);
-  letter-spacing:-.01em;
-}
-.dp-slider-hint{
-  font-size:11px;color:var(--label-3);
-  text-align:center;margin-top:8px;line-height:1.3;
+.dp-note::before{
+  content:"*";color:var(--accent-2);font-weight:700;
+  font-size:14px;line-height:1;margin-top:1px;flex-shrink:0;
 }
 
-/* TENOR LIST */
-.tenor-list{
-  background:var(--bg);border-radius:14px;
-  overflow:hidden;margin-bottom:14px;
-}
-.tenor-row{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:12px 14px;font-size:13px;
-}
-.tenor-row + .tenor-row{border-top:1px solid var(--separator)}
-.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-.01em}
-.tenor-cicilan{
-  font-weight:800;color:var(--accent-2);font-size:14.5px;
-  letter-spacing:-.02em;
-}
-.tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px}
+.promo-option{display:none;margin-top:12px;}
+.promo-option.is-visible{display:block;animation:slideDown .35s cubic-bezier(0.32,0.72,0,1) both;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 
-/* FLOAT WA */
+.promo-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;
+  background:linear-gradient(135deg,#ff9500 0%,#f58a00 100%);
+  color:#fff;font-weight:700;font-size:13px;
+  padding:12px 16px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 4px 12px rgba(255,149,0,.35);
+  transition:transform .15s,box-shadow .15s,background .3s;
+  font-family:inherit;letter-spacing:-.01em;
+}
+.promo-btn:active{transform:scale(.97);box-shadow:0 2px 6px rgba(255,149,0,.3);}
+
+.promo-view{display:none;margin-bottom:14px;}
+.promo-banner{
+  background:linear-gradient(135deg,rgba(255,149,0,.14) 0%,rgba(255,149,0,.06) 100%);
+  border:1.5px solid rgba(255,149,0,.35);
+  border-radius:14px;padding:16px;position:relative;overflow:hidden;
+}
+.promo-banner::before{
+  content:"";position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(255,149,0,.15);pointer-events:none;
+}
+.promo-banner-label{
+  font-size:11px;font-weight:800;color:var(--accent-2);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;
+  display:flex;align-items:center;gap:4px;position:relative;z-index:1;
+}
+.promo-banner-value{
+  font-size:26px;font-weight:800;color:var(--label);
+  letter-spacing:-.03em;line-height:1.1;margin-bottom:6px;
+  position:relative;z-index:1;
+}
+.promo-banner-value small{font-size:13px;font-weight:600;color:var(--label-3);margin-left:2px;}
+.promo-banner-meta{font-size:13px;color:var(--label-2);line-height:1.45;font-weight:600;position:relative;z-index:1;}
+.promo-banner-note{
+  font-size:11px;color:var(--label-3);font-style:italic;
+  line-height:1.45;padding-top:10px;margin-top:10px;
+  border-top:1px solid rgba(255,149,0,.2);position:relative;z-index:1;
+}
+.kredit-card.promo-active .promo-view{display:block;}
+.kredit-card.promo-active .tenor-list{display:none;}
+.kredit-card.promo-active .dp-slider{opacity:.4;pointer-events:none;}
+.kredit-card.promo-active .dp-slider-labels{opacity:.4;}
+.kredit-card.promo-active .promo-btn{
+  background:linear-gradient(135deg,#1d1d1f 0%,#2c2c2e 100%);
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+.kredit-card.promo-active .dp-display-label{color:var(--accent-2);}
+
+.tenor-list{background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;}
+.tenor-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;font-size:13px;}
+.tenor-row + .tenor-row{border-top:1px solid var(--separator);}
+.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-.01em;}
+.tenor-cicilan{font-weight:800;color:var(--accent-2);font-size:14.5px;letter-spacing:-.02em;}
+.tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px;}
+
 .float-wa{
   position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));
   width:60px;height:60px;border-radius:50%;
@@ -504,17 +485,122 @@ section{padding:8px 0 0}
 }
 .float-wa:active{transform:scale(.9)}
 .float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
-.float-wa.is-hidden{
-  opacity:0;transform:scale(.6) translateY(24px);
-  pointer-events:none;box-shadow:none;
+.float-wa.is-hidden{opacity:0;transform:scale(.6) translateY(24px);pointer-events:none;box-shadow:none;}
+
+/* ============ ACTION SHEET (bottom sheet cash/kredit) ============ */
+.sheet-backdrop{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.42);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s var(--smooth);
+  z-index:200;
 }
+.sheet-backdrop.is-open{opacity:1;pointer-events:auto;}
+
+.sheet{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  max-width:520px;
+  margin:0 auto;
+  background:var(--surface);
+  border-top-left-radius:24px;
+  border-top-right-radius:24px;
+  padding:10px 20px calc(20px + env(safe-area-inset-bottom));
+  transform:translateY(100%);
+  transition:transform .4s var(--nav-easing);
+  z-index:201;
+  box-shadow:0 -8px 32px rgba(0,0,0,0.15);
+  will-change:transform;
+}
+.sheet.is-open{transform:translateY(0);}
+
+.sheet-handle{
+  width:40px;height:4px;border-radius:2px;
+  background:var(--fill-2);
+  margin:0 auto 16px;
+}
+.sheet-header{margin-bottom:16px}
+.sheet-title{
+  font-size:17px;font-weight:800;
+  letter-spacing:-0.02em;color:var(--label);
+  margin-bottom:2px;
+  line-height:1.25;
+}
+.sheet-sub{
+  font-size:13px;color:var(--label-2);
+  font-weight:600;letter-spacing:-0.01em;
+}
+
+.sheet-actions{display:grid;gap:10px;margin-bottom:8px;}
+
+.sheet-btn{
+  display:flex;align-items:center;gap:14px;
+  padding:15px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+  transition:transform .15s,background .15s;
+  position:relative;
+}
+.sheet-btn:active{transform:scale(.98)}
+
+.sheet-btn-cash{
+  background:var(--wa);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(37,211,102,.25);
+}
+.sheet-btn-cash:active{background:var(--wa-2)}
+
+.sheet-btn-kredit{
+  background:var(--accent);
+  color:var(--accent-text);
+  box-shadow:0 4px 12px rgba(255,149,0,.3);
+}
+.sheet-btn-kredit:active{background:var(--accent-2)}
+
+.sheet-btn-icon{
+  width:44px;height:44px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.22);
+  display:grid;place-items:center;
+  font-size:22px;flex-shrink:0;
+}
+.sheet-btn-kredit .sheet-btn-icon{background:rgba(0,0,0,0.08)}
+
+.sheet-btn-body{flex:1;min-width:0}
+.sheet-btn-body strong{
+  display:block;font-size:15px;font-weight:700;
+  letter-spacing:-0.01em;margin-bottom:1px;
+}
+.sheet-btn-body span{
+  display:block;font-size:12.5px;opacity:0.85;
+  line-height:1.3;
+}
+
+.sheet-cancel{
+  width:100%;
+  padding:14px;
+  background:transparent;
+  border:none;
+  color:var(--label-2);
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+  border-radius:12px;
+  transition:background .15s;
+  letter-spacing:-0.01em;
+}
+.sheet-cancel:active{background:var(--fill)}
 
 footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)}
 .not-found{padding:80px 24px;text-align:center}
 .not-found h2{font-size:22px;margin-bottom:12px;color:var(--label);letter-spacing:-.02em}
 .not-found p{color:var(--label-2);margin-bottom:20px;font-size:14px}
 
-@supports not ((backdrop-filter:blur(24px)) or (-webkit-backdrop-filter:blur(24px))){
+@supports not ((backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px))){
   .section-head{background:var(--bg)}
   .detail-header{background:var(--bg)}
   .float-wa{background:var(--wa)}
@@ -528,6 +614,32 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
 
 <div id="app"></div>
 
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="actionSheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title" id="sheetTitle"></div>
+    <div class="sheet-sub" id="sheetSub"></div>
+  </div>
+  <div class="sheet-actions">
+    <button class="sheet-btn sheet-btn-cash" data-sheet-action="cash" type="button">
+      <div class="sheet-btn-icon">💵</div>
+      <div class="sheet-btn-body">
+        <strong>Bayar Cash</strong>
+        <span>Tanya stok & harga cash via WhatsApp</span>
+      </div>
+    </button>
+    <button class="sheet-btn sheet-btn-kredit" data-sheet-action="kredit" type="button">
+      <div class="sheet-btn-icon">📊</div>
+      <div class="sheet-btn-body">
+        <strong>Simulasi Kredit</strong>
+        <span>Lihat cicilan per tenor dulu</span>
+      </div>
+    </button>
+  </div>
+  <button class="sheet-cancel" id="sheetCancel" type="button">Batal</button>
+</div>
+
 <a class="float-wa is-hidden" id="floatWa" href="#" aria-label="Chat WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 5.56-13.56ZM12.05 18.5h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.58 6.58 0 0 1-1.01-3.51 6.6 6.6 0 0 1 6.6-6.6 6.56 6.56 0 0 1 4.66 1.93 6.6 6.6 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.17-.58-1.35-.65-.18-.06-.32-.1-.45.1-.14.2-.53.65-.65.78-.12.13-.24.14-.44.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.12-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.13-.2.2-.34.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.33-.34-.45-.34h-.38c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.66 0 .98.72 1.93.82 2.06.1.13 1.4 2.14 3.4 3 .48.2.85.33 1.14.42.48.15.91.13 1.26.08.38-.06 1.17-.48 1.34-.94.17-.46.17-.85.12-.93-.05-.08-.18-.13-.38-.23Z"/></svg>
 </a>
@@ -535,7 +647,7 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
 <script src="data.js"></script>
 <script>
 /* ============================================================
-   KONFIGURASI — EDIT DI SINI
+   KONFIGURASI
    ============================================================ */
 const CONFIG = {
   phone: "6285155070692",
@@ -548,6 +660,18 @@ const CONFIG = {
     youtube: "bandung_honda"
   },
   defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
+
+  dpRangeMinPct: 10,
+  dpRangeMaxPct: 15.5,
+
+  promo: {
+    beatSeries: {
+      dp: 700000,
+      tenor: 35,
+      cicilan: 893000
+    }
+  },
+
   images: {
     profil: "",
     "New BeAT CBS": "",
@@ -557,46 +681,20 @@ const CONFIG = {
     "ADV 160 CBS": ""
   }
 };
-/* ============================================================ */
 
 const DATA_MOTOR = window.DATA_MOTOR || {};
-
-const FEATURED_KEYS = [
-  "New BeAT CBS",
-  "SCOOPY Energetic & Fashion",
-  "All New Vario 125 CBS",
-  "PCX 160 CBS",
-  "ADV 160 CBS"
-];
+const FEATURED_KEYS = ["New BeAT CBS","SCOOPY Energetic & Fashion","All New Vario 125 CBS","PCX 160 CBS","ADV 160 CBS"];
 
 const MODEL_OVERRIDES = {
-  "New BeAT CBS": {
-    tag: "TERLARIS",
-    tagline: "Paling irit untuk harian, cocok pemula",
-    highlights: ["Konsumsi BBM sangat irit","Ringan & mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]
-  },
-  "SCOOPY Energetic & Fashion": {
-    tag: "RETRO",
-    tagline: "Gaya retro unik, cocok untuk gaya hidup",
-    highlights: ["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]
-  },
-  "All New Vario 125 CBS": {
-    tagline: "Nyaman untuk harian & jarak menengah",
-    highlights: ["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]
-  },
-  "PCX 160 CBS": {
-    tag: "PREMIUM",
-    tagline: "Premium untuk jarak jauh",
-    highlights: ["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]
-  },
-  "ADV 160 CBS": {
-    tagline: "Gaya adventure, tangguh di segala medan",
-    highlights: ["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]
-  }
+  "New BeAT CBS":{tag:"TERLARIS",tagline:"Paling irit untuk harian, cocok pemula",highlights:["Konsumsi BBM sangat irit","Ringan & mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]},
+  "SCOOPY Energetic & Fashion":{tag:"RETRO",tagline:"Gaya retro unik, cocok untuk gaya hidup",highlights:["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]},
+  "All New Vario 125 CBS":{tagline:"Nyaman untuk harian & jarak menengah",highlights:["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]},
+  "PCX 160 CBS":{tag:"PREMIUM",tagline:"Premium untuk jarak jauh",highlights:["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]},
+  "ADV 160 CBS":{tagline:"Gaya adventure, tangguh di segala medan",highlights:["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]}
 };
 
 const CATEGORIES = [
-  { key: "matic", label: "Skutik", icon: "🛵", models: [
+  { key:"matic", label:"Skutik", icon:"🛵", models:[
     "New BeAT CBS","New BeAT CBS ISS DELUXE","New BeAT CBS ISS DELUXE SMARTKEY","New BeAT Street",
     "GENIO CBS","GENIO CBS White & White Red Blue","GENIO CBS ISS",
     "SCOOPY Energetic & Fashion","SCOOPY Prestige & Stylish",
@@ -608,13 +706,13 @@ const CATEGORIES = [
     "New Stylo 160 CBS","New Stylo 160 ABS","New Stylo 160 ABS SE",
     "FORZA"
   ]},
-  { key: "bebek", label: "Bebek", icon: "🏍️", models: [
+  { key:"bebek", label:"Bebek", icon:"🏍️", models:[
     "NEW REVO FIT FI MMC","NEW REVO X",
     "New Supra X 125 FI SW","New Supra X 125 FI CW",
     "New Supra GTR 150 Sporty","New Supra GTR 150 Exclusive",
     "NEW SONIC 150 Standar MMC","SONIC 150 R SE Racing Red & Matte Black"
   ]},
-  { key: "sport", label: "Sport", icon: "🏁", models: [
+  { key:"sport", label:"Sport", icon:"🏁", models:[
     "CB 150 X SE","CB 150 X STD",
     "ALL NEW CB 150 R STREETFIRE STD","ALL NEW CB 150 R STREETFIRE SE",
     "CBR 150 R STD - BK","CBR 150 R STD - MH - RD","CBR 150 R ABS - BK","CBR 150 R ABS - RD",
@@ -623,10 +721,10 @@ const CATEGORIES = [
     "CRF 250 RALLY","CRF 250 L",
     "CB150 VERZA STD","CB150 VERZA CW"
   ]},
-  { key: "lifestyle", label: "Lifestyle", icon: "✨", models: [
+  { key:"lifestyle", label:"Lifestyle", icon:"✨", models:[
     "MONKEY 125","ST 125 DAX","SUPERCUB C125","CT 125"
   ]},
-  { key: "ev", label: "EV", icon: "⚡", models: [
+  { key:"ev", label:"EV", icon:"⚡", models:[
     "EM1 e: + Charger","EM1 e Plus: + Charger","CUV eplus: + Charger","ICON E"
   ]}
 ];
@@ -637,16 +735,18 @@ const CATEGORIES = [
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const formatRp = n => (n === null || n === undefined || isNaN(n)) ? '—' : 'Rp ' + Number(n).toLocaleString('id-ID');
 
-function getAllModelNames() { return Object.keys(DATA_MOTOR); }
-function getModelData(name) { return DATA_MOTOR[name] || null; }
-function getCategoryOf(name) { return CATEGORIES.find(c => c.models.includes(name)); }
-function getEmojiFor(name) { const c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
+function getAllModelNames(){ return Object.keys(DATA_MOTOR); }
+function getModelData(name){ return DATA_MOTOR[name] || null; }
+function getCategoryOf(name){ return CATEGORIES.find(c => c.models.includes(name)); }
+function getEmojiFor(name){ const c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
+function isBeatSeries(name){ return /beat/i.test(name); }
+function isPromoAvailable(){ const p = CONFIG.promo.beatSeries; return p && p.dp > 0 && p.tenor > 0 && p.cicilan > 0; }
 
-function getModelMeta(name) {
+function getModelMeta(name){
   const ov = MODEL_OVERRIDES[name] || {};
   const cat = getCategoryOf(name);
   return {
-    key: name, name: name, emoji: getEmojiFor(name),
+    key:name, name:name, emoji:getEmojiFor(name),
     category: cat ? cat.key : '',
     tag: ov.tag || null,
     tagline: ov.tagline || (cat ? 'Honda ' + name : 'Cek harga OTR & simulasi kredit'),
@@ -655,33 +755,49 @@ function getModelMeta(name) {
   };
 }
 
-function getMinCicilan(model) {
+function getAllDpOptions(model){ return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
+
+function getSliderDpOptions(model){
+  const all = getAllDpOptions(model);
+  const otr = model.harga || 0;
+  if (!otr || !all.length) return all;
+  const minDp = otr * (CONFIG.dpRangeMinPct / 100);
+  const maxDp = otr * (CONFIG.dpRangeMaxPct / 100);
+  const filtered = all.filter(dp => dp >= minDp && dp <= maxDp);
+  if (filtered.length < 2) {
+    const target = (minDp + maxDp) / 2;
+    return [...all].sort((a,b) => Math.abs(a-target) - Math.abs(b-target)).slice(0, 10).sort((a,b)=>a-b);
+  }
+  return filtered;
+}
+
+function getDefaultDp(model){
+  const opts = getSliderDpOptions(model);
+  return opts.length ? opts[opts.length - 1] : null;
+}
+
+function getMinCicilan(model){
+  const opts = getSliderDpOptions(model);
+  if (!opts.length) return null;
   let min = null;
-  for (const dp in model.tabel) {
-    for (const tenor in model.tabel[dp]) {
-      const c = model.tabel[dp][tenor];
+  for (const dp of opts) {
+    const tbl = model.tabel[String(dp)];
+    if (!tbl) continue;
+    for (const tenor in tbl) {
+      const c = tbl[tenor];
       if (min === null || c < min.cicilan) min = { dp: +dp, tenor: +tenor, cicilan: c };
     }
   }
   return min;
 }
-function getDpOptions(model) { return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
-function getDefaultDp(model) {
-  const opts = getDpOptions(model);
-  if (!opts.length) return null;
-  const target = (model.harga || 0) * 0.20;
-  return opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
-}
-function getTenors(model, dp) {
+
+function getTenors(model, dp){
   const t = model.tabel[String(dp)];
   if (!t) return [];
   return Object.keys(t).map(Number).sort((a,b)=>a-b);
 }
-function getImageForModel(name) { return CONFIG.images[name] || ''; }
-function imgTag(src, alt) {
-  if (!src) return '';
-  return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
-}
+function getImageForModel(name){ return CONFIG.images[name] || ''; }
+function imgTag(src, alt){ if (!src) return ''; return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`; }
 
 /* ============================================================
    NAVIGATION
@@ -692,10 +808,11 @@ const floatWa = document.getElementById('floatWa');
 const stack = [];
 let animating = false;
 let pendingKreditModel = null;
+let pendingSheetModel = null;
 
 const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
 
-function openWa(msg, btnEl) {
+function openWa(msg, btnEl){
   if (btnEl && btnEl.classList.contains('is-loading')) return;
   if (btnEl) btnEl.classList.add('is-loading');
   setTimeout(() => {
@@ -704,7 +821,7 @@ function openWa(msg, btnEl) {
   }, 320);
 }
 
-function updateFloatWa(screen) {
+function updateFloatWa(screen){
   if (!floatWa || !screen) return;
   const hero = screen.querySelector('.hero');
   if (!hero) { floatWa.classList.remove('is-hidden'); return; }
@@ -713,7 +830,7 @@ function updateFloatWa(screen) {
   else floatWa.classList.remove('is-hidden');
 }
 
-function setupStickyHeads(screen) {
+function setupStickyHeads(screen){
   const heads = screen.querySelectorAll('.section-head');
   if (!heads.length) return;
   const onScroll = () => {
@@ -727,22 +844,37 @@ function setupStickyHeads(screen) {
   screen._stickyOnScroll = onScroll;
 }
 
-function expandKreditModel(screenEl, name) {
+function expandKreditModel(screenEl, name){
   const card = screenEl.querySelector(`[data-kredit-card="${CSS.escape(name)}"]`);
   if (!card) return;
-  screenEl.querySelectorAll('.kredit-card.open').forEach(c => {
-    if (c !== card) c.classList.remove('open');
-  });
+  screenEl.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
   card.classList.add('open');
-  setTimeout(() => {
-    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 100);
+  setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+/* ============ ACTION SHEET ============ */
+function openActionSheet(name){
+  const data = getModelData(name);
+  if (!data) return;
+  pendingSheetModel = name;
+  document.getElementById('sheetTitle').textContent = name;
+  document.getElementById('sheetSub').textContent = 'OTR ' + formatRp(data.harga);
+  document.getElementById('sheetBackdrop').classList.add('is-open');
+  document.getElementById('actionSheet').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeActionSheet(){
+  document.getElementById('sheetBackdrop').classList.remove('is-open');
+  document.getElementById('actionSheet').classList.remove('is-open');
+  document.body.style.overflow = '';
+  pendingSheetModel = null;
 }
 
 /* ============================================================
-   RENDER — HERO & HOME
+   RENDER — HERO
    ============================================================ */
-function renderHero() {
+function renderHero(){
   const initial = (CONFIG.salesName || 'S').trim().charAt(0).toUpperCase();
   return `
     <header class="hero anim-in">
@@ -768,7 +900,7 @@ function renderHero() {
   `;
 }
 
-function renderSocials() {
+function renderSocials(){
   const s = CONFIG.socials;
   const items = [
     { cls:'social-tiktok', url: s.tiktok ? 'https://tiktok.com/@' + s.tiktok : '',
@@ -793,7 +925,7 @@ function renderSocials() {
   `;
 }
 
-function renderFeaturedCards() {
+function renderFeaturedCards(){
   return FEATURED_KEYS.map(name => {
     const data = getModelData(name);
     if (!data) return '';
@@ -817,7 +949,7 @@ function renderFeaturedCards() {
   }).join('');
 }
 
-function renderHome() {
+function renderHome(){
   return `
     ${renderHero()}
     <main class="wrap">
@@ -861,7 +993,7 @@ function renderHome() {
       <section class="anim-in">
         <div class="terms">
           <h3>Syarat & Ketentuan</h3>
-          <p>Harga OTR dan simulasi kredit bersifat estimasi berdasarkan pricelist FIFGROUP, dapat berubah sewaktu-waktu tanpa pemberitahuan. Beberapa tipe motor belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
+          <p>Harga OTR dan simulasi kredit bersifat estimasi berdasarkan pricelist FIFGROUP, dapat berubah sewaktu-waktu tanpa pemberitahuan. Cicilan belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
         </div>
       </section>
     </main>
@@ -870,9 +1002,9 @@ function renderHome() {
 }
 
 /* ============================================================
-   RENDER — DETAIL MODEL
+   DETAIL MODEL
    ============================================================ */
-function renderBackHeader(title) {
+function renderBackHeader(title){
   return `
     <header class="detail-header anim-in">
       <button class="back-btn" data-back aria-label="Kembali">
@@ -884,7 +1016,7 @@ function renderBackHeader(title) {
   `;
 }
 
-function renderHargaCard(name) {
+function renderHargaCard(name){
   const data = getModelData(name);
   if (!data) return '';
   const cicilanMin = getMinCicilan(data);
@@ -908,7 +1040,7 @@ function renderHargaCard(name) {
   `;
 }
 
-function renderModelDetail(name) {
+function renderModelDetail(name){
   const data = getModelData(name);
   if (!data) return renderNotFound();
   const meta = getModelMeta(name);
@@ -936,25 +1068,22 @@ function renderModelDetail(name) {
 }
 
 /* ============================================================
-   RENDER — STOK PAGE
+   STOK
    ============================================================ */
 const stokFilter = { q: '', cat: 'all' };
 const kreditFilter = { q: '', cat: 'all' };
 
-function filterModelsByState(f) {
+function filterModelsByState(f){
   let names = getAllModelNames();
   if (f.cat !== 'all') {
     const cat = CATEGORIES.find(c => c.key === f.cat);
     if (cat) names = names.filter(n => cat.models.includes(n));
   }
-  if (f.q) {
-    const q = f.q.toLowerCase();
-    names = names.filter(n => n.toLowerCase().includes(q));
-  }
+  if (f.q) { const q = f.q.toLowerCase(); names = names.filter(n => n.toLowerCase().includes(q)); }
   return names;
 }
 
-function renderFilterBar(f, prefix) {
+function renderFilterBar(f, prefix){
   return `
     <div class="filter-bar">
       <div class="search-wrap">
@@ -972,34 +1101,33 @@ function renderFilterBar(f, prefix) {
   `;
 }
 
-function renderStokList() {
+function renderStokList(){
   const names = filterModelsByState(stokFilter);
   if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
   return names.map(name => {
     const data = getModelData(name);
     if (!data) return '';
     const meta = getModelMeta(name);
-    const safeName = esc(name);
     return `
-      <a class="stok-item" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok & harga ${safeName}.">
+      <a class="stok-item" href="#" data-model="${esc(name)}">
         <div class="stok-item-emoji">${meta.emoji}</div>
         <div class="stok-item-info">
           <strong>${esc(name)}</strong>
           <span>OTR ${formatRp(data.harga)}</span>
         </div>
-        <div class="stok-item-cta">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 5.56-13.56Z"/></svg>
+        <div class="stok-item-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </div>
       </a>
     `;
   }).join('');
 }
 
-function renderStok() {
+function renderStok(){
   return `
     ${renderBackHeader('Stok & Harga')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Daftar harga OTR semua model Honda. Tanya ketersediaan warna/tipe via WhatsApp.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Daftar harga OTR semua model Honda. Tap model untuk pilih cash atau kredit.</p>
       ${renderFilterBar(stokFilter, 'stok')}
       <div id="stok-list-container" class="anim-in">${renderStokList()}</div>
     </div>
@@ -1007,9 +1135,9 @@ function renderStok() {
 }
 
 /* ============================================================
-   RENDER — KREDIT PAGE
+   KREDIT
    ============================================================ */
-function renderTenorRows(name, dp) {
+function renderTenorRows(name, dp){
   const data = getModelData(name);
   if (!data) return '';
   const tenors = getTenors(data, dp);
@@ -1022,19 +1150,24 @@ function renderTenorRows(name, dp) {
   `).join('');
 }
 
-function renderDpSlider(name, currentDp) {
+function renderDpSlider(name, currentDp){
   const data = getModelData(name);
   if (!data) return '';
-  const opts = getDpOptions(data);
+  const opts = getSliderDpOptions(data);
   if (!opts.length) return '';
   const idx = Math.max(0, opts.indexOf(currentDp));
   const minDp = opts[0];
   const maxDp = opts[opts.length - 1];
   const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
+  const isAtMax = idx === opts.length - 1;
+  const showPromo = isBeatSeries(name) && isPromoAvailable();
   return `
     <div class="dp-slider-wrap">
       <div class="dp-display">
-        <span class="dp-display-label">DP Dipilih</span>
+        <div>
+          <span class="dp-display-label">DP Dipilih</span>
+          <span class="dp-display-sub">Range ${CONFIG.dpRangeMinPct}%–${CONFIG.dpRangeMaxPct}% OTR</span>
+        </div>
         <span class="dp-display-value">${formatRp(opts[idx])}</span>
       </div>
       <input type="range" class="dp-slider"
@@ -1046,12 +1179,38 @@ function renderDpSlider(name, currentDp) {
         <span>${formatRp(minDp)}</span>
         <span>${formatRp(maxDp)}</span>
       </div>
-      <div class="dp-slider-hint">Geser untuk atur DP · Cicilan update otomatis</div>
+      <div class="dp-note">Belum termasuk diskon & potongan tenor</div>
+      ${showPromo ? `
+        <div class="promo-option${isAtMax ? ' is-visible' : ''}" data-promo-option="${esc(name)}">
+          <button class="promo-btn" data-promo-toggle="${esc(name)}" type="button">
+            ⚡ Coba DP Promo ${formatRp(CONFIG.promo.beatSeries.dp)} · Tenor ${CONFIG.promo.beatSeries.tenor} bulan
+          </button>
+        </div>
+      ` : ''}
     </div>
   `;
 }
 
-function renderKreditCardsList() {
+function renderPromoView(name){
+  if (!isBeatSeries(name) || !isPromoAvailable()) return '';
+  const p = CONFIG.promo.beatSeries;
+  return `
+    <div class="promo-view">
+      <div class="promo-banner">
+        <div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>
+        <div class="promo-banner-value">${formatRp(p.cicilan)}<small>/bln</small></div>
+        <div class="promo-banner-meta">
+          DP ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
+        </div>
+        <div class="promo-banner-note">
+          Cicilan promo belum termasuk diskon & potongan tenor. Konfirmasi final via WhatsApp.
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderKreditCardsList(){
   const names = filterModelsByState(kreditFilter);
   if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kata lain.</div>`;
   return names.map(name => {
@@ -1078,6 +1237,7 @@ function renderKreditCardsList() {
             <div class="kredit-body">
               <div class="kredit-body-inner">
                 ${renderDpSlider(name, defaultDp)}
+                ${renderPromoView(name)}
                 <div class="tenor-list" data-tenor-list="${esc(name)}">
                   ${renderTenorRows(name, defaultDp)}
                 </div>
@@ -1091,18 +1251,18 @@ function renderKreditCardsList() {
   }).join('');
 }
 
-function renderKredit() {
+function renderKredit(){
   return `
     ${renderBackHeader('Simulasi Kredit')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP (10%–15.5% OTR) untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
       ${renderFilterBar(kreditFilter, 'kredit')}
       <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
   `;
 }
 
-function renderNotFound() {
+function renderNotFound(){
   return `
     ${renderBackHeader('Tidak Ditemukan')}
     <div class="not-found">
@@ -1116,22 +1276,18 @@ function renderNotFound() {
 /* ============================================================
    ROUTER
    ============================================================ */
-function renderRoute(route) {
+function renderRoute(route){
   if (route === '/') return renderHome();
-  if (route.startsWith('/model/')) {
-    const name = decodeURIComponent(route.slice(7));
-    return renderModelDetail(name);
-  }
+  if (route.startsWith('/model/')) return renderModelDetail(decodeURIComponent(route.slice(7)));
   if (route === '/stok') return renderStok();
   if (route === '/kredit') return renderKredit();
   return renderNotFound();
 }
-
-function routeToHash(route) {
+function routeToHash(route){
   if (route.startsWith('/model/')) return '/model/' + encodeURIComponent(route.slice(7));
   return route;
 }
-function hashToRoute(hash) {
+function hashToRoute(hash){
   const path = hash.startsWith('#') ? hash.slice(1) : hash;
   if (path.startsWith('/model/')) return '/model/' + decodeURIComponent(path.slice(7));
   return path || '/';
@@ -1140,27 +1296,23 @@ function hashToRoute(hash) {
 /* ============================================================
    NAVIGATION ENGINE
    ============================================================ */
-function makeScreen(route) {
+function makeScreen(route){
   const el = document.createElement('section');
   el.className = 'screen';
   el.dataset.route = route;
   el.innerHTML = renderRoute(route);
-  const onScroll = () => {
-    if (!el.classList.contains('is-active')) return;
-    updateFloatWa(el);
-  };
+  const onScroll = () => { if (!el.classList.contains('is-active')) return; updateFloatWa(el); };
   el.addEventListener('scroll', onScroll, { passive: true });
   el._onScroll = onScroll;
   setupStickyHeads(el);
   return el;
 }
 
-function pushScreen(route, animate) {
+function pushScreen(route, animate){
   if (animate && animating) return;
   const current = stack[stack.length - 1];
   const el = makeScreen(route);
   app.appendChild(el);
-
   const afterActivate = () => {
     animating = false;
     updateFloatWa(el);
@@ -1170,7 +1322,6 @@ function pushScreen(route, animate) {
       setTimeout(() => expandKreditModel(el, target), 120);
     }
   };
-
   if (animate && current) {
     animating = true;
     void el.offsetWidth;
@@ -1192,7 +1343,7 @@ function pushScreen(route, animate) {
   stack.push(el);
 }
 
-function popScreen(animate) {
+function popScreen(animate){
   if (animate && animating) return;
   if (stack.length <= 1) return;
   const current = stack.pop();
@@ -1217,7 +1368,7 @@ function popScreen(animate) {
   }
 }
 
-function navigate(route) {
+function navigate(route){
   if (animating) return;
   const current = stack[stack.length - 1];
   if (current && current.dataset.route === route) return;
@@ -1225,7 +1376,7 @@ function navigate(route) {
   pushScreen(route, true);
 }
 
-function refreshActiveList(prefix) {
+function refreshActiveList(prefix){
   const screen = stack[stack.length - 1];
   if (!screen) return;
   if (prefix === 'stok') {
@@ -1238,24 +1389,71 @@ function refreshActiveList(prefix) {
 }
 
 /* ============================================================
-   EVENTS
+   EVENTS — APP
    ============================================================ */
 app.addEventListener('click', e => {
   if (animating) return;
 
+  // Stok item → buka action sheet
+  const stokEl = e.target.closest('.stok-item');
+  if (stokEl) {
+    e.preventDefault();
+    const name = stokEl.dataset.model;
+    if (name) openActionSheet(name);
+    return;
+  }
+
+  // Toggle accordion kredit
   const toggleEl = e.target.closest('[data-toggle-kredit]');
   if (toggleEl) {
     e.preventDefault();
     const card = toggleEl.closest('.kredit-card');
     if (!card) return;
     const wasOpen = card.classList.contains('open');
-    card.parentElement.querySelectorAll('.kredit-card.open').forEach(c => {
-      if (c !== card) c.classList.remove('open');
-    });
+    card.parentElement.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
     card.classList.toggle('open', !wasOpen);
     return;
   }
 
+  // Promo toggle
+  const promoBtn = e.target.closest('[data-promo-toggle]');
+  if (promoBtn) {
+    e.preventDefault();
+    const name = promoBtn.dataset.promoToggle;
+    const card = promoBtn.closest('.kredit-card');
+    if (!card) return;
+    const data = getModelData(name);
+    if (!data) return;
+    const wasActive = card.classList.contains('promo-active');
+    const p = CONFIG.promo.beatSeries;
+
+    if (!wasActive) {
+      card.classList.add('promo-active');
+      const display = card.querySelector('.dp-display-value');
+      if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9500;font-weight:800;margin-left:4px">PROMO</small>`;
+      const sub = card.querySelector('.dp-display-sub');
+      if (sub) sub.textContent = 'Harga promo Beat Series';
+      const btn = card.querySelector('.promo-btn');
+      if (btn) btn.innerHTML = '✕ Batalkan Promo · Kembali ke DP Normal';
+    } else {
+      card.classList.remove('promo-active');
+      const slider = card.querySelector('.dp-slider');
+      const opts = getSliderDpOptions(data);
+      const currentIdx = slider ? +slider.value : 0;
+      const currentDp = opts[currentIdx] || getDefaultDp(data);
+      const display = card.querySelector('.dp-display-value');
+      if (display) display.textContent = formatRp(currentDp);
+      const sub = card.querySelector('.dp-display-sub');
+      if (sub) sub.textContent = `Range ${CONFIG.dpRangeMinPct}%–${CONFIG.dpRangeMaxPct}% OTR`;
+      const btn = card.querySelector('.promo-btn');
+      if (btn) btn.innerHTML = `⚡ Coba DP Promo ${formatRp(p.dp)} · Tenor ${p.tenor} bulan`;
+      const tenorList = card.querySelector('.tenor-list');
+      if (tenorList) tenorList.innerHTML = renderTenorRows(name, currentDp);
+    }
+    return;
+  }
+
+  // Category chip
   const catEl = e.target.closest('[data-cat]');
   if (catEl) {
     e.preventDefault();
@@ -1268,6 +1466,7 @@ app.addEventListener('click', e => {
     return;
   }
 
+  // Navigasi
   const navEl = e.target.closest('[data-nav]');
   if (navEl) {
     e.preventDefault();
@@ -1284,28 +1483,31 @@ app.addEventListener('click', e => {
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
-/* Slider live update: cicilan & display DP langsung berubah saat digeser */
+// Slider & search
 app.addEventListener('input', e => {
-  // DP slider
   if (e.target.matches('.dp-slider')) {
     const name = e.target.dataset.model;
     const data = getModelData(name);
     if (!data) return;
-    const opts = getDpOptions(data);
+    const card = e.target.closest('.kredit-card');
+    if (!card || card.classList.contains('promo-active')) return;
+    const opts = getSliderDpOptions(data);
     const idx = +e.target.value;
     const dp = opts[idx];
     if (dp === undefined) return;
     const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
     e.target.style.setProperty('--pct', pct + '%');
-    const card = e.target.closest('.kredit-card');
-    if (!card) return;
     const display = card.querySelector('.dp-display-value');
     if (display) display.textContent = formatRp(dp);
     const tenorList = card.querySelector('.tenor-list');
     if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+    const promoOpt = card.querySelector('.promo-option');
+    if (promoOpt) {
+      if (idx === opts.length - 1) promoOpt.classList.add('is-visible');
+      else promoOpt.classList.remove('is-visible');
+    }
     return;
   }
-  // Search input
   if (e.target.matches('.search-input')) {
     const prefix = e.target.dataset.search;
     const target = prefix === 'stok' ? stokFilter : kreditFilter;
@@ -1318,6 +1520,31 @@ app.addEventListener('input', e => {
 floatWa.addEventListener('click', e => {
   e.preventDefault();
   openWa(CONFIG.defaultMessage, e.currentTarget);
+});
+
+/* ============ ACTION SHEET EVENTS ============ */
+document.getElementById('sheetBackdrop').addEventListener('click', closeActionSheet);
+document.getElementById('sheetCancel').addEventListener('click', closeActionSheet);
+
+document.getElementById('actionSheet').addEventListener('click', e => {
+  const btn = e.target.closest('[data-sheet-action]');
+  if (!btn) return;
+  const action = btn.dataset.sheetAction;
+  const name = pendingSheetModel;
+  if (!name) return;
+
+  if (action === 'cash') {
+    closeActionSheet();
+    openWa(`Halo Dion, saya dari TikTok. Mau tanya stok & harga CASH untuk ${name}.`, btn);
+  } else if (action === 'kredit') {
+    closeActionSheet();
+    pendingKreditModel = name;
+    navigate('/kredit');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && pendingSheetModel) closeActionSheet();
 });
 
 window.addEventListener('popstate', e => {
