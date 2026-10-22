@@ -1,10 +1,76 @@
 <!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════════
+  DION PRAYOGA — SALES HONDA BANDUNG  (v2 · development-ready)
+  ─────────────────────────────────────────────────────────────
+  Status: sudah lebih baik dari versi sebelumnya, siap deploy.
+  Yang BELUM diaktifkan (karena butuh domain + file):
+    • canonical, og:url, og:image, favicon, JSON-LD
+    → Cari komentar "TEMPLATE PRODUCTION" di <head>, uncomment
+      saat domain & file sudah siap.
+  ═══════════════════════════════════════════════════════════════
+-->
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dion Prayoga — Sales Honda Bandung</title>
+
+<title>Dion Prayoga — Sales Resmi Honda Bandung | Harga OTR & Simulasi Kredit</title>
+<meta name="description" content="Harga OTR terbaru motor Honda Bandung & simulasi kredit FIFGROUP. Tanya stok, cash, atau kredit langsung dari sales resmi Daya Motor Cibiru.">
+<meta name="author" content="Dion Prayoga">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#1c1c1e">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dion Honda">
+
+<!-- Open Graph basic (works tanpa og:image — preview akan pakai fallback) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Dion Prayoga — Sales Honda Bandung">
+<meta property="og:title" content="Sales Resmi Honda Bandung — Harga OTR & Simulasi Kredit">
+<meta property="og:description" content="Harga OTR terbaru & simulasi kredit FIFGROUP untuk semua model Honda. Konsultasi langsung dari sales resmi Daya Motor Cibiru.">
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  TEMPLATE PRODUCTION                                         ║
+     ║  Uncomment bagian ini setelah:                               ║
+     ║  1. Punya domain (mis. dionprayoga.com)                      ║
+     ║  2. Upload file ke root: favicon-32.png, favicon-16.png,     ║
+     ║     apple-touch-icon.png, og-image.jpg (1200x630)            ║
+     ╚══════════════════════════════════════════════════════════════╝
+
+<link rel="canonical" href="https://dionprayoga.com/">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta property="og:url" content="https://dionprayoga.com/">
+<meta property="og:image" content="https://dionprayoga.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dion Prayoga - Sales Resmi Honda Bandung">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sales Resmi Honda Bandung — Harga OTR & Simulasi Kredit">
+<meta name="twitter:description" content="Harga OTR terbaru & simulasi kredit FIFGROUP untuk semua model Honda.">
+<meta name="twitter:image" content="https://dionprayoga.com/og-image.jpg">
+<link rel="preconnect" href="https://wa.me" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "name": "Daya Motor Cibiru — Dion Prayoga",
+  "description": "Sales resmi Honda Bandung. Harga OTR terbaru & simulasi kredit FIFGROUP.",
+  "url": "https://dionprayoga.com/",
+  "image": "https://dionprayoga.com/og-image.jpg",
+  "telephone": "+6285155070692",
+  "areaServed": { "@type": "City", "name": "Bandung" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Bandung", "addressRegion": "Jawa Barat", "addressCountry": "ID" },
+  "brand": { "@type": "Brand", "name": "Honda" },
+  "priceRange": "Rp"
+}
+</script>
+-->
+
 <style>
 :root{
   --bg:#f5f5f7;
@@ -70,8 +136,6 @@ a{color:inherit;text-decoration:none}
 }
 .wa-btn.is-loading::after,.wa-btn.is-loading{color:transparent}
 .wa-btn.is-loading::after{border-color:rgba(255,255,255,.3);border-top-color:#fff}
-.hero-cta.is-loading{color:transparent!important}
-.hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .hero{
@@ -253,7 +317,6 @@ section{padding:8px 0 0}
 .wa-btn-outline{background:var(--surface);color:var(--label);box-shadow:var(--shadow-card)}
 .wa-btn-outline:active{background:var(--surface-2)}
 
-/* Konsultasi aktif (ada pilihan) */
 .wa-btn.has-selection{
   background:var(--wa-2);
   box-shadow:0 0 0 4px rgba(37,211,102,.18),0 4px 12px rgba(37,211,102,.3);
@@ -502,9 +565,6 @@ section{padding:8px 0 0}
 .kredit-card.promo-active .dp-slider-labels{opacity:.4;}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2);}
 
-/* ============================================================
-   TENOR LIST — tap to select (bukan langsung WA)
-   ============================================================ */
 .tenor-list{background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;}
 .tenor-row{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -531,7 +591,6 @@ section{padding:8px 0 0}
   flex-shrink:0;margin-left:2px;transition:color .2s;
 }
 
-/* Baris tenor terpilih */
 .tenor-row.is-selected{
   background:rgba(255,149,0,0.12);
   box-shadow:inset 3px 0 0 var(--accent);
@@ -609,6 +668,7 @@ section{padding:8px 0 0}
   font-family:inherit;
   transition:transform .15s,background .15s;
   position:relative;
+  text-decoration:none;
 }
 .sheet-btn:active{transform:scale(.98)}
 
@@ -680,6 +740,19 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
 
 <div id="app"></div>
 
+<noscript>
+  <div style="padding:40px 24px;max-width:520px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1d1d1f">
+    <h1 style="font-size:22px;font-weight:800;margin:0 0 8px;letter-spacing:-.02em">Dion Prayoga — Sales Resmi Honda Bandung</h1>
+    <p style="color:#6e6e73;margin:0 0 16px">Harga OTR terbaru motor Honda Bandung & simulasi kredit FIFGROUP. Tanya stok, cash, atau kredit langsung dari sales resmi Daya Motor Cibiru.</p>
+    <p style="margin:0 0 8px"><strong>Model tersedia:</strong> Beat, Scoopy, Vario, PCX, ADV, Stylo, Revo, Supra, Sonic, CB150R, CBR, CRF, Monkey, EM1 e, dan lainnya.</p>
+    <p style="margin:0 0 16px">Untuk pengalaman terbaik (simulasi kredit interaktif, katalog lengkap), aktifkan JavaScript di browser Anda.</p>
+    <p style="margin:0 0 16px">
+      <a href="https://wa.me/6285155070692?text=Halo%20Dion%2C%20saya%20dari%20TikTok.%20Mau%20tanya-tanya%20soal%20motor%20Honda." style="display:inline-block;padding:14px 24px;background:#25d366;color:#fff;text-decoration:none;border-radius:10px;font-weight:700">Chat WhatsApp</a>
+    </p>
+    <p style="color:#86868b;font-size:12px;margin-top:32px">© Daya Motor Cibiru · Dion Prayoga</p>
+  </div>
+</noscript>
+
 <div class="sheet-backdrop" id="sheetBackdrop"></div>
 <div class="sheet" id="actionSheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="sheet-handle"></div>
@@ -688,13 +761,13 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
     <div class="sheet-sub" id="sheetSub"></div>
   </div>
   <div class="sheet-actions">
-    <button class="sheet-btn sheet-btn-cash" data-sheet-action="cash" type="button">
+    <a class="sheet-btn sheet-btn-cash" data-sheet-action="cash" href="#" target="_blank" rel="noopener">
       <div class="sheet-btn-icon">💵</div>
       <div class="sheet-btn-body">
         <strong>Bayar Cash</strong>
         <span>Tanya stok & harga cash via WhatsApp</span>
       </div>
-    </button>
+    </a>
     <button class="sheet-btn sheet-btn-kredit" data-sheet-action="kredit" type="button">
       <div class="sheet-btn-icon">📊</div>
       <div class="sheet-btn-body">
@@ -706,7 +779,7 @@ footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)
   <button class="sheet-cancel" id="sheetCancel" type="button">Batal</button>
 </div>
 
-<a class="float-wa is-hidden" id="floatWa" href="#" aria-label="Chat WhatsApp">
+<a class="float-wa is-hidden" id="floatWa" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.83.98h.01a7.94 7.94 0 0 0 5.56-13.56ZM12.05 18.5h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.58 6.58 0 0 1-1.01-3.51 6.6 6.6 0 0 1 6.6-6.6 6.56 6.56 0 0 1 4.66 1.93 6.6 6.6 0 0 1 1.93 4.68 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.17-.58-1.35-.65-.18-.06-.32-.1-.45.1-.14.2-.53.65-.65.78-.12.13-.24.14-.44.05-.2-.1-.84-.31-1.6-.99-.6-.53-1-1.18-1.12-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.13-.2.2-.34.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.33-.34-.45-.34h-.38c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.66 0 .98.72 1.93.82 2.06.1.13 1.4 2.14 3.4 3 .48.2.85.33 1.14.42.48.15.91.13 1.26.08.38-.06 1.17-.48 1.34-.94.17-.46.17-.85.12-.93-.05-.08-.18-.13-.38-.23Z"/></svg>
 </a>
 
@@ -891,6 +964,34 @@ function getImageForModel(name){ return CONFIG.images[name] || ''; }
 function imgTag(src, alt){ if (!src) return ''; return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`; }
 
 /* ============================================================
+   WA LINK HELPERS
+   ============================================================ */
+function waLink(msg){
+  return 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
+}
+
+/**
+ * Buka WhatsApp via anchor click (user gesture, no popup blocker).
+ * Tidak ada setTimeout sebelum navigasi → tidak terdeteksi sebagai
+ * scripted redirect. Loading state cuma visual.
+ */
+function openWa(msg, btnEl){
+  if (btnEl){
+    btnEl.classList.add('is-loading');
+    setTimeout(() => btnEl.classList.remove('is-loading'), 1500);
+  }
+  const url = waLink(msg);
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+/* ============================================================
    NAVIGATION
    ============================================================ */
 const NAV_DURATION = 400;
@@ -901,16 +1002,7 @@ let animating = false;
 let pendingKreditModel = null;
 let pendingSheetModel = null;
 
-const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
-
-function openWa(msg, btnEl){
-  if (btnEl && btnEl.classList.contains('is-loading')) return;
-  if (btnEl) btnEl.classList.add('is-loading');
-  setTimeout(() => {
-    window.open(waLink(msg), '_blank', 'noopener');
-    if (btnEl) setTimeout(() => btnEl.classList.remove('is-loading'), 250);
-  }, 320);
-}
+floatWa.href = waLink(CONFIG.defaultMessage);
 
 function updateFloatWa(screen){
   if (!floatWa || !screen) return;
@@ -949,6 +1041,12 @@ function openActionSheet(name){
   pendingSheetModel = name;
   document.getElementById('sheetTitle').textContent = name;
   document.getElementById('sheetSub').textContent = 'OTR ' + formatRp(data.harga);
+
+  const cashBtn = document.querySelector('[data-sheet-action="cash"]');
+  if (cashBtn) {
+    cashBtn.href = waLink(`Halo Dion, saya dari TikTok. Mau tanya stok & harga CASH untuk ${name}.`);
+  }
+
   document.getElementById('sheetBackdrop').classList.add('is-open');
   document.getElementById('actionSheet').classList.add('is-open');
   document.body.style.overflow = 'hidden';
@@ -961,7 +1059,6 @@ function closeActionSheet(){
   pendingSheetModel = null;
 }
 
-/* Update tombol konsultasi sesuai state card */
 function updateKonsultasiBtn(card){
   const btn = card.querySelector('[data-konsultasi]');
   if (!btn) return;
@@ -1045,7 +1142,7 @@ function renderHero(){
         </div>
         <h1>Sales Resmi Honda Bandung</h1>
         <p>Harga OTR & simulasi kredit FIFGROUP. Tanya stok, kredit, atau test ride via WhatsApp.</p>
-        <a class="hero-cta" data-msg="${esc(CONFIG.defaultMessage)}">💬 Chat WhatsApp</a>
+        <a class="hero-cta" href="${esc(waLink(CONFIG.defaultMessage))}" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
       </div>
     </header>
   `;
@@ -1195,6 +1292,7 @@ function renderModelDetail(name){
   const data = getModelData(name);
   if (!data) return renderNotFound();
   const meta = getModelMeta(name);
+  const waUrl = waLink(`Halo Dion, saya dari TikTok. Mau tanya stok & harga ${name}.`);
   return `
     ${renderBackHeader(name)}
     <div class="model-hero anim-in">
@@ -1212,7 +1310,7 @@ function renderModelDetail(name){
         <ul class="highlights">${meta.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
       </div>
       <div class="cta-block anim-in">
-        <a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok & harga ${esc(name)}.">💬 Tanya Stok & Harga</a>
+        <a class="wa-btn" href="${esc(waUrl)}" target="_blank" rel="noopener">💬 Tanya Stok & Harga</a>
       </div>
     </div>
   `;
@@ -1585,7 +1683,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Tap tenor row = pilih (bukan buka WA)
   const tenorEl = e.target.closest('.tenor-row');
   if (tenorEl) {
     e.preventDefault();
@@ -1611,7 +1708,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Tap tombol konsultasi = baru buka WA
   const konsulEl = e.target.closest('[data-konsultasi]');
   if (konsulEl) {
     e.preventDefault();
@@ -1621,7 +1717,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Promo toggle
   const promoBtn = e.target.closest('[data-promo-toggle]');
   if (promoBtn) {
     e.preventDefault();
@@ -1634,7 +1729,6 @@ app.addEventListener('click', e => {
     const p = CONFIG.promo.beatSeries;
 
     if (!wasActive) {
-      // Aktifkan promo - reset selection dulu
       resetSelection(card);
       card.classList.add('promo-active');
       const display = card.querySelector('[data-dp-value]');
@@ -1643,7 +1737,6 @@ app.addEventListener('click', e => {
       if (sub) sub.textContent = 'Mode Promo Aktif';
       updateKonsultasiBtn(card);
     } else {
-      // Matikan promo - balik ke trigger DP
       card.classList.remove('promo-active');
       const triggerDp = getPromoTriggerDp(name);
       const opts = getSliderDpOptions(data);
@@ -1691,12 +1784,8 @@ app.addEventListener('click', e => {
 
   const backEl = e.target.closest('[data-back]');
   if (backEl) { e.preventDefault(); if (stack.length > 1) history.back(); return; }
-
-  const msgEl = e.target.closest('[data-msg]');
-  if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
-// Slider live update — reset selection saat DP berubah
 app.addEventListener('input', e => {
   if (e.target.matches('.dp-slider')) {
     const name = e.target.dataset.model;
@@ -1715,7 +1804,6 @@ app.addEventListener('input', e => {
     const tenorList = card.querySelector('.tenor-list');
     if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
     
-    // Reset selection karena tenor list berubah
     resetSelection(card);
 
     const triggerDp = getPromoTriggerDp(name);
@@ -1735,11 +1823,6 @@ app.addEventListener('input', e => {
   }
 });
 
-floatWa.addEventListener('click', e => {
-  e.preventDefault();
-  openWa(CONFIG.defaultMessage, e.currentTarget);
-});
-
 document.getElementById('sheetBackdrop').addEventListener('click', closeActionSheet);
 document.getElementById('sheetCancel').addEventListener('click', closeActionSheet);
 
@@ -1752,7 +1835,6 @@ document.getElementById('actionSheet').addEventListener('click', e => {
 
   if (action === 'cash') {
     closeActionSheet();
-    openWa(`Halo Dion, saya dari TikTok. Mau tanya stok & harga CASH untuk ${name}.`, btn);
   } else if (action === 'kredit') {
     closeActionSheet();
     pendingKreditModel = name;
