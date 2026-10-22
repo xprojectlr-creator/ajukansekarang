@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dion Prayoga — Sales Honda Bandung</title>
-<meta name="description" content="Katalog Honda Daya Motor Cibiru, Bandung. Cek stok, simulasi kredit, atau booking test ride.">
+<meta name="description" content="Katalog Honda Daya Motor Cibiru, Bandung. Cek stok, harga OTR, simulasi kredit.">
 <meta name="theme-color" content="#1c1c1e">
 <style>
 :root{
@@ -55,7 +55,6 @@ body{
 #app{position:fixed;inset:0;overflow:hidden}
 button,a{touch-action:manipulation}
 
-/* SCREEN SYSTEM */
 .screen{
   position:absolute;inset:0;
   overflow-y:auto;overflow-x:hidden;
@@ -91,13 +90,13 @@ a{color:inherit;text-decoration:none}
   border:2px solid rgba(0,0,0,.15);border-top-color:var(--label);
   animation:spin .7s linear infinite;
 }
-.wa-btn.is-loading::after,.wa-btn.is-loading{color:transparent}
-.wa-btn.is-loading::after{border-color:rgba(255,255,255,.3);border-top-color:#fff}
+.wa-btn.is-loading::after,.wa-btn.is-loading,.stok-btn.is-loading,.harga-cta.is-loading{color:transparent}
+.wa-btn.is-loading::after,.stok-btn.is-loading::after{border-color:rgba(255,255,255,.3);border-top-color:#fff}
 .hero-cta.is-loading{color:transparent!important}
 .hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ============ HERO ============ */
+/* HERO */
 .hero{
   background:
     radial-gradient(ellipse at 85% 0%,rgba(255,149,0,0.22) 0%,transparent 55%),
@@ -106,58 +105,35 @@ a{color:inherit;text-decoration:none}
   color:#fff;
   padding:calc(20px + env(safe-area-inset-top)) 0 28px;
   position:relative;overflow:hidden;
-  border-bottom-left-radius:28px;
-  border-bottom-right-radius:28px;
+  border-bottom-left-radius:28px;border-bottom-right-radius:28px;
 }
-.hero-top{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin-bottom:22px;
-}
-.hero-profile{
-  display:flex;align-items:center;gap:11px;min-width:0;flex:1;
-}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.hero-profile{display:flex;align-items:center;gap:11px;min-width:0;flex:1}
 .profile-avatar{
   width:46px;height:46px;border-radius:50%;overflow:hidden;
   background:linear-gradient(135deg,#ffb84d 0%,#ff8500 100%);
-  color:#fff;display:grid;place-items:center;
-  font-size:19px;font-weight:800;flex-shrink:0;position:relative;
-  box-shadow:0 2px 8px rgba(255,149,0,.3),
-             inset 0 0 0 1px rgba(255,255,255,.15);
+  color:#fff;display:grid;place-items:center;font-size:19px;font-weight:800;
+  flex-shrink:0;position:relative;
+  box-shadow:0 2px 8px rgba(255,149,0,.3),inset 0 0 0 1px rgba(255,255,255,.15);
 }
 .profile-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .profile-info{min-width:0}
-.profile-info strong{
-  display:block;font-size:15px;font-weight:700;
-  letter-spacing:-0.01em;color:#fff;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.profile-info span{
-  display:block;font-size:12px;color:rgba(255,255,255,0.6);
-  margin-top:1px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
+.profile-info strong{display:block;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profile-info span{display:block;font-size:12px;color:rgba(255,255,255,0.6);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .badge{
   display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);
   padding:5px 10px;border-radius:var(--radius-pill);
   font-size:11px;font-weight:600;flex-shrink:0;
-  backdrop-filter:var(--blur-glass-sm);
-  -webkit-backdrop-filter:var(--blur-glass-sm);
+  backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
 }
-.badge .dot{
-  width:6px;height:6px;border-radius:50%;background:#4ade80;
-  box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:pulse 2s infinite;
-}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)}
   70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}
   100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}
 }
-.hero h1{
-  font-size:28px;line-height:1.15;font-weight:800;
-  letter-spacing:-0.03em;margin-bottom:10px;
-}
+.hero h1{font-size:28px;line-height:1.15;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px}
 .hero p{font-size:14.5px;color:rgba(255,255,255,.7);margin-bottom:22px;line-height:1.5}
 .hero-cta{
   display:flex;align-items:center;justify-content:center;gap:10px;
@@ -170,52 +146,39 @@ a{color:inherit;text-decoration:none}
 }
 .hero-cta:active{transform:scale(.97);background:var(--accent-2)}
 
-/* ============ SECTIONS WITH STICKY GLASS HEADER ============ */
+/* SECTIONS */
 section{padding:8px 0 0}
 .section-head{
   position:sticky;top:0;z-index:5;
   padding:20px 20px 14px;
   margin:0 -20px 10px;
   background:var(--bg-glass);
-  backdrop-filter:var(--blur-glass);
-  -webkit-backdrop-filter:var(--blur-glass);
+  backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   transition:box-shadow .2s ease;
 }
-.section-head.is-stuck{
-  box-shadow:0 1px 0 rgba(60,60,67,0.08);
-}
-.section-title{
-  font-size:20px;font-weight:800;letter-spacing:-0.02em;
-  margin-bottom:4px;color:var(--label);
-}
+.section-head.is-stuck{box-shadow:0 1px 0 rgba(60,60,67,0.08)}
+.section-title{font-size:20px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;color:var(--label)}
 .section-sub{font-size:13.5px;color:var(--label-2);margin:0}
 
-/* ============ SOCIAL ============ */
+/* SOCIAL */
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
 .social{
   display:flex;flex-direction:column;align-items:center;gap:8px;
   padding:14px 8px;border-radius:16px;background:var(--surface);
   box-shadow:var(--shadow-card);
-  transition:transform .2s var(--spring);
-  cursor:pointer;
+  transition:transform .2s var(--spring);cursor:pointer;
 }
 .social:active{transform:scale(.94)}
-.social-icon{
-  width:38px;height:38px;border-radius:11px;
-  display:grid;place-items:center;color:#fff;
-}
+.social-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff}
 .social-icon svg{width:20px;height:20px}
 .social-tiktok .social-icon{background:#000}
 .social-ig .social-icon{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
 .social-yt .social-icon{background:#ff0000}
-.social span{
-  font-size:11.5px;font-weight:600;color:var(--label);
-  text-align:center;line-height:1.2;
-  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
+.social span{font-size:11.5px;font-weight:600;color:var(--label);text-align:center;line-height:1.2;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* ============ ACTIONS ============ */
-.actions{display:grid;gap:10px;padding:0 20px;margin:0 -20px}
+/* ACTIONS */
+.actions{display:grid;gap:10px}
 .action{
   display:flex;align-items:center;gap:14px;padding:16px;
   border-radius:var(--radius-card);background:var(--surface);
@@ -223,180 +186,99 @@ section{padding:8px 0 0}
   transition:transform .2s var(--spring);cursor:pointer;
 }
 .action:active{transform:scale(.98)}
-.action-ico{
-  width:46px;height:46px;border-radius:13px;
-  background:var(--accent-soft);
-  display:grid;place-items:center;font-size:22px;flex-shrink:0;
-}
+.action-ico{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);display:grid;place-items:center;font-size:22px;flex-shrink:0}
 .action-body{flex:1;min-width:0}
-.action-body strong{
-  display:block;font-size:15.5px;font-weight:700;
-  letter-spacing:-0.01em;color:var(--label);
-}
+.action-body strong{display:block;font-size:15.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
 .action-body span{display:block;font-size:13px;color:var(--label-2);margin-top:2px}
 .action-arrow{color:var(--label-3);font-size:20px;font-weight:300}
 
-/* ============ MODELS ============ */
-.models{display:grid;gap:14px;padding:0 20px;margin:0 -20px}
+/* MODEL CARDS */
+.models{display:grid;gap:14px}
 .model{
   border-radius:var(--radius-card);background:var(--surface);
   overflow:hidden;box-shadow:var(--shadow-card);
   transition:transform .2s var(--spring);cursor:pointer;display:block;
 }
 .model:active{transform:scale(.98)}
-.model-img{
-  height:155px;display:grid;place-items:center;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#fafafa,#eaeaec);
-  font-size:60px;
-}
+.model-img{height:155px;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:60px}
 .model-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .model-img .tag{
   position:absolute;top:12px;left:12px;
   background:rgba(255,149,0,0.82);
-  backdrop-filter:var(--blur-glass-sm);
-  -webkit-backdrop-filter:var(--blur-glass-sm);
-  color:#fff;
-  font-size:11px;font-weight:800;padding:6px 12px;
-  border-radius:var(--radius-pill);letter-spacing:0.04em;
-  z-index:2;
+  backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
+  color:#fff;font-size:11px;font-weight:800;padding:6px 12px;
+  border-radius:var(--radius-pill);letter-spacing:0.04em;z-index:2;
   border:1px solid rgba(255,255,255,0.25);
   box-shadow:0 2px 6px rgba(255,149,0,.25);
 }
-.model-img .tag.tag-dark{
-  background:rgba(28,28,30,0.78);
-  border-color:rgba(255,255,255,0.15);
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
+.model-img .tag.tag-dark{background:rgba(28,28,30,0.78);border-color:rgba(255,255,255,0.15);box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .model-body{padding:16px 18px 18px}
-.model-body h3{
-  font-size:17px;font-weight:800;letter-spacing:-0.02em;
-  margin-bottom:4px;color:var(--label);
-}
+.model-body h3{font-size:17px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;color:var(--label)}
 .model-body p{font-size:13px;color:var(--label-2);margin-bottom:14px;line-height:1.5}
 .model-btn{
   display:inline-flex;align-items:center;gap:6px;
   background:var(--accent);color:var(--accent-text);
   font-weight:700;font-size:13.5px;letter-spacing:-0.01em;
   padding:12px 16px;border-radius:11px;
-  width:100%;justify-content:center;
-  transition:background .15s;
+  width:100%;justify-content:center;transition:background .15s;
 }
 .model:active .model-btn{background:var(--accent-2)}
 
-/* ============ TRUST ============ */
-.trust{
-  background:var(--surface);border-radius:var(--radius-card);
-  box-shadow:var(--shadow-card);overflow:hidden;
-  padding:0 20px;margin:0 -20px;
-}
-.trust-item{
-  display:flex;gap:14px;align-items:flex-start;
-  padding:16px 0;
-}
+/* TRUST */
+.trust{background:var(--surface);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden}
+.trust-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px}
 .trust-item + .trust-item{border-top:1px solid var(--separator)}
-.trust-ico{
-  width:34px;height:34px;border-radius:50%;
-  background:var(--accent-soft);color:var(--accent-2);
-  display:grid;place-items:center;
-  font-size:14px;font-weight:800;flex-shrink:0;
-}
-.trust-item strong{
-  display:block;font-size:14.5px;font-weight:700;
-  letter-spacing:-0.01em;color:var(--label);
-}
+.trust-ico{width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent-2);
+  display:grid;place-items:center;font-size:14px;font-weight:800;flex-shrink:0}
+.trust-item strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
 .trust-item span{display:block;font-size:13px;color:var(--label-2);margin-top:3px;line-height:1.45}
 
-/* ============ TERMS ============ */
-.terms{
-  background:var(--surface);border-radius:var(--radius-card);
-  padding:16px 18px;box-shadow:var(--shadow-card);
-  margin:0 20px;
-}
-.terms h3{
-  font-size:13px;font-weight:700;color:var(--label);
-  letter-spacing:-0.01em;margin-bottom:8px;
-}
-.terms p{
-  font-size:12.5px;color:var(--label-2);line-height:1.55;
-}
+/* TERMS */
+.terms{background:var(--surface);border-radius:var(--radius-card);padding:16px 18px;box-shadow:var(--shadow-card)}
+.terms h3{font-size:13px;font-weight:700;color:var(--label);letter-spacing:-0.01em;margin-bottom:8px}
+.terms p{font-size:12.5px;color:var(--label-2);line-height:1.55}
 
-/* ============ DETAIL HEADER (glass) ============ */
+/* DETAIL HEADER */
 .detail-header{
   position:sticky;top:0;z-index:10;
   background:var(--bg-glass);
-  backdrop-filter:var(--blur-glass);
-  -webkit-backdrop-filter:var(--blur-glass);
+  backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   border-bottom:1px solid var(--separator);
   display:flex;align-items:center;padding:10px 14px;gap:8px;
   padding-top:calc(10px + env(safe-area-inset-top));
 }
 .back-btn{
-  width:42px;height:42px;border-radius:50%;
-  background:var(--fill);
+  width:42px;height:42px;border-radius:50%;background:var(--fill);
   border:none;display:grid;place-items:center;cursor:pointer;
   color:var(--label);transition:transform .2s var(--spring),background .15s;
   flex-shrink:0;
-  backdrop-filter:var(--blur-glass-sm);
-  -webkit-backdrop-filter:var(--blur-glass-sm);
+  backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);
 }
 .back-btn:active{background:var(--fill-2);transform:scale(.93)}
-.detail-title{
-  flex:1;font-size:16px;font-weight:700;text-align:center;
-  letter-spacing:-0.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  color:var(--label);
-}
+.detail-title{flex:1;font-size:16px;font-weight:700;text-align:center;letter-spacing:-0.02em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--label)}
 
-/* ============ MODEL DETAIL ============ */
-.model-hero{
-  height:260px;display:grid;place-items:center;position:relative;
-  overflow:hidden;background:linear-gradient(135deg,#fafafa,#eaeaec);
-  font-size:110px;
-}
+/* MODEL DETAIL */
+.model-hero{height:260px;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:110px}
 .model-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.model-hero .tag{
-  position:absolute;top:20px;left:20px;
-  background:rgba(255,149,0,0.82);
-  backdrop-filter:var(--blur-glass-sm);
-  -webkit-backdrop-filter:var(--blur-glass-sm);
-  color:#fff;
-  font-size:12px;font-weight:800;padding:7px 14px;
-  border-radius:var(--radius-pill);z-index:2;
-  border:1px solid rgba(255,255,255,0.25);
-  box-shadow:0 2px 8px rgba(255,149,0,.25);
-}
-.model-hero .tag.tag-dark{
-  background:rgba(28,28,30,0.78);
-  border-color:rgba(255,255,255,0.15);
-}
-.detail-h2{
-  font-size:28px;font-weight:800;letter-spacing:-0.03em;
-  margin-bottom:6px;color:var(--label);
-}
-.detail-tagline{
-  font-size:15px;color:var(--accent-2);font-weight:600;
-  margin-bottom:16px;letter-spacing:-0.01em;
-}
-.detail-desc{font-size:15px;color:var(--label-2);margin-bottom:24px;line-height:1.55}
-.detail-h3{
-  font-size:17px;font-weight:800;margin-bottom:12px;
-  letter-spacing:-0.02em;color:var(--label);
-}
-.highlights{
-  list-style:none;background:var(--surface);
-  border-radius:var(--radius-card);padding:0;
-  margin-bottom:24px;box-shadow:var(--shadow-card);overflow:hidden;
-}
-.highlights li{
-  font-size:14.5px;color:var(--label);padding:14px 18px;
-  display:flex;gap:12px;align-items:flex-start;line-height:1.45;
-}
+.model-hero .tag{position:absolute;top:20px;left:20px;background:rgba(255,149,0,0.82);
+  backdrop-filter:var(--blur-glass-sm);-webkit-backdrop-filter:var(--blur-glass-sm);color:#fff;
+  font-size:12px;font-weight:800;padding:7px 14px;border-radius:var(--radius-pill);z-index:2;
+  border:1px solid rgba(255,255,255,0.25);box-shadow:0 2px 8px rgba(255,149,0,.25)}
+.model-hero .tag.tag-dark{background:rgba(28,28,30,0.78);border-color:rgba(255,255,255,0.15)}
+.detail-h2{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px;color:var(--label)}
+.detail-tagline{font-size:15px;color:var(--accent-2);font-weight:600;margin-bottom:16px;letter-spacing:-0.01em}
+.detail-desc{font-size:15px;color:var(--label-2);margin-bottom:20px;line-height:1.55}
+.detail-h3{font-size:17px;font-weight:800;margin-bottom:12px;letter-spacing:-0.02em;color:var(--label)}
+.highlights{list-style:none;background:var(--surface);border-radius:var(--radius-card);padding:0;
+  margin-bottom:20px;box-shadow:var(--shadow-card);overflow:hidden}
+.highlights li{font-size:14.5px;color:var(--label);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;line-height:1.45}
 .highlights li + li{border-top:1px solid var(--separator)}
-.highlights li::before{
-  content:"✓";color:var(--accent);font-weight:800;flex-shrink:0;
-  width:20px;height:20px;border-radius:50%;
-  background:var(--accent-soft);display:grid;place-items:center;
-  font-size:12px;margin-top:1px;
-}
+.highlights li::before{content:"✓";color:var(--accent);font-weight:800;flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;background:var(--accent-soft);
+  display:grid;place-items:center;font-size:12px;margin-top:1px}
 .cta-block{display:grid;gap:10px;margin-bottom:24px}
 .wa-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
@@ -408,68 +290,193 @@ section{padding:8px 0 0}
   position:relative;
 }
 .wa-btn:active{background:var(--wa-2);transform:scale(.97)}
-.wa-btn-outline{
-  background:var(--surface);color:var(--label);
-  box-shadow:var(--shadow-card);
-}
+.wa-btn-outline{background:var(--surface);color:var(--label);box-shadow:var(--shadow-card)}
 .wa-btn-outline:active{background:var(--surface-2)}
 
-/* ============ FLOAT WA (glass) ============ */
+/* HARGA CARD (detail model) */
+.harga-card{
+  background:var(--surface);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:20px;
+}
+.harga-section{padding:16px 18px}
+.harga-section + .harga-section{border-top:1px solid var(--separator)}
+.harga-stok-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.harga-label{
+  font-size:11px;font-weight:700;color:var(--label-2);
+  text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;
+}
+.harga-value{font-size:22px;font-weight:800;letter-spacing:-0.02em;color:var(--label);line-height:1.1}
+.harga-value small{font-size:13px;font-weight:600;color:var(--label-3);margin-left:2px}
+.harga-note{font-size:12px;color:var(--label-2);margin-top:6px;line-height:1.45}
+.harga-cta{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:14px;background:var(--accent-soft);color:var(--accent-2);
+  font-weight:700;font-size:13.5px;border:none;width:100%;cursor:pointer;
+  transition:background .15s;font-family:inherit;letter-spacing:-0.01em;
+  position:relative;
+}
+.harga-cta:active{background:rgba(255,149,0,.2)}
+
+/* STOK BADGE */
+.stock-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:var(--radius-pill);
+  font-size:11.5px;font-weight:700;letter-spacing:-0.01em;
+  white-space:nowrap;flex-shrink:0;
+}
+.stock-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.stock-ready{background:rgba(52,199,89,.14);color:#1a8a3f}
+.stock-indent{background:rgba(255,149,0,.16);color:#b86a00}
+.stock-out{background:rgba(255,59,48,.14);color:#c11c15}
+.stock-ask{background:var(--fill-2);color:var(--label-2)}
+
+/* STOK LIST */
+.stok-card{
+  background:var(--surface);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-card);overflow:hidden;
+  padding:16px 18px;
+}
+.stok-card + .stok-card{margin-top:12px}
+.stok-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.stok-emoji{
+  width:42px;height:42px;border-radius:12px;background:var(--accent-soft);
+  display:grid;place-items:center;font-size:20px;flex-shrink:0;
+}
+.stok-title{flex:1;min-width:0}
+.stok-title strong{display:block;font-size:15.5px;font-weight:700;letter-spacing:-0.01em;color:var(--label)}
+.stok-title span{display:block;font-size:12px;color:var(--label-2);margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stok-price-row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:12px 0;border-top:1px solid var(--separator);border-bottom:1px solid var(--separator);
+  margin-bottom:14px;
+}
+.stok-price-label{font-size:11.5px;font-weight:700;color:var(--label-2);
+  text-transform:uppercase;letter-spacing:0.04em}
+.stok-price{font-size:20px;font-weight:800;letter-spacing:-0.02em;color:var(--label);
+  text-align:right;line-height:1.1}
+.stok-price small{font-size:11.5px;font-weight:600;color:var(--label-3);display:block;margin-top:2px}
+.stok-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;background:var(--wa);color:#fff;
+  font-weight:700;font-size:13.5px;letter-spacing:-0.01em;
+  border-radius:11px;cursor:pointer;
+  transition:transform .15s var(--spring),background .15s;
+  position:relative;
+}
+.stok-btn:active{transform:scale(.98);background:var(--wa-2)}
+
+/* KREDIT ACCORDION */
+.kredit-card{
+  background:var(--surface);border-radius:var(--radius-card);
+  box-shadow:var(--shadow-card);overflow:hidden;
+  scroll-margin-top:80px;
+}
+.kredit-card + .kredit-card{margin-top:12px}
+.kredit-head{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;cursor:pointer;width:100%;
+  background:transparent;border:none;text-align:left;
+  font-family:inherit;color:inherit;
+  transition:background .15s;
+}
+.kredit-head:active{background:var(--surface-2)}
+.kredit-emoji{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--accent-soft);display:grid;place-items:center;
+  font-size:21px;flex-shrink:0;
+}
+.kredit-info{flex:1;min-width:0}
+.kredit-info strong{display:block;font-size:15.5px;font-weight:700;
+  letter-spacing:-0.01em;color:var(--label)}
+.kredit-info .kredit-mulai{
+  display:block;font-size:12.5px;color:var(--accent-2);
+  font-weight:700;margin-top:2px;letter-spacing:-0.01em;
+}
+.kredit-info .kredit-otr{
+  display:block;font-size:11.5px;color:var(--label-3);
+  font-weight:500;margin-top:2px;
+}
+.kredit-chevron{
+  width:24px;height:24px;display:grid;place-items:center;
+  color:var(--label-3);font-size:20px;
+  transition:transform .3s var(--spring),color .2s;
+  flex-shrink:0;font-weight:300;
+}
+.kredit-card.open .kredit-chevron{transform:rotate(90deg);color:var(--accent)}
+.kredit-detail{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .35s cubic-bezier(0.32,0.72,0,1);
+}
+.kredit-card.open .kredit-detail{grid-template-rows:1fr}
+.kredit-detail-inner{overflow:hidden;min-height:0}
+.kredit-body{
+  padding:0 16px 16px;
+  border-top:1px solid var(--separator);
+  margin-top:2px;
+}
+.kredit-body-inner{padding-top:14px}
+.tenor-list{
+  background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;
+}
+.tenor-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 14px;font-size:13px;
+}
+.tenor-row + .tenor-row{border-top:1px solid var(--separator)}
+.tenor-left{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-0.01em}
+.tenor-dp{color:var(--label-3);font-size:11.5px}
+.tenor-right{text-align:right;flex-shrink:0}
+.tenor-cicilan{
+  font-weight:800;color:var(--accent-2);font-size:14.5px;
+  letter-spacing:-0.02em;
+}
+.tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px}
+.kredit-empty{
+  font-size:13px;color:var(--label-2);padding:14px;
+  background:var(--bg);border-radius:12px;margin-bottom:14px;
+  text-align:center;line-height:1.5;
+}
+
+/* FLOAT WA */
 .float-wa{
-  position:fixed;right:20px;
-  bottom:calc(20px + env(safe-area-inset-bottom));
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));
   width:60px;height:60px;border-radius:50%;
   background:var(--wa-glass);
-  backdrop-filter:var(--blur-glass);
-  -webkit-backdrop-filter:var(--blur-glass);
-  color:#fff;
-  display:grid;place-items:center;
-  box-shadow:var(--shadow-float),
-             inset 0 0 0 1px rgba(255,255,255,0.2);
-  z-index:100;
-  cursor:pointer;
-  transform-origin:center bottom;
-  transition:
-    transform .45s var(--spring),
-    opacity .35s var(--smooth),
-    box-shadow .2s var(--smooth);
+  backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
+  color:#fff;display:grid;place-items:center;
+  box-shadow:var(--shadow-float),inset 0 0 0 1px rgba(255,255,255,0.2);
+  z-index:100;cursor:pointer;transform-origin:center bottom;
+  transition:transform .45s var(--spring),opacity .35s var(--smooth),box-shadow .2s var(--smooth);
 }
 .float-wa:active{transform:scale(.9)}
 .float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.15))}
 .float-wa.is-hidden{
-  opacity:0;
-  transform:scale(.6) translateY(24px);
-  pointer-events:none;
-  box-shadow:none;
+  opacity:0;transform:scale(.6) translateY(24px);
+  pointer-events:none;box-shadow:none;
 }
 
-/* ============ TOAST ============ */
+/* TOAST */
 .toast{
-  position:fixed;left:50%;
-  bottom:calc(100px + env(safe-area-inset-bottom));
+  position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));
   transform:translateX(-50%) translateY(20px);
   background:rgba(28,28,30,0.82);
-  backdrop-filter:var(--blur-glass);
-  -webkit-backdrop-filter:var(--blur-glass);
+  backdrop-filter:var(--blur-glass);-webkit-backdrop-filter:var(--blur-glass);
   color:#fff;padding:13px 22px;border-radius:var(--radius-pill);
   font-size:13.5px;font-weight:600;letter-spacing:-0.01em;
   opacity:0;pointer-events:none;
   transition:opacity .3s var(--smooth),transform .3s var(--spring);
   z-index:200;white-space:nowrap;
-  box-shadow:0 8px 24px rgba(0,0,0,.25),
-             inset 0 0 0 1px rgba(255,255,255,0.08);
+  box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-footer{
-  text-align:center;padding:40px 0 20px;
-  font-size:12px;color:var(--label-3);
-}
+footer{text-align:center;padding:40px 0 20px;font-size:12px;color:var(--label-3)}
 .not-found{padding:80px 24px;text-align:center}
 .not-found h2{font-size:22px;margin-bottom:12px;color:var(--label);letter-spacing:-0.02em}
 .not-found p{color:var(--label-2);margin-bottom:20px;font-size:14px}
 
-/* Fallback untuk browser tanpa backdrop-filter */
 @supports not ((backdrop-filter:blur(24px)) or (-webkit-backdrop-filter:blur(24px))){
   .section-head{background:var(--bg)}
   .detail-header{background:var(--bg)}
@@ -491,6 +498,7 @@ footer{
 
 <div class="toast" id="toast"></div>
 
+<script src="data.js" onerror="window.DATA=window.DATA||{models:{}}"></script>
 <script>
 /* ============================================================
    KONFIGURASI
@@ -518,6 +526,11 @@ const CONFIG = {
     adv:    ""
   }
 };
+
+/* Ambil DATA dari data.js (kalau belum ada, fallback kosong) */
+const DATA = (typeof window.DATA === 'object' && window.DATA && window.DATA.models)
+  ? window.DATA
+  : { models: {} };
 /* ============================================================ */
 
 const MODELS = {
@@ -558,9 +571,41 @@ const app = document.getElementById('app');
 const floatWa = document.getElementById('floatWa');
 const stack = [];
 let animating = false;
+let pendingKreditModel = null;
 
 const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function getModelData(key) {
+  return (DATA.models && DATA.models[key]) || null;
+}
+
+function formatRp(n) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return 'Rp ' + Number(n).toLocaleString('id-ID');
+}
+
+function stokBadge(stok) {
+  if (!stok || String(stok).trim() === '') {
+    return '<span class="stock-badge stock-ask">Tanya ketersediaan</span>';
+  }
+  const lower = String(stok).toLowerCase();
+  if (/(kosong|habis|sold)/.test(lower)) {
+    return `<span class="stock-badge stock-out">${esc(stok)}</span>`;
+  }
+  if (/(indent|po\b|pre-?order|tunggu)/.test(lower)) {
+    return `<span class="stock-badge stock-indent">${esc(stok)}</span>`;
+  }
+  return `<span class="stock-badge stock-ready">${esc(stok)}</span>`;
+}
+
+function lowestCicilan(kredit) {
+  if (!Array.isArray(kredit) || !kredit.length) return null;
+  return kredit.reduce((min, t) => {
+    if (!t || !t.cicilan) return min;
+    return (min === null || t.cicilan < min.cicilan) ? t : min;
+  }, null);
+}
 
 function openWa(msg, btnEl) {
   if (btnEl && btnEl.classList.contains('is-loading')) return;
@@ -579,19 +624,12 @@ function imgTag(src, alt) {
 function updateFloatWa(screen) {
   if (!floatWa || !screen) return;
   const hero = screen.querySelector('.hero');
-  if (!hero) {
-    floatWa.classList.remove('is-hidden');
-    return;
-  }
+  if (!hero) { floatWa.classList.remove('is-hidden'); return; }
   const heroBottom = hero.getBoundingClientRect().bottom;
-  if (heroBottom > 20) {
-    floatWa.classList.add('is-hidden');
-  } else {
-    floatWa.classList.remove('is-hidden');
-  }
+  if (heroBottom > 20) floatWa.classList.add('is-hidden');
+  else floatWa.classList.remove('is-hidden');
 }
 
-/* Sticky header: toggle .is-stuck saat scroll */
 function setupStickyHeads(screen) {
   const heads = screen.querySelectorAll('.section-head');
   if (!heads.length) return;
@@ -599,14 +637,23 @@ function setupStickyHeads(screen) {
     if (!screen.classList.contains('is-active')) return;
     heads.forEach(head => {
       const rect = head.getBoundingClientRect();
-      // stuck kalau top-nya persis di 0 (dalam toleransi 1px)
-      const stuck = rect.top <= 1 && rect.top >= -1;
-      head.classList.toggle('is-stuck', stuck);
+      head.classList.toggle('is-stuck', rect.top <= 1 && rect.top >= -1);
     });
   };
   screen.addEventListener('scroll', onScroll, { passive: true });
-  if (!screen._stickyHandlers) screen._stickyHandlers = [];
-  screen._stickyHandlers.push(onScroll);
+  screen._stickyOnScroll = onScroll;
+}
+
+function expandKreditModel(screenEl, key) {
+  const card = screenEl.querySelector(`[data-kredit-card="${key}"]`);
+  if (!card) return;
+  screenEl.querySelectorAll('.kredit-card.open').forEach(c => {
+    if (c !== card) c.classList.remove('open');
+  });
+  card.classList.add('open');
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
 
 /* ============ RENDERERS ============ */
@@ -629,7 +676,7 @@ function renderHero() {
           <div class="badge"><span class="dot"></span> Online</div>
         </div>
         <h1>Sales Resmi Honda Bandung</h1>
-        <p>Unit ready, proses cepat. Tanya stok, simulasi kredit, atau cek harga langsung via WhatsApp.</p>
+        <p>Unit ready, proses cepat. Cek stok, harga OTR, atau simulasi kredit langsung di sini.</p>
         <a class="hero-cta" data-msg="${esc(CONFIG.defaultMessage)}">💬 Chat WhatsApp</a>
       </div>
     </header>
@@ -686,17 +733,17 @@ function renderHome() {
       <section class="anim-in">
         <div class="section-head">
           <h2 class="section-title">Pilih Kebutuhanmu</h2>
-          <p class="section-sub">Satu tap, langsung terhubung ke WhatsApp saya.</p>
+          <p class="section-sub">Cek stok & harga, atau simulasi kredit.</p>
         </div>
         <div class="actions">
           <a class="action" data-nav="/stok">
             <div class="action-ico">🏍️</div>
-            <div class="action-body"><strong>Tanya Stok & Harga</strong><span>Unit ready, harga update</span></div>
+            <div class="action-body"><strong>Tanya Stok & Harga</strong><span>Lihat OTR & ketersediaan unit</span></div>
             <div class="action-arrow">›</div>
           </a>
           <a class="action" data-nav="/kredit">
             <div class="action-ico">💰</div>
-            <div class="action-body"><strong>Simulasi Kredit</strong><span>Hitung DP & cicilan</span></div>
+            <div class="action-body"><strong>Simulasi Kredit</strong><span>Lihat cicilan per tenor</span></div>
             <div class="action-arrow">›</div>
           </a>
         </div>
@@ -704,7 +751,7 @@ function renderHome() {
       <section class="anim-in">
         <div class="section-head">
           <h2 class="section-title">Model Favorit</h2>
-          <p class="section-sub">Klik model untuk lihat detail.</p>
+          <p class="section-sub">Klik model untuk lihat detail & harga.</p>
         </div>
         <div class="models">${renderModelCards()}</div>
       </section>
@@ -714,24 +761,15 @@ function renderHome() {
           <p class="section-sub">Bukan calo. Sales resmi, proses transparan.</p>
         </div>
         <div class="trust">
-          <div class="trust-item">
-            <div class="trust-ico">✓</div>
-            <div><strong>Unit ready & bisa dilihat</strong><span>Stok fisik tersedia, bisa cek langsung sebelum beli.</span></div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-ico">✓</div>
-            <div><strong>Bantu proses kredit</strong><span>Dibantu sampai disetujui, tanpa biaya tersembunyi.</span></div>
-          </div>
-          <div class="trust-item">
-            <div class="trust-ico">✓</div>
-            <div><strong>Sales resmi Honda</strong><span>Bukan perantara. Legal, aman, dan terpercaya.</span></div>
-          </div>
+          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Unit ready & bisa dilihat</strong><span>Stok fisik tersedia, bisa cek langsung sebelum beli.</span></div></div>
+          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Bantu proses kredit</strong><span>Dibantu sampai disetujui, tanpa biaya tersembunyi.</span></div></div>
+          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Sales resmi Honda</strong><span>Bukan perantara. Legal, aman, dan terpercaya.</span></div></div>
         </div>
       </section>
       <section class="anim-in">
         <div class="terms">
           <h3>Syarat & Ketentuan</h3>
-          <p>Harga dan promo dapat berubah sewaktu-waktu tanpa pemberitahuan. Beberapa tipe motor belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan simulasi kredit akan dikonfirmasi langsung via WhatsApp.</p>
+          <p>Harga OTR dan simulasi kredit bersifat estimasi, dapat berubah sewaktu-waktu tanpa pemberitahuan. Beberapa tipe motor belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
         </div>
       </section>
     </main>
@@ -751,6 +789,46 @@ function renderBackHeader(title) {
   `;
 }
 
+function renderHargaCard(key, modelName) {
+  const md = getModelData(key);
+  if (!md) {
+    return `
+      <div class="harga-card anim-in">
+        <div class="harga-section">
+          <div class="harga-label">Harga OTR</div>
+          <div class="harga-note" style="margin-top:2px">Harga belum tersedia. Tanyakan langsung via WhatsApp.</div>
+        </div>
+      </div>
+    `;
+  }
+  const cicilanMin = lowestCicilan(md.kredit);
+  return `
+    <div class="harga-card anim-in">
+      <div class="harga-section">
+        <div class="harga-stok-row">
+          <div>
+            <div class="harga-label">Harga OTR</div>
+            <div class="harga-value">${md.otr ? formatRp(md.otr) : '—'}</div>
+          </div>
+          ${stokBadge(md.stok)}
+        </div>
+      </div>
+      ${cicilanMin ? `
+        <div class="harga-section">
+          <div class="harga-label">Cicilan Mulai</div>
+          <div class="harga-value">${formatRp(cicilanMin.cicilan)}<small>/bln</small></div>
+          <div class="harga-note">Tenor ${cicilanMin.tenor} bulan · DP ${formatRp(cicilanMin.dp)}</div>
+        </div>
+      ` : ''}
+      ${(md.kredit && md.kredit.length) ? `
+        <a class="harga-cta" data-nav="/kredit" data-expand-kredit="${esc(key)}">
+          Lihat Semua Simulasi Kredit →
+        </a>
+      ` : ''}
+    </div>
+  `;
+}
+
 function renderModelDetail(key) {
   const m = MODELS[key];
   if (!m) return renderNotFound();
@@ -765,49 +843,112 @@ function renderModelDetail(key) {
       <h2 class="detail-h2 anim-in">${esc(m.name)}</h2>
       <p class="detail-tagline anim-in">${esc(m.tagline)}</p>
       <p class="detail-desc anim-in">${esc(m.description)}</p>
+      ${renderHargaCard(key, m.name)}
       <div class="anim-in">
         <h3 class="detail-h3">Keunggulan</h3>
         <ul class="highlights">${m.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
       </div>
       <div class="cta-block anim-in">
         <a class="wa-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau tanya stok & harga ${esc(m.name)}.">💬 Tanya Stok & Harga ${esc(m.name)}</a>
-        <a class="wa-btn wa-btn-outline" data-msg="Halo Dion, saya mau simulasi kredit ${esc(m.name)}. DP berapa & cicilan per bulan?">💰 Simulasi Kredit ${esc(m.name)}</a>
       </div>
     </div>
   `;
 }
 
+/* Halaman Tanya Stok & Harga */
 function renderStok() {
   return `
-    ${renderBackHeader('Tanya Stok & Harga')}
-    <div class="wrap" style="padding-top:24px">
-      <p class="detail-desc anim-in">Pilih model yang ingin dicek stok & harganya. Saya balas cepat dengan info unit terbaru.</p>
-      <div class="actions anim-in">
-        ${Object.values(MODELS).map(m => `
-          <a class="action" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau tanya stok & harga ${esc(m.name)}.">
-            <div class="action-ico">${m.emoji}</div>
-            <div class="action-body"><strong>${esc(m.name)}</strong><span>Tanya stok & harga</span></div>
-            <div class="action-arrow">›</div>
-          </a>
-        `).join('')}
+    ${renderBackHeader('Stok & Harga')}
+    <div class="wrap" style="padding-top:20px">
+      <p class="detail-desc anim-in">Harga OTR dan ketersediaan unit terbaru. Untuk ketersediaan spesifik warna/tipe, tanya langsung via WhatsApp.</p>
+      <div class="anim-in">
+        ${Object.values(MODELS).map(m => {
+          const md = getModelData(m.key);
+          const otr = md && md.otr ? formatRp(md.otr) : null;
+          const stok = md ? md.stok : null;
+          return `
+            <div class="stok-card">
+              <div class="stok-head">
+                <div class="stok-emoji">${m.emoji}</div>
+                <div class="stok-title">
+                  <strong>${esc(m.name)}</strong>
+                  <span>${esc(m.tagline)}</span>
+                </div>
+              </div>
+              <div class="stok-price-row">
+                <div class="stok-price-label">Harga OTR</div>
+                <div class="stok-price">
+                  ${otr || '<span style="font-size:13px;font-weight:600;color:var(--label-3)">Belum tersedia</span>'}
+                  <small>${stokBadge(stok)}</small>
+                </div>
+              </div>
+              <a class="stok-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau tanya ketersediaan & harga ${esc(m.name)}.">
+                💬 Tanya ${esc(m.name)}
+              </a>
+            </div>
+          `;
+        }).join('')}
       </div>
     </div>
   `;
 }
 
+/* Halaman Simulasi Kredit (accordion) */
 function renderKredit() {
   return `
     ${renderBackHeader('Simulasi Kredit')}
-    <div class="wrap" style="padding-top:24px">
-      <p class="detail-desc anim-in">Konsultasikan simulasi kredit untuk motor Honda pilihan Anda. DP ringan, cicilan terjangkau, dan proses dibantu sampai disetujui.</p>
-      <div class="actions anim-in">
-        ${Object.values(MODELS).map(m => `
-          <a class="action" data-msg="Halo Dion, saya mau simulasi kredit ${esc(m.name)}. DP berapa & cicilan per bulan?">
-            <div class="action-ico">💰</div>
-            <div class="action-body"><strong>Kredit ${esc(m.name)}</strong><span>Simulasi DP & cicilan</span></div>
-            <div class="action-arrow">›</div>
-          </a>
-        `).join('')}
+    <div class="wrap" style="padding-top:20px">
+      <p class="detail-desc anim-in">Pilih model untuk lihat simulasi cicilan per tenor. Angka bersifat estimasi, konfirmasi final via WhatsApp.</p>
+      <div class="anim-in">
+        ${Object.values(MODELS).map(m => {
+          const md = getModelData(m.key);
+          const otr = md && md.otr ? formatRp(md.otr) : null;
+          const cicilanMin = md ? lowestCicilan(md.kredit) : null;
+          const tenorList = md && Array.isArray(md.kredit) ? md.kredit : [];
+          return `
+            <div class="kredit-card" data-kredit-card="${m.key}">
+              <button class="kredit-head" data-toggle-kredit="${m.key}" type="button">
+                <div class="kredit-emoji">${m.emoji}</div>
+                <div class="kredit-info">
+                  <strong>${esc(m.name)}</strong>
+                  ${cicilanMin
+                    ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanMin.cicilan)}/bln</span>`
+                    : `<span class="kredit-mulai" style="color:var(--label-3)">Simulasi belum tersedia</span>`}
+                  ${otr ? `<span class="kredit-otr">OTR ${otr}</span>` : ''}
+                </div>
+                <div class="kredit-chevron">›</div>
+              </button>
+              <div class="kredit-detail">
+                <div class="kredit-detail-inner">
+                  <div class="kredit-body">
+                    <div class="kredit-body-inner">
+                      ${tenorList.length ? `
+                        <div class="tenor-list">
+                          ${tenorList.map(t => `
+                            <div class="tenor-row">
+                              <div class="tenor-left">
+                                <span class="tenor-dur">${t.tenor} bulan</span>
+                                <span class="tenor-dp">DP ${formatRp(t.dp)}</span>
+                              </div>
+                              <div class="tenor-right">
+                                <span class="tenor-cicilan">${formatRp(t.cicilan)}<small>/bln</small></span>
+                              </div>
+                            </div>
+                          `).join('')}
+                        </div>
+                      ` : `
+                        <div class="kredit-empty">Simulasi kredit belum tersedia untuk model ini. Tanyakan langsung via WhatsApp.</div>
+                      `}
+                      <a class="wa-btn" data-msg="Halo Dion, saya lihat katalog Honda-nya. Mau konsultasi kredit ${esc(m.name)}. Bisa info DP & cicilan?">
+                        💬 Konsultasi Kredit ${esc(m.name)}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('')}
       </div>
     </div>
   `;
@@ -854,28 +995,32 @@ function pushScreen(route, animate) {
   const el = makeScreen(route);
   app.appendChild(el);
 
+  const afterActivate = () => {
+    animating = false;
+    updateFloatWa(el);
+    if (pendingKreditModel && route === '/kredit') {
+      const target = pendingKreditModel;
+      pendingKreditModel = null;
+      setTimeout(() => expandKreditModel(el, target), 120);
+    }
+  };
+
   if (animate && current) {
     animating = true;
     void el.offsetWidth;
     current.classList.remove('is-active');
     current.classList.add('is-behind');
     el.classList.add('is-active');
-    setTimeout(() => {
-      animating = false;
-      updateFloatWa(el);
-    }, NAV_DURATION);
+    setTimeout(afterActivate, NAV_DURATION);
   } else if (animate) {
     animating = true;
     el.classList.add('is-active');
-    setTimeout(() => {
-      animating = false;
-      updateFloatWa(el);
-    }, NAV_DURATION);
+    setTimeout(afterActivate, NAV_DURATION);
   } else {
     el.classList.add('no-transition', 'is-active');
     requestAnimationFrame(() => {
       el.classList.remove('no-transition');
-      updateFloatWa(el);
+      afterActivate();
     });
   }
   stack.push(el);
@@ -917,10 +1062,35 @@ function navigate(route) {
 /* EVENTS */
 app.addEventListener('click', e => {
   if (animating) return;
+
+  // Toggle accordion kredit
+  const toggleEl = e.target.closest('[data-toggle-kredit]');
+  if (toggleEl) {
+    e.preventDefault();
+    const card = toggleEl.closest('.kredit-card');
+    if (!card) return;
+    const wasOpen = card.classList.contains('open');
+    // Tutup semua card lain
+    card.parentElement.querySelectorAll('.kredit-card.open').forEach(c => {
+      if (c !== card) c.classList.remove('open');
+    });
+    card.classList.toggle('open', !wasOpen);
+    return;
+  }
+
+  // Navigasi + optional expand kredit
   const navEl = e.target.closest('[data-nav]');
-  if (navEl) { e.preventDefault(); navigate(navEl.dataset.nav); return; }
+  if (navEl) {
+    e.preventDefault();
+    const expandTarget = navEl.dataset.expandKredit;
+    if (expandTarget) pendingKreditModel = expandTarget;
+    navigate(navEl.dataset.nav);
+    return;
+  }
+
   const backEl = e.target.closest('[data-back]');
   if (backEl) { e.preventDefault(); if (stack.length > 1) history.back(); return; }
+
   const msgEl = e.target.closest('[data-msg]');
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
