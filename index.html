@@ -286,7 +286,7 @@ section{padding:8px 0 0}
 }
 .harga-cta:active{background:rgba(255,149,0,.2)}
 
-/* FILTER BAR (stok & kredit) */
+/* FILTER BAR */
 .filter-bar{padding:16px 0 12px;margin-bottom:4px}
 .search-wrap{margin-bottom:10px}
 .search-input{
@@ -318,12 +318,6 @@ section{padding:8px 0 0}
 .cat-chip:active{transform:scale(.96)}
 
 /* STOK ITEMS */
-.stok-group{margin-bottom:20px}
-.stok-group-title{
-  font-size:12px;font-weight:700;color:var(--label-2);
-  text-transform:uppercase;letter-spacing:.05em;
-  padding:0 0 8px;margin-top:8px;
-}
 .stok-item{
   display:flex;align-items:center;gap:12px;
   padding:14px;border-radius:16px;
@@ -412,24 +406,72 @@ section{padding:8px 0 0}
 }
 .kredit-body-inner{padding-top:14px}
 
-/* DP SELECT */
-.dp-label{
-  display:block;font-size:11px;font-weight:700;
-  color:var(--label-2);text-transform:uppercase;
-  letter-spacing:.04em;margin-bottom:6px;
+/* DP SLIDER */
+.dp-slider-wrap{
+  background:var(--bg);border-radius:14px;
+  padding:14px 16px;margin-bottom:14px;
 }
-.dp-select{
-  width:100%;padding:12px 14px;border-radius:12px;
-  border:1px solid rgba(0,0,0,.08);background:var(--bg);
-  font-size:14px;font-weight:600;font-family:inherit;
-  color:var(--label);margin-bottom:14px;
+.dp-display{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:10px;margin-bottom:6px;
+}
+.dp-display-label{
+  font-size:11px;font-weight:700;color:var(--label-2);
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.dp-display-value{
+  font-size:20px;font-weight:800;color:var(--accent-2);
+  letter-spacing:-.02em;line-height:1.1;
+}
+.dp-slider{
   -webkit-appearance:none;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 14px center;
-  background-size:12px;
-  padding-right:36px;
+  width:100%;height:6px;border-radius:3px;
+  background:var(--fill-2);
+  outline:none;cursor:pointer;
+  margin:14px 0 8px;
+  touch-action:pan-y;
+}
+.dp-slider::-webkit-slider-runnable-track{
+  height:6px;border-radius:3px;
+  background:linear-gradient(to right,
+    var(--accent) 0%,
+    var(--accent) var(--pct,0%),
+    var(--fill-2) var(--pct,0%),
+    var(--fill-2) 100%);
+}
+.dp-slider::-moz-range-track{
+  height:6px;border-radius:3px;background:var(--fill-2);
+}
+.dp-slider::-moz-range-progress{
+  height:6px;border-radius:3px;background:var(--accent);
+}
+.dp-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:24px;height:24px;border-radius:50%;
+  background:#fff;
+  border:2px solid var(--accent);
+  box-shadow:0 2px 8px rgba(255,149,0,.4),0 0 0 3px rgba(255,255,255,.6);
+  cursor:pointer;margin-top:-9px;
+  transition:transform .15s ease;
+}
+.dp-slider:active::-webkit-slider-thumb{transform:scale(1.15)}
+.dp-slider::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:#fff;border:2px solid var(--accent);
+  box-shadow:0 2px 8px rgba(255,149,0,.4);
   cursor:pointer;
+}
+.dp-slider-labels{
+  display:flex;justify-content:space-between;
+  margin-top:4px;
+}
+.dp-slider-labels span{
+  font-size:11px;font-weight:600;color:var(--label-3);
+  letter-spacing:-.01em;
+}
+.dp-slider-hint{
+  font-size:11px;color:var(--label-3);
+  text-align:center;margin-top:8px;line-height:1.3;
 }
 
 /* TENOR LIST */
@@ -519,7 +561,6 @@ const CONFIG = {
 
 const DATA_MOTOR = window.DATA_MOTOR || {};
 
-/* Featured di home */
 const FEATURED_KEYS = [
   "New BeAT CBS",
   "SCOOPY Energetic & Fashion",
@@ -528,7 +569,6 @@ const FEATURED_KEYS = [
   "ADV 160 CBS"
 ];
 
-/* Tag & tagline custom untuk featured. Model lain pakai default. */
 const MODEL_OVERRIDES = {
   "New BeAT CBS": {
     tag: "TERLARIS",
@@ -555,7 +595,6 @@ const MODEL_OVERRIDES = {
   }
 };
 
-/* Kategori untuk filter di /stok dan /kredit */
 const CATEGORIES = [
   { key: "matic", label: "Skutik", icon: "🛵", models: [
     "New BeAT CBS","New BeAT CBS ISS DELUXE","New BeAT CBS ISS DELUXE SMARTKEY","New BeAT Street",
@@ -598,30 +637,16 @@ const CATEGORIES = [
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const formatRp = n => (n === null || n === undefined || isNaN(n)) ? '—' : 'Rp ' + Number(n).toLocaleString('id-ID');
 
-function getAllModelNames() {
-  return Object.keys(DATA_MOTOR);
-}
-
-function getModelData(name) {
-  return DATA_MOTOR[name] || null;
-}
-
-function getCategoryOf(name) {
-  return CATEGORIES.find(c => c.models.includes(name));
-}
-
-function getEmojiFor(name) {
-  const cat = getCategoryOf(name);
-  return cat ? cat.icon : '🏍️';
-}
+function getAllModelNames() { return Object.keys(DATA_MOTOR); }
+function getModelData(name) { return DATA_MOTOR[name] || null; }
+function getCategoryOf(name) { return CATEGORIES.find(c => c.models.includes(name)); }
+function getEmojiFor(name) { const c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
 
 function getModelMeta(name) {
   const ov = MODEL_OVERRIDES[name] || {};
   const cat = getCategoryOf(name);
   return {
-    key: name,
-    name: name,
-    emoji: getEmojiFor(name),
+    key: name, name: name, emoji: getEmojiFor(name),
     category: cat ? cat.key : '',
     tag: ov.tag || null,
     tagline: ov.tagline || (cat ? 'Honda ' + name : 'Cek harga OTR & simulasi kredit'),
@@ -640,29 +665,19 @@ function getMinCicilan(model) {
   }
   return min;
 }
-
-function getDpOptions(model) {
-  return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b);
-}
-
+function getDpOptions(model) { return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
 function getDefaultDp(model) {
   const opts = getDpOptions(model);
   if (!opts.length) return null;
   const target = (model.harga || 0) * 0.20;
-  return opts.reduce((best, cur) =>
-    Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
+  return opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
 }
-
 function getTenors(model, dp) {
   const t = model.tabel[String(dp)];
   if (!t) return [];
   return Object.keys(t).map(Number).sort((a,b)=>a-b);
 }
-
-function getImageForModel(name) {
-  return CONFIG.images[name] || '';
-}
-
+function getImageForModel(name) { return CONFIG.images[name] || ''; }
 function imgTag(src, alt) {
   if (!src) return '';
   return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
@@ -959,9 +974,7 @@ function renderFilterBar(f, prefix) {
 
 function renderStokList() {
   const names = filterModelsByState(stokFilter);
-  if (!names.length) {
-    return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
-  }
+  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
   return names.map(name => {
     const data = getModelData(name);
     if (!data) return '';
@@ -1009,25 +1022,38 @@ function renderTenorRows(name, dp) {
   `).join('');
 }
 
-function renderDpSelect(name, defaultDp) {
+function renderDpSlider(name, currentDp) {
   const data = getModelData(name);
   if (!data) return '';
   const opts = getDpOptions(data);
+  if (!opts.length) return '';
+  const idx = Math.max(0, opts.indexOf(currentDp));
+  const minDp = opts[0];
+  const maxDp = opts[opts.length - 1];
+  const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
   return `
-    <label class="dp-label">Pilih DP</label>
-    <select class="dp-select" data-model="${esc(name)}">
-      ${opts.map(dp => `
-        <option value="${dp}"${dp === defaultDp ? ' selected' : ''}>DP ${formatRp(dp)}</option>
-      `).join('')}
-    </select>
+    <div class="dp-slider-wrap">
+      <div class="dp-display">
+        <span class="dp-display-label">DP Dipilih</span>
+        <span class="dp-display-value">${formatRp(opts[idx])}</span>
+      </div>
+      <input type="range" class="dp-slider"
+             data-model="${esc(name)}"
+             min="0" max="${opts.length - 1}" value="${idx}" step="1"
+             style="--pct: ${pct}%"
+             aria-label="Geser untuk atur DP">
+      <div class="dp-slider-labels">
+        <span>${formatRp(minDp)}</span>
+        <span>${formatRp(maxDp)}</span>
+      </div>
+      <div class="dp-slider-hint">Geser untuk atur DP · Cicilan update otomatis</div>
+    </div>
   `;
 }
 
 function renderKreditCardsList() {
   const names = filterModelsByState(kreditFilter);
-  if (!names.length) {
-    return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kata lain.</div>`;
-  }
+  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kata lain.</div>`;
   return names.map(name => {
     const data = getModelData(name);
     if (!data) return '';
@@ -1051,7 +1077,7 @@ function renderKreditCardsList() {
           <div class="kredit-detail-inner">
             <div class="kredit-body">
               <div class="kredit-body-inner">
-                ${renderDpSelect(name, defaultDp)}
+                ${renderDpSlider(name, defaultDp)}
                 <div class="tenor-list" data-tenor-list="${esc(name)}">
                   ${renderTenorRows(name, defaultDp)}
                 </div>
@@ -1069,7 +1095,7 @@ function renderKredit() {
   return `
     ${renderBackHeader('Simulasi Kredit')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
       ${renderFilterBar(kreditFilter, 'kredit')}
       <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
@@ -1102,16 +1128,12 @@ function renderRoute(route) {
 }
 
 function routeToHash(route) {
-  if (route.startsWith('/model/')) {
-    return '/model/' + encodeURIComponent(route.slice(7));
-  }
+  if (route.startsWith('/model/')) return '/model/' + encodeURIComponent(route.slice(7));
   return route;
 }
 function hashToRoute(hash) {
   const path = hash.startsWith('#') ? hash.slice(1) : hash;
-  if (path.startsWith('/model/')) {
-    return '/model/' + decodeURIComponent(path.slice(7));
-  }
+  if (path.startsWith('/model/')) return '/model/' + decodeURIComponent(path.slice(7));
   return path || '/';
 }
 
@@ -1221,7 +1243,6 @@ function refreshActiveList(prefix) {
 app.addEventListener('click', e => {
   if (animating) return;
 
-  // Toggle accordion
   const toggleEl = e.target.closest('[data-toggle-kredit]');
   if (toggleEl) {
     e.preventDefault();
@@ -1235,21 +1256,18 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Category chip
   const catEl = e.target.closest('[data-cat]');
   if (catEl) {
     e.preventDefault();
     const [prefix, cat] = catEl.dataset.cat.split(':');
     const target = prefix === 'stok' ? stokFilter : kreditFilter;
     target.cat = cat;
-    // Update active state
     catEl.parentElement.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('is-active'));
     catEl.classList.add('is-active');
     refreshActiveList(prefix);
     return;
   }
 
-  // Navigasi
   const navEl = e.target.closest('[data-nav]');
   if (navEl) {
     e.preventDefault();
@@ -1266,27 +1284,34 @@ app.addEventListener('click', e => {
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
-// DP select change
-app.addEventListener('change', e => {
-  if (e.target.matches('.dp-select')) {
+/* Slider live update: cicilan & display DP langsung berubah saat digeser */
+app.addEventListener('input', e => {
+  // DP slider
+  if (e.target.matches('.dp-slider')) {
     const name = e.target.dataset.model;
-    const dp = e.target.value;
+    const data = getModelData(name);
+    if (!data) return;
+    const opts = getDpOptions(data);
+    const idx = +e.target.value;
+    const dp = opts[idx];
+    if (dp === undefined) return;
+    const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
+    e.target.style.setProperty('--pct', pct + '%');
     const card = e.target.closest('.kredit-card');
     if (!card) return;
-    const tenorList = card.querySelector('[data-tenor-list]');
+    const display = card.querySelector('.dp-display-value');
+    if (display) display.textContent = formatRp(dp);
+    const tenorList = card.querySelector('.tenor-list');
     if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+    return;
   }
-});
-
-// Search input
-let searchTimer;
-app.addEventListener('input', e => {
+  // Search input
   if (e.target.matches('.search-input')) {
     const prefix = e.target.dataset.search;
     const target = prefix === 'stok' ? stokFilter : kreditFilter;
     target.q = e.target.value;
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => refreshActiveList(prefix), 150);
+    clearTimeout(window._searchTimer);
+    window._searchTimer = setTimeout(() => refreshActiveList(prefix), 150);
   }
 });
 
