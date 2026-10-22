@@ -303,7 +303,6 @@ section{padding:8px 0 0}
 .cat-chip.is-active{background:var(--label);color:#fff;border-color:var(--label);}
 .cat-chip:active{transform:scale(.96)}
 
-/* STOK ITEM */
 .stok-item{
   display:flex;align-items:center;gap:12px;
   padding:14px;border-radius:16px;
@@ -333,7 +332,6 @@ section{padding:8px 0 0}
 
 .empty-state{padding:40px 20px;text-align:center;color:var(--label-2);font-size:14px;}
 
-/* KREDIT */
 .kredit-card{
   background:var(--surface);border-radius:var(--radius-card);
   box-shadow:var(--shadow-card);overflow:hidden;
@@ -364,7 +362,6 @@ section{padding:8px 0 0}
 .kredit-body{padding:0 16px 16px;border-top:1px solid var(--separator);margin-top:2px;}
 .kredit-body-inner{padding-top:14px}
 
-/* DP SLIDER */
 .dp-slider-wrap{background:var(--bg);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
 .dp-display{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px;}
 .dp-display-label{font-size:11px;font-weight:700;color:var(--label-2);text-transform:uppercase;letter-spacing:.04em;display:block;}
@@ -375,6 +372,7 @@ section{padding:8px 0 0}
   width:100%;height:6px;border-radius:3px;
   background:var(--fill-2);outline:none;cursor:pointer;
   margin:14px 0 8px;touch-action:pan-y;
+  transition:opacity .3s ease;
 }
 .dp-slider::-webkit-slider-runnable-track{
   height:6px;border-radius:3px;
@@ -399,7 +397,7 @@ section{padding:8px 0 0}
   background:#fff;border:2px solid var(--accent);
   box-shadow:0 2px 8px rgba(255,149,0,.4);cursor:pointer;
 }
-.dp-slider-labels{display:flex;justify-content:space-between;margin-top:4px;}
+.dp-slider-labels{display:flex;justify-content:space-between;margin-top:4px;transition:opacity .3s ease;}
 .dp-slider-labels span{font-size:11px;font-weight:600;color:var(--label-3);letter-spacing:-.01em;}
 
 .dp-note{
@@ -412,9 +410,21 @@ section{padding:8px 0 0}
   font-size:14px;line-height:1;margin-top:1px;flex-shrink:0;
 }
 
-.promo-option{display:none;margin-top:12px;}
-.promo-option.is-visible{display:block;animation:slideDown .35s cubic-bezier(0.32,0.72,0,1) both;}
+.promo-container{display:none;margin-top:0;}
+.promo-container.is-visible{display:block;animation:slideDown .35s var(--nav-easing) both;}
 @keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+.promo-divider{
+  display:flex;align-items:center;gap:10px;
+  margin:14px 0 10px;
+  color:var(--label-3);
+  font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.promo-divider::before,
+.promo-divider::after{
+  content:"";flex:1;height:1px;background:var(--separator);
+}
 
 .promo-btn{
   display:flex;align-items:center;justify-content:center;gap:6px;
@@ -423,7 +433,7 @@ section{padding:8px 0 0}
   color:#fff;font-weight:700;font-size:13px;
   padding:12px 16px;border-radius:12px;border:none;cursor:pointer;
   box-shadow:0 4px 12px rgba(255,149,0,.35);
-  transition:transform .15s,box-shadow .15s,background .3s;
+  transition:transform .15s,box-shadow .15s;
   font-family:inherit;letter-spacing:-.01em;
 }
 .promo-btn:active{transform:scale(.97);box-shadow:0 2px 6px rgba(255,149,0,.3);}
@@ -456,14 +466,23 @@ section{padding:8px 0 0}
   line-height:1.45;padding-top:10px;margin-top:10px;
   border-top:1px solid rgba(255,149,0,.2);position:relative;z-index:1;
 }
+.promo-banner-back{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;margin-top:12px;padding:11px;
+  background:transparent;color:var(--accent-2);
+  border:1.5px dashed rgba(255,149,0,.5);
+  font-weight:700;font-size:12.5px;
+  border-radius:10px;cursor:pointer;
+  font-family:inherit;letter-spacing:-.01em;
+  transition:background .15s;position:relative;z-index:1;
+}
+.promo-banner-back:active{background:rgba(255,149,0,.08);}
+
 .kredit-card.promo-active .promo-view{display:block;}
+.kredit-card.promo-active .promo-container{display:none;}
 .kredit-card.promo-active .tenor-list{display:none;}
 .kredit-card.promo-active .dp-slider{opacity:.4;pointer-events:none;}
 .kredit-card.promo-active .dp-slider-labels{opacity:.4;}
-.kredit-card.promo-active .promo-btn{
-  background:linear-gradient(135deg,#1d1d1f 0%,#2c2c2e 100%);
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
-}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2);}
 
 .tenor-list{background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;}
@@ -487,7 +506,6 @@ section{padding:8px 0 0}
 .float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
 .float-wa.is-hidden{opacity:0;transform:scale(.6) translateY(24px);pointer-events:none;box-shadow:none;}
 
-/* ============ ACTION SHEET (bottom sheet cash/kredit) ============ */
 .sheet-backdrop{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.42);
@@ -661,14 +679,45 @@ const CONFIG = {
   },
   defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
 
-  dpRangeMinPct: 10,
-  dpRangeMaxPct: 15.5,
+  /* Default DP non-Beat: 15% OTR */
+  dpDefaultPct: 15,
 
+  /* ==========================================================
+     PROMO BEAT SERIES
+     Setiap model Beat punya:
+       - triggerDp: DP "sistem" di data.js (default slider & trigger promo)
+       - cicilan: cicilan tenor 35 bulan pada DP trigger tsb
+
+     Alur:
+       1. Buka Beat → slider default di triggerDp
+       2. Slider tepat di triggerDp → tombol promo muncul
+       3. Geser dari triggerDp → tombol promo hilang
+       4. Balik ke triggerDp → tombol promo muncul lagi
+       5. Klik promo → mode aktif (DP 700rb, cicilan promo)
+       6. Balik → slider balik ke triggerDp
+     ========================================================== */
   promo: {
     beatSeries: {
       dp: 700000,
       tenor: 35,
-      cicilan: 893000
+      perModel: {
+        "New BeAT CBS": {
+          triggerDp: 3000000,
+          cicilan: 893000
+        },
+        "New BeAT CBS ISS DELUXE": {
+          triggerDp: 3200000,
+          cicilan: 933000
+        },
+        "New BeAT CBS ISS DELUXE SMARTKEY": {
+          triggerDp: 3200000,
+          cicilan: 960000
+        },
+        "New BeAT Street": {
+          triggerDp: 3200000,
+          cicilan: 938000
+        }
+      }
     }
   },
 
@@ -681,6 +730,7 @@ const CONFIG = {
     "ADV 160 CBS": ""
   }
 };
+/* ============================================================ */
 
 const DATA_MOTOR = window.DATA_MOTOR || {};
 const FEATURED_KEYS = ["New BeAT CBS","SCOOPY Energetic & Fashion","All New Vario 125 CBS","PCX 160 CBS","ADV 160 CBS"];
@@ -740,7 +790,29 @@ function getModelData(name){ return DATA_MOTOR[name] || null; }
 function getCategoryOf(name){ return CATEGORIES.find(c => c.models.includes(name)); }
 function getEmojiFor(name){ const c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
 function isBeatSeries(name){ return /beat/i.test(name); }
-function isPromoAvailable(){ const p = CONFIG.promo.beatSeries; return p && p.dp > 0 && p.tenor > 0 && p.cicilan > 0; }
+
+function getPromoConfig(name){
+  const map = CONFIG.promo.beatSeries.perModel || {};
+  return map[name] || null;
+}
+function getPromoTriggerDp(name){
+  const c = getPromoConfig(name);
+  return c ? c.triggerDp : null;
+}
+function getPromoCicilan(name){
+  const c = getPromoConfig(name);
+  return c ? c.cicilan : null;
+}
+function isPromoAvailable(name){
+  const p = CONFIG.promo.beatSeries;
+  if (!p || p.dp <= 0 || p.tenor <= 0) return false;
+  const c = getPromoConfig(name);
+  if (!c) return false;
+  const model = getModelData(name);
+  if (!model) return false;
+  const opts = getAllDpOptions(model);
+  return opts.includes(c.triggerDp) && c.cicilan > 0;
+}
 
 function getModelMeta(name){
   const ov = MODEL_OVERRIDES[name] || {};
@@ -756,39 +828,43 @@ function getModelMeta(name){
 }
 
 function getAllDpOptions(model){ return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
+function getSliderDpOptions(model){ return getAllDpOptions(model); }
 
-function getSliderDpOptions(model){
-  const all = getAllDpOptions(model);
-  const otr = model.harga || 0;
-  if (!otr || !all.length) return all;
-  const minDp = otr * (CONFIG.dpRangeMinPct / 100);
-  const maxDp = otr * (CONFIG.dpRangeMaxPct / 100);
-  const filtered = all.filter(dp => dp >= minDp && dp <= maxDp);
-  if (filtered.length < 2) {
-    const target = (minDp + maxDp) / 2;
-    return [...all].sort((a,b) => Math.abs(a-target) - Math.abs(b-target)).slice(0, 10).sort((a,b)=>a-b);
-  }
-  return filtered;
-}
-
-function getDefaultDp(model){
-  const opts = getSliderDpOptions(model);
-  return opts.length ? opts[opts.length - 1] : null;
-}
-
-function getMinCicilan(model){
+/* Default = trigger DP untuk Beat promo, 15% OTR untuk non-Beat */
+function getDefaultDp(name){
+  const model = getModelData(name);
+  if (!model) return null;
   const opts = getSliderDpOptions(model);
   if (!opts.length) return null;
-  let min = null;
-  for (const dp of opts) {
-    const tbl = model.tabel[String(dp)];
-    if (!tbl) continue;
-    for (const tenor in tbl) {
-      const c = tbl[tenor];
-      if (min === null || c < min.cicilan) min = { dp: +dp, tenor: +tenor, cicilan: c };
-    }
+  const triggerDp = getPromoTriggerDp(name);
+  if (triggerDp !== null && opts.includes(triggerDp)) return triggerDp;
+  const target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
+  return opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
+}
+
+/* Header "Mulai" = cicilan tenor 35 di DP trigger (Beat) atau DP terdekat 15% OTR (non-Beat) */
+function getCicilanHeader(name){
+  const model = getModelData(name);
+  if (!model) return null;
+  const opts = getSliderDpOptions(model);
+  if (!opts.length) return null;
+  
+  const triggerDp = getPromoTriggerDp(name);
+  if (triggerDp !== null && opts.includes(triggerDp)) {
+    const tbl = model.tabel[String(triggerDp)];
+    const t35 = tbl && tbl[35];
+    if (t35) return { dp: triggerDp, tenor: 35, cicilan: t35 };
   }
-  return min;
+  
+  const targetPct = CONFIG.dpDefaultPct;
+  const target = (model.harga || 0) * (targetPct / 100);
+  const dpClose = opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
+  const tbl = model.tabel[String(dpClose)];
+  if (!tbl) return null;
+  const tenors = Object.keys(tbl).map(Number).sort((a,b)=>b-a);
+  if (!tenors.length) return null;
+  const t = 35 in tbl ? 35 : tenors[0];
+  return { dp: dpClose, tenor: t, cicilan: tbl[String(t)] };
 }
 
 function getTenors(model, dp){
@@ -852,7 +928,6 @@ function expandKreditModel(screenEl, name){
   setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 }
 
-/* ============ ACTION SHEET ============ */
 function openActionSheet(name){
   const data = getModelData(name);
   if (!data) return;
@@ -872,7 +947,7 @@ function closeActionSheet(){
 }
 
 /* ============================================================
-   RENDER — HERO
+   RENDER — HERO & HOME
    ============================================================ */
 function renderHero(){
   const initial = (CONFIG.salesName || 'S').trim().charAt(0).toUpperCase();
@@ -1019,18 +1094,18 @@ function renderBackHeader(title){
 function renderHargaCard(name){
   const data = getModelData(name);
   if (!data) return '';
-  const cicilanMin = getMinCicilan(data);
+  const cicilanHeader = getCicilanHeader(name);
   return `
     <div class="harga-card anim-in">
       <div class="harga-section">
         <div class="harga-label">Harga OTR</div>
         <div class="harga-value">${formatRp(data.harga)}</div>
       </div>
-      ${cicilanMin ? `
+      ${cicilanHeader ? `
         <div class="harga-section">
           <div class="harga-label">Cicilan Mulai</div>
-          <div class="harga-value">${formatRp(cicilanMin.cicilan)}<small>/bln</small></div>
-          <div class="harga-note">Tenor ${cicilanMin.tenor} bulan · DP ${formatRp(cicilanMin.dp)}</div>
+          <div class="harga-value">${formatRp(cicilanHeader.cicilan)}<small>/bln</small></div>
+          <div class="harga-note">Tenor ${cicilanHeader.tenor} bulan · DP ${formatRp(cicilanHeader.dp)}</div>
         </div>
       ` : ''}
       <a class="harga-cta" data-nav="/kredit" data-expand-kredit="${esc(name)}">
@@ -1159,16 +1234,21 @@ function renderDpSlider(name, currentDp){
   const minDp = opts[0];
   const maxDp = opts[opts.length - 1];
   const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
-  const isAtMax = idx === opts.length - 1;
-  const showPromo = isBeatSeries(name) && isPromoAvailable();
+  
+  const triggerDp = getPromoTriggerDp(name);
+  const isAtTrigger = triggerDp !== null && opts[idx] === triggerDp;
+  const hasPromo = isBeatSeries(name) && isPromoAvailable(name);
+  const promoCicilan = hasPromo ? getPromoCicilan(name) : 0;
+  const p = CONFIG.promo.beatSeries;
+  
   return `
-    <div class="dp-slider-wrap">
+    <div class="dp-slider-wrap" data-dp-wrap="${esc(name)}">
       <div class="dp-display">
         <div>
           <span class="dp-display-label">DP Dipilih</span>
-          <span class="dp-display-sub">Range ${CONFIG.dpRangeMinPct}%–${CONFIG.dpRangeMaxPct}% OTR</span>
+          <span class="dp-display-sub" data-dp-sub>Geser untuk ubah DP</span>
         </div>
-        <span class="dp-display-value">${formatRp(opts[idx])}</span>
+        <span class="dp-display-value" data-dp-value>${formatRp(opts[idx])}</span>
       </div>
       <input type="range" class="dp-slider"
              data-model="${esc(name)}"
@@ -1180,10 +1260,11 @@ function renderDpSlider(name, currentDp){
         <span>${formatRp(maxDp)}</span>
       </div>
       <div class="dp-note">Belum termasuk diskon & potongan tenor</div>
-      ${showPromo ? `
-        <div class="promo-option${isAtMax ? ' is-visible' : ''}" data-promo-option="${esc(name)}">
+      ${hasPromo ? `
+        <div class="promo-container${isAtTrigger ? ' is-visible' : ''}" data-promo-container="${esc(name)}">
+          <div class="promo-divider">atau</div>
           <button class="promo-btn" data-promo-toggle="${esc(name)}" type="button">
-            ⚡ Coba DP Promo ${formatRp(CONFIG.promo.beatSeries.dp)} · Tenor ${CONFIG.promo.beatSeries.tenor} bulan
+            ⚡ Coba DP Promo ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
           </button>
         </div>
       ` : ''}
@@ -1192,19 +1273,24 @@ function renderDpSlider(name, currentDp){
 }
 
 function renderPromoView(name){
-  if (!isBeatSeries(name) || !isPromoAvailable()) return '';
+  if (!isBeatSeries(name)) return '';
+  if (!isPromoAvailable(name)) return '';
   const p = CONFIG.promo.beatSeries;
+  const cicilan = getPromoCicilan(name);
   return `
     <div class="promo-view">
       <div class="promo-banner">
         <div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>
-        <div class="promo-banner-value">${formatRp(p.cicilan)}<small>/bln</small></div>
+        <div class="promo-banner-value">${formatRp(cicilan)}<small>/bln</small></div>
         <div class="promo-banner-meta">
           DP ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
         </div>
         <div class="promo-banner-note">
           Cicilan promo belum termasuk diskon & potongan tenor. Konfirmasi final via WhatsApp.
         </div>
+        <button class="promo-banner-back" data-promo-toggle="${esc(name)}" type="button">
+          ← Kembali ke DP Normal
+        </button>
       </div>
     </div>
   `;
@@ -1217,16 +1303,16 @@ function renderKreditCardsList(){
     const data = getModelData(name);
     if (!data) return '';
     const meta = getModelMeta(name);
-    const cicilanMin = getMinCicilan(data);
-    const defaultDp = getDefaultDp(data);
+    const cicilanHeader = getCicilanHeader(name);
+    const defaultDp = getDefaultDp(name);
     return `
       <div class="kredit-card" data-kredit-card="${esc(name)}">
         <button class="kredit-head" data-toggle-kredit="${esc(name)}" type="button">
           <div class="kredit-emoji">${meta.emoji}</div>
           <div class="kredit-info">
             <strong>${esc(name)}</strong>
-            ${cicilanMin
-              ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanMin.cicilan)}/bln</span>`
+            ${cicilanHeader
+              ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanHeader.cicilan)}/bln</span>`
               : `<span class="kredit-mulai" style="color:var(--label-3)">Belum tersedia</span>`}
             <span class="kredit-otr">OTR ${formatRp(data.harga)}</span>
           </div>
@@ -1255,7 +1341,7 @@ function renderKredit(){
   return `
     ${renderBackHeader('Simulasi Kredit')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP (10%–15.5% OTR) untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
       ${renderFilterBar(kreditFilter, 'kredit')}
       <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
@@ -1389,12 +1475,11 @@ function refreshActiveList(prefix){
 }
 
 /* ============================================================
-   EVENTS — APP
+   EVENTS
    ============================================================ */
 app.addEventListener('click', e => {
   if (animating) return;
 
-  // Stok item → buka action sheet
   const stokEl = e.target.closest('.stok-item');
   if (stokEl) {
     e.preventDefault();
@@ -1403,7 +1488,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Toggle accordion kredit
   const toggleEl = e.target.closest('[data-toggle-kredit]');
   if (toggleEl) {
     e.preventDefault();
@@ -1415,7 +1499,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Promo toggle
   const promoBtn = e.target.closest('[data-promo-toggle]');
   if (promoBtn) {
     e.preventDefault();
@@ -1429,31 +1512,34 @@ app.addEventListener('click', e => {
 
     if (!wasActive) {
       card.classList.add('promo-active');
-      const display = card.querySelector('.dp-display-value');
+      const display = card.querySelector('[data-dp-value]');
       if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9500;font-weight:800;margin-left:4px">PROMO</small>`;
-      const sub = card.querySelector('.dp-display-sub');
-      if (sub) sub.textContent = 'Harga promo Beat Series';
-      const btn = card.querySelector('.promo-btn');
-      if (btn) btn.innerHTML = '✕ Batalkan Promo · Kembali ke DP Normal';
+      const sub = card.querySelector('[data-dp-sub]');
+      if (sub) sub.textContent = 'Mode Promo Aktif';
     } else {
       card.classList.remove('promo-active');
-      const slider = card.querySelector('.dp-slider');
+      const triggerDp = getPromoTriggerDp(name);
       const opts = getSliderDpOptions(data);
-      const currentIdx = slider ? +slider.value : 0;
-      const currentDp = opts[currentIdx] || getDefaultDp(data);
-      const display = card.querySelector('.dp-display-value');
-      if (display) display.textContent = formatRp(currentDp);
-      const sub = card.querySelector('.dp-display-sub');
-      if (sub) sub.textContent = `Range ${CONFIG.dpRangeMinPct}%–${CONFIG.dpRangeMaxPct}% OTR`;
-      const btn = card.querySelector('.promo-btn');
-      if (btn) btn.innerHTML = `⚡ Coba DP Promo ${formatRp(p.dp)} · Tenor ${p.tenor} bulan`;
+      const targetDp = (triggerDp !== null && opts.includes(triggerDp)) ? triggerDp : getDefaultDp(name);
+      const targetIdx = opts.indexOf(targetDp);
+      const slider = card.querySelector('.dp-slider');
+      if (slider && targetIdx >= 0) {
+        slider.value = targetIdx;
+        const pct = opts.length > 1 ? (targetIdx / (opts.length - 1)) * 100 : 0;
+        slider.style.setProperty('--pct', pct + '%');
+      }
+      const display = card.querySelector('[data-dp-value]');
+      if (display) display.textContent = formatRp(targetDp);
+      const sub = card.querySelector('[data-dp-sub]');
+      if (sub) sub.textContent = 'Geser untuk ubah DP';
       const tenorList = card.querySelector('.tenor-list');
-      if (tenorList) tenorList.innerHTML = renderTenorRows(name, currentDp);
+      if (tenorList) tenorList.innerHTML = renderTenorRows(name, targetDp);
+      const promoContainer = card.querySelector('[data-promo-container]');
+      if (promoContainer) promoContainer.classList.add('is-visible');
     }
     return;
   }
 
-  // Category chip
   const catEl = e.target.closest('[data-cat]');
   if (catEl) {
     e.preventDefault();
@@ -1466,7 +1552,6 @@ app.addEventListener('click', e => {
     return;
   }
 
-  // Navigasi
   const navEl = e.target.closest('[data-nav]');
   if (navEl) {
     e.preventDefault();
@@ -1483,7 +1568,6 @@ app.addEventListener('click', e => {
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
-// Slider & search
 app.addEventListener('input', e => {
   if (e.target.matches('.dp-slider')) {
     const name = e.target.dataset.model;
@@ -1497,14 +1581,16 @@ app.addEventListener('input', e => {
     if (dp === undefined) return;
     const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
     e.target.style.setProperty('--pct', pct + '%');
-    const display = card.querySelector('.dp-display-value');
+    const display = card.querySelector('[data-dp-value]');
     if (display) display.textContent = formatRp(dp);
     const tenorList = card.querySelector('.tenor-list');
     if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
-    const promoOpt = card.querySelector('.promo-option');
-    if (promoOpt) {
-      if (idx === opts.length - 1) promoOpt.classList.add('is-visible');
-      else promoOpt.classList.remove('is-visible');
+
+    const triggerDp = getPromoTriggerDp(name);
+    const promoContainer = card.querySelector('[data-promo-container]');
+    if (promoContainer && triggerDp !== null) {
+      if (dp === triggerDp) promoContainer.classList.add('is-visible');
+      else promoContainer.classList.remove('is-visible');
     }
     return;
   }
@@ -1522,7 +1608,6 @@ floatWa.addEventListener('click', e => {
   openWa(CONFIG.defaultMessage, e.currentTarget);
 });
 
-/* ============ ACTION SHEET EVENTS ============ */
 document.getElementById('sheetBackdrop').addEventListener('click', closeActionSheet);
 document.getElementById('sheetCancel').addEventListener('click', closeActionSheet);
 
