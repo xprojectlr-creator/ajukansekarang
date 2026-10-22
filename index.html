@@ -244,14 +244,31 @@ section{padding:8px 0 0}
   display:flex;align-items:center;justify-content:center;gap:8px;
   background:var(--wa);color:#fff;font-weight:700;font-size:15.5px;
   letter-spacing:-.01em;padding:16px;border-radius:var(--radius-button);
-  transition:transform .2s var(--spring),background .15s;
+  transition:transform .2s var(--spring),background .15s,box-shadow .25s;
   cursor:pointer;text-align:center;
   box-shadow:0 4px 12px rgba(37,211,102,.2),0 1px 2px rgba(0,0,0,.08);
-  position:relative;
+  position:relative;border:none;font-family:inherit;width:100%;
 }
 .wa-btn:active{background:var(--wa-2);transform:scale(.97)}
 .wa-btn-outline{background:var(--surface);color:var(--label);box-shadow:var(--shadow-card)}
 .wa-btn-outline:active{background:var(--surface-2)}
+
+/* Konsultasi aktif (ada pilihan) */
+.wa-btn.has-selection{
+  background:var(--wa-2);
+  box-shadow:0 0 0 4px rgba(37,211,102,.18),0 4px 12px rgba(37,211,102,.3);
+  animation:btnPulse .45s var(--smooth) 1;
+}
+.wa-btn.promo-ready{
+  background:linear-gradient(135deg,#ff9500 0%,#f58a00 100%);
+  box-shadow:0 0 0 4px rgba(255,149,0,.2),0 4px 12px rgba(255,149,0,.35);
+  animation:btnPulse .45s var(--smooth) 1;
+}
+@keyframes btnPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+  100%{transform:scale(1)}
+}
 
 .harga-card{
   background:var(--surface);border-radius:var(--radius-card);
@@ -443,9 +460,7 @@ section{padding:8px 0 0}
   background:linear-gradient(135deg,rgba(255,149,0,.14) 0%,rgba(255,149,0,.06) 100%);
   border:1.5px solid rgba(255,149,0,.35);
   border-radius:14px;padding:16px;position:relative;overflow:hidden;
-  cursor:pointer;transition:transform .15s;
 }
-.promo-banner:active{transform:scale(.98);}
 .promo-banner::before{
   content:"";position:absolute;top:-20px;right:-20px;
   width:80px;height:80px;border-radius:50%;
@@ -479,13 +494,6 @@ section{padding:8px 0 0}
   transition:background .15s;position:relative;z-index:1;
 }
 .promo-banner-back:active{background:rgba(255,149,0,.08);}
-.promo-banner.is-loading > *{visibility:hidden;}
-.promo-banner.is-loading::after{
-  left:50%;top:50%;margin:0;
-  transform:translate(-50%,-50%);
-  border-color:rgba(255,149,0,.3);
-  border-top-color:var(--accent-2);
-}
 
 .kredit-card.promo-active .promo-view{display:block;}
 .kredit-card.promo-active .promo-container{display:none;}
@@ -495,7 +503,7 @@ section{padding:8px 0 0}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2);}
 
 /* ============================================================
-   TENOR LIST — klik untuk WA
+   TENOR LIST — tap to select (bukan langsung WA)
    ============================================================ */
 .tenor-list{background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;}
 .tenor-row{
@@ -503,31 +511,34 @@ section{padding:8px 0 0}
   padding:12px 14px;font-size:13px;
   width:100%;border:none;background:transparent;
   font-family:inherit;text-align:left;color:inherit;
-  cursor:pointer;transition:background .15s;
+  cursor:pointer;transition:background .2s,box-shadow .2s;
   position:relative;
 }
 .tenor-row + .tenor-row{border-top:1px solid var(--separator);}
 .tenor-row:active{background:var(--fill);}
 .tenor-dur{
   font-weight:700;color:var(--label);font-size:13.5px;
-  letter-spacing:-.01em;flex:1;
+  letter-spacing:-.01em;flex:1;transition:color .2s;
 }
 .tenor-cicilan{
   font-weight:800;color:var(--accent-2);font-size:14.5px;
   letter-spacing:-.02em;display:flex;align-items:baseline;flex-shrink:0;
+  transition:color .2s;
 }
 .tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px;}
 .tenor-arrow{
   color:var(--label-3);display:grid;place-items:center;
-  flex-shrink:0;margin-left:2px;
+  flex-shrink:0;margin-left:2px;transition:color .2s;
 }
-.tenor-row.is-loading > *{visibility:hidden;}
-.tenor-row.is-loading::after{
-  left:50%;top:50%;margin:0;
-  transform:translate(-50%,-50%);
-  border-color:rgba(255,149,0,.3);
-  border-top-color:var(--accent-2);
+
+/* Baris tenor terpilih */
+.tenor-row.is-selected{
+  background:rgba(255,149,0,0.12);
+  box-shadow:inset 3px 0 0 var(--accent);
 }
+.tenor-row.is-selected .tenor-dur{color:var(--accent-2);}
+.tenor-row.is-selected .tenor-cicilan{color:var(--accent-2);}
+.tenor-row.is-selected .tenor-arrow{color:var(--accent);}
 
 .float-wa{
   position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));
@@ -723,22 +734,10 @@ const CONFIG = {
       dp: 700000,
       tenor: 35,
       perModel: {
-        "New BeAT CBS": {
-          triggerDp: 3000000,
-          cicilan: 893000
-        },
-        "New BeAT CBS ISS DELUXE": {
-          triggerDp: 3200000,
-          cicilan: 933000
-        },
-        "New BeAT CBS ISS DELUXE SMARTKEY": {
-          triggerDp: 3200000,
-          cicilan: 960000
-        },
-        "New BeAT Street": {
-          triggerDp: 3200000,
-          cicilan: 938000
-        }
+        "New BeAT CBS": { triggerDp: 3000000, cicilan: 893000 },
+        "New BeAT CBS ISS DELUXE": { triggerDp: 3200000, cicilan: 933000 },
+        "New BeAT CBS ISS DELUXE SMARTKEY": { triggerDp: 3200000, cicilan: 960000 },
+        "New BeAT Street": { triggerDp: 3200000, cicilan: 938000 }
       }
     }
   },
@@ -960,6 +959,67 @@ function closeActionSheet(){
   document.getElementById('actionSheet').classList.remove('is-open');
   document.body.style.overflow = '';
   pendingSheetModel = null;
+}
+
+/* Update tombol konsultasi sesuai state card */
+function updateKonsultasiBtn(card){
+  const btn = card.querySelector('[data-konsultasi]');
+  if (!btn) return;
+  const name = btn.dataset.konsultasi;
+  const isPromo = card.classList.contains('promo-active');
+  const selDp = card.dataset.selDp;
+  const selTenor = card.dataset.selTenor;
+  const selCicilan = card.dataset.selCicilan;
+  
+  btn.classList.remove('has-selection', 'promo-ready');
+  
+  if (isPromo) {
+    const p = CONFIG.promo.beatSeries;
+    const cicilan = getPromoCicilan(name);
+    btn.innerHTML = `⚡ Ambil Promo · ${formatRp(cicilan)}/bln · ${p.tenor} bln`;
+    btn.classList.add('promo-ready');
+    return;
+  }
+  
+  if (selTenor && selCicilan && selDp) {
+    btn.innerHTML = `✅ Ajukan Pilihan · ${formatRp(+selCicilan)}/bln · ${selTenor} bln`;
+    btn.classList.add('has-selection');
+    return;
+  }
+  
+  btn.innerHTML = `💬 Konsultasi Kredit`;
+}
+
+function resetSelection(card){
+  if (!card) return;
+  card.dataset.selDp = '';
+  card.dataset.selTenor = '';
+  card.dataset.selCicilan = '';
+  card.querySelectorAll('.tenor-row.is-selected').forEach(r => r.classList.remove('is-selected'));
+  updateKonsultasiBtn(card);
+}
+
+function buildKonsultasiMsg(card){
+  const btn = card.querySelector('[data-konsultasi]');
+  if (!btn) return CONFIG.defaultMessage;
+  const name = btn.dataset.konsultasi;
+  const isPromo = card.classList.contains('promo-active');
+  
+  if (isPromo) {
+    const p = CONFIG.promo.beatSeries;
+    const cicilan = getPromoCicilan(name);
+    return `Halo Dion, saya dari TikTok. Mau ambil PROMO ${name}: DP ${formatRp(p.dp)}, tenor ${p.tenor} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
+  }
+  
+  const selDp = card.dataset.selDp;
+  const selTenor = card.dataset.selTenor;
+  const selCicilan = card.dataset.selCicilan;
+  
+  if (selTenor && selCicilan && selDp) {
+    return `Halo Dion, saya dari TikTok. Mau kredit ${name} dengan DP ${formatRp(+selDp)}, tenor ${selTenor} bulan, cicilan ${formatRp(+selCicilan)}/bulan.`;
+  }
+  
+  return `Halo Dion, saya dari TikTok. Mau konsultasi kredit ${name}.`;
 }
 
 /* ============================================================
@@ -1235,9 +1295,10 @@ function renderTenorRows(name, dp){
   const tbl = data.tabel[String(dp)] || {};
   return tenors.map(t => {
     const cicilan = tbl[t];
-    const msg = `Halo Dion, saya dari TikTok. Mau kredit ${name} dengan DP ${formatRp(dp)}, tenor ${t} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
     return `
-      <button class="tenor-row" type="button" data-msg="${esc(msg)}">
+      <button class="tenor-row" type="button"
+              data-dp="${dp}" data-tenor="${t}" data-cicilan="${cicilan}"
+              aria-pressed="false">
         <div class="tenor-dur">${t} bulan</div>
         <div class="tenor-cicilan">${formatRp(cicilan)}<small>/bln</small></div>
         <div class="tenor-arrow">
@@ -1299,17 +1360,16 @@ function renderPromoView(name){
   if (!isPromoAvailable(name)) return '';
   const p = CONFIG.promo.beatSeries;
   const cicilan = getPromoCicilan(name);
-  const promoMsg = `Halo Dion, saya dari TikTok. Mau ambil PROMO ${name}: DP ${formatRp(p.dp)}, tenor ${p.tenor} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
   return `
     <div class="promo-view">
-      <div class="promo-banner" data-msg="${esc(promoMsg)}">
+      <div class="promo-banner">
         <div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>
         <div class="promo-banner-value">${formatRp(cicilan)}<small>/bln</small></div>
         <div class="promo-banner-meta">
           DP ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
         </div>
         <div class="promo-banner-note">
-          Cicilan promo belum termasuk diskon & potongan tenor. Ketuk kartu untuk chat & konfirmasi promo.
+          Cicilan promo belum termasuk diskon & potongan tenor. Ketuk tombol di bawah untuk konfirmasi via WhatsApp.
         </div>
         <button class="promo-banner-back" data-promo-toggle="${esc(name)}" type="button">
           ← Kembali ke DP Normal
@@ -1329,7 +1389,8 @@ function renderKreditCardsList(){
     const cicilanHeader = getCicilanHeader(name);
     const defaultDp = getDefaultDp(name);
     return `
-      <div class="kredit-card" data-kredit-card="${esc(name)}">
+      <div class="kredit-card" data-kredit-card="${esc(name)}"
+           data-sel-dp="" data-sel-tenor="" data-sel-cicilan="">
         <button class="kredit-head" data-toggle-kredit="${esc(name)}" type="button">
           <div class="kredit-emoji">${meta.emoji}</div>
           <div class="kredit-info">
@@ -1350,7 +1411,9 @@ function renderKreditCardsList(){
                 <div class="tenor-list" data-tenor-list="${esc(name)}">
                   ${renderTenorRows(name, defaultDp)}
                 </div>
-                <a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau konsultasi kredit ${esc(name)}.">💬 Konsultasi Kredit</a>
+                <button class="wa-btn" type="button" data-konsultasi="${esc(name)}">
+                  💬 Konsultasi Kredit
+                </button>
               </div>
             </div>
           </div>
@@ -1364,7 +1427,7 @@ function renderKredit(){
   return `
     ${renderBackHeader('Simulasi Kredit')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Tap tenor untuk chat dengan sales. Angka dari pricelist FIFGROUP.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP. Tap tenor untuk pilih cicilan, lalu kirim via WhatsApp. Angka dari pricelist FIFGROUP.</p>
       ${renderFilterBar(kreditFilter, 'kredit')}
       <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
@@ -1522,6 +1585,43 @@ app.addEventListener('click', e => {
     return;
   }
 
+  // Tap tenor row = pilih (bukan buka WA)
+  const tenorEl = e.target.closest('.tenor-row');
+  if (tenorEl) {
+    e.preventDefault();
+    const card = tenorEl.closest('.kredit-card');
+    if (!card || card.classList.contains('promo-active')) return;
+    const dp = tenorEl.dataset.dp;
+    const tenor = tenorEl.dataset.tenor;
+    const cicilan = tenorEl.dataset.cicilan;
+    if (!dp || !tenor || !cicilan) return;
+    
+    card.querySelectorAll('.tenor-row').forEach(r => {
+      r.classList.remove('is-selected');
+      r.setAttribute('aria-pressed', 'false');
+    });
+    tenorEl.classList.add('is-selected');
+    tenorEl.setAttribute('aria-pressed', 'true');
+    
+    card.dataset.selDp = dp;
+    card.dataset.selTenor = tenor;
+    card.dataset.selCicilan = cicilan;
+    
+    updateKonsultasiBtn(card);
+    return;
+  }
+
+  // Tap tombol konsultasi = baru buka WA
+  const konsulEl = e.target.closest('[data-konsultasi]');
+  if (konsulEl) {
+    e.preventDefault();
+    const card = konsulEl.closest('.kredit-card');
+    if (!card) return;
+    openWa(buildKonsultasiMsg(card), konsulEl);
+    return;
+  }
+
+  // Promo toggle
   const promoBtn = e.target.closest('[data-promo-toggle]');
   if (promoBtn) {
     e.preventDefault();
@@ -1534,12 +1634,16 @@ app.addEventListener('click', e => {
     const p = CONFIG.promo.beatSeries;
 
     if (!wasActive) {
+      // Aktifkan promo - reset selection dulu
+      resetSelection(card);
       card.classList.add('promo-active');
       const display = card.querySelector('[data-dp-value]');
       if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9500;font-weight:800;margin-left:4px">PROMO</small>`;
       const sub = card.querySelector('[data-dp-sub]');
       if (sub) sub.textContent = 'Mode Promo Aktif';
+      updateKonsultasiBtn(card);
     } else {
+      // Matikan promo - balik ke trigger DP
       card.classList.remove('promo-active');
       const triggerDp = getPromoTriggerDp(name);
       const opts = getSliderDpOptions(data);
@@ -1559,6 +1663,7 @@ app.addEventListener('click', e => {
       if (tenorList) tenorList.innerHTML = renderTenorRows(name, targetDp);
       const promoContainer = card.querySelector('[data-promo-container]');
       if (promoContainer) promoContainer.classList.add('is-visible');
+      resetSelection(card);
     }
     return;
   }
@@ -1591,6 +1696,7 @@ app.addEventListener('click', e => {
   if (msgEl) { e.preventDefault(); openWa(msgEl.dataset.msg, msgEl); return; }
 });
 
+// Slider live update — reset selection saat DP berubah
 app.addEventListener('input', e => {
   if (e.target.matches('.dp-slider')) {
     const name = e.target.dataset.model;
@@ -1608,6 +1714,9 @@ app.addEventListener('input', e => {
     if (display) display.textContent = formatRp(dp);
     const tenorList = card.querySelector('.tenor-list');
     if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+    
+    // Reset selection karena tenor list berubah
+    resetSelection(card);
 
     const triggerDp = getPromoTriggerDp(name);
     const promoContainer = card.querySelector('[data-promo-container]');
