@@ -443,7 +443,9 @@ section{padding:8px 0 0}
   background:linear-gradient(135deg,rgba(255,149,0,.14) 0%,rgba(255,149,0,.06) 100%);
   border:1.5px solid rgba(255,149,0,.35);
   border-radius:14px;padding:16px;position:relative;overflow:hidden;
+  cursor:pointer;transition:transform .15s;
 }
+.promo-banner:active{transform:scale(.98);}
 .promo-banner::before{
   content:"";position:absolute;top:-20px;right:-20px;
   width:80px;height:80px;border-radius:50%;
@@ -477,6 +479,13 @@ section{padding:8px 0 0}
   transition:background .15s;position:relative;z-index:1;
 }
 .promo-banner-back:active{background:rgba(255,149,0,.08);}
+.promo-banner.is-loading > *{visibility:hidden;}
+.promo-banner.is-loading::after{
+  left:50%;top:50%;margin:0;
+  transform:translate(-50%,-50%);
+  border-color:rgba(255,149,0,.3);
+  border-top-color:var(--accent-2);
+}
 
 .kredit-card.promo-active .promo-view{display:block;}
 .kredit-card.promo-active .promo-container{display:none;}
@@ -485,12 +494,40 @@ section{padding:8px 0 0}
 .kredit-card.promo-active .dp-slider-labels{opacity:.4;}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2);}
 
+/* ============================================================
+   TENOR LIST — klik untuk WA
+   ============================================================ */
 .tenor-list{background:var(--bg);border-radius:14px;overflow:hidden;margin-bottom:14px;}
-.tenor-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;font-size:13px;}
+.tenor-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;font-size:13px;
+  width:100%;border:none;background:transparent;
+  font-family:inherit;text-align:left;color:inherit;
+  cursor:pointer;transition:background .15s;
+  position:relative;
+}
 .tenor-row + .tenor-row{border-top:1px solid var(--separator);}
-.tenor-dur{font-weight:700;color:var(--label);font-size:13.5px;letter-spacing:-.01em;}
-.tenor-cicilan{font-weight:800;color:var(--accent-2);font-size:14.5px;letter-spacing:-.02em;}
+.tenor-row:active{background:var(--fill);}
+.tenor-dur{
+  font-weight:700;color:var(--label);font-size:13.5px;
+  letter-spacing:-.01em;flex:1;
+}
+.tenor-cicilan{
+  font-weight:800;color:var(--accent-2);font-size:14.5px;
+  letter-spacing:-.02em;display:flex;align-items:baseline;flex-shrink:0;
+}
 .tenor-cicilan small{font-weight:600;font-size:11px;color:var(--label-3);margin-left:1px;}
+.tenor-arrow{
+  color:var(--label-3);display:grid;place-items:center;
+  flex-shrink:0;margin-left:2px;
+}
+.tenor-row.is-loading > *{visibility:hidden;}
+.tenor-row.is-loading::after{
+  left:50%;top:50%;margin:0;
+  transform:translate(-50%,-50%);
+  border-color:rgba(255,149,0,.3);
+  border-top-color:var(--accent-2);
+}
 
 .float-wa{
   position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));
@@ -679,23 +716,8 @@ const CONFIG = {
   },
   defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
 
-  /* Default DP non-Beat: 15% OTR */
   dpDefaultPct: 15,
 
-  /* ==========================================================
-     PROMO BEAT SERIES
-     Setiap model Beat punya:
-       - triggerDp: DP "sistem" di data.js (default slider & trigger promo)
-       - cicilan: cicilan tenor 35 bulan pada DP trigger tsb
-
-     Alur:
-       1. Buka Beat → slider default di triggerDp
-       2. Slider tepat di triggerDp → tombol promo muncul
-       3. Geser dari triggerDp → tombol promo hilang
-       4. Balik ke triggerDp → tombol promo muncul lagi
-       5. Klik promo → mode aktif (DP 700rb, cicilan promo)
-       6. Balik → slider balik ke triggerDp
-     ========================================================== */
   promo: {
     beatSeries: {
       dp: 700000,
@@ -779,9 +801,6 @@ const CATEGORIES = [
   ]}
 ];
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const formatRp = n => (n === null || n === undefined || isNaN(n)) ? '—' : 'Rp ' + Number(n).toLocaleString('id-ID');
 
@@ -830,7 +849,6 @@ function getModelMeta(name){
 function getAllDpOptions(model){ return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
 function getSliderDpOptions(model){ return getAllDpOptions(model); }
 
-/* Default = trigger DP untuk Beat promo, 15% OTR untuk non-Beat */
 function getDefaultDp(name){
   const model = getModelData(name);
   if (!model) return null;
@@ -842,7 +860,6 @@ function getDefaultDp(name){
   return opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
 }
 
-/* Header "Mulai" = cicilan tenor 35 di DP trigger (Beat) atau DP terdekat 15% OTR (non-Beat) */
 function getCicilanHeader(name){
   const model = getModelData(name);
   if (!model) return null;
@@ -856,8 +873,7 @@ function getCicilanHeader(name){
     if (t35) return { dp: triggerDp, tenor: 35, cicilan: t35 };
   }
   
-  const targetPct = CONFIG.dpDefaultPct;
-  const target = (model.harga || 0) * (targetPct / 100);
+  const target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
   const dpClose = opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
   const tbl = model.tabel[String(dpClose)];
   if (!tbl) return null;
@@ -1217,12 +1233,19 @@ function renderTenorRows(name, dp){
   if (!data) return '';
   const tenors = getTenors(data, dp);
   const tbl = data.tabel[String(dp)] || {};
-  return tenors.map(t => `
-    <div class="tenor-row">
-      <div class="tenor-dur">${t} bulan</div>
-      <div class="tenor-cicilan">${formatRp(tbl[t])}<small>/bln</small></div>
-    </div>
-  `).join('');
+  return tenors.map(t => {
+    const cicilan = tbl[t];
+    const msg = `Halo Dion, saya dari TikTok. Mau kredit ${name} dengan DP ${formatRp(dp)}, tenor ${t} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
+    return `
+      <button class="tenor-row" type="button" data-msg="${esc(msg)}">
+        <div class="tenor-dur">${t} bulan</div>
+        <div class="tenor-cicilan">${formatRp(cicilan)}<small>/bln</small></div>
+        <div class="tenor-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+      </button>
+    `;
+  }).join('');
 }
 
 function renderDpSlider(name, currentDp){
@@ -1238,7 +1261,6 @@ function renderDpSlider(name, currentDp){
   const triggerDp = getPromoTriggerDp(name);
   const isAtTrigger = triggerDp !== null && opts[idx] === triggerDp;
   const hasPromo = isBeatSeries(name) && isPromoAvailable(name);
-  const promoCicilan = hasPromo ? getPromoCicilan(name) : 0;
   const p = CONFIG.promo.beatSeries;
   
   return `
@@ -1277,16 +1299,17 @@ function renderPromoView(name){
   if (!isPromoAvailable(name)) return '';
   const p = CONFIG.promo.beatSeries;
   const cicilan = getPromoCicilan(name);
+  const promoMsg = `Halo Dion, saya dari TikTok. Mau ambil PROMO ${name}: DP ${formatRp(p.dp)}, tenor ${p.tenor} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
   return `
     <div class="promo-view">
-      <div class="promo-banner">
+      <div class="promo-banner" data-msg="${esc(promoMsg)}">
         <div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>
         <div class="promo-banner-value">${formatRp(cicilan)}<small>/bln</small></div>
         <div class="promo-banner-meta">
           DP ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
         </div>
         <div class="promo-banner-note">
-          Cicilan promo belum termasuk diskon & potongan tenor. Konfirmasi final via WhatsApp.
+          Cicilan promo belum termasuk diskon & potongan tenor. Ketuk kartu untuk chat & konfirmasi promo.
         </div>
         <button class="promo-banner-back" data-promo-toggle="${esc(name)}" type="button">
           ← Kembali ke DP Normal
@@ -1341,7 +1364,7 @@ function renderKredit(){
   return `
     ${renderBackHeader('Simulasi Kredit')}
     <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Angka dari pricelist FIFGROUP.</p>
+      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP untuk lihat cicilan per tenor. Tap tenor untuk chat dengan sales. Angka dari pricelist FIFGROUP.</p>
       ${renderFilterBar(kreditFilter, 'kredit')}
       <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
     </div>
