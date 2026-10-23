@@ -924,7 +924,7 @@ footer{text-align:center;padding:44px 0 22px;font-size:12px;color:var(--label-3)
       <div class="sheet-btn-icon">💵</div>
       <div class="sheet-btn-body">
         <strong>Bayar Cash</strong>
-        <span>Tanya stok & harga cash via WhatsApp</span>
+        <span>Tanya stok &amp; harga cash via WhatsApp</span>
       </div>
     </button>
     <button class="sheet-btn sheet-btn-kredit" data-sheet-action="kredit" type="button">
@@ -944,1166 +944,1266 @@ footer{text-align:center;padding:44px 0 22px;font-size:12px;color:var(--label-3)
 
 <script src="data.js"></script>
 <script>
-/* ============================================================
-   KONFIGURASI
-   ============================================================ */
-const CONFIG = {
-  phone: "6285155070692",
-  brand: "Daya Motor Cibiru, Bandung",
-  salesName: "Dion Prayoga",
-  salesRole: "Sales Resmi Daya Motor Cibiru",
-  socials: {
-    tiktok:  "bandung_honda",
-    ig:      "bandunghonda_",
-    youtube: "bandung_honda"
-  },
-  defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
+(function () {
+  'use strict';
 
-  dpDefaultPct: 15,
-
-  promo: {
-    beatSeries: {
-      dp: 700000,
-      tenor: 35,
-      perModel: {
-        "New BeAT CBS": { triggerDp: 3000000, cicilan: 893000 },
-        "New BeAT CBS ISS DELUXE": { triggerDp: 3200000, cicilan: 933000 },
-        "New BeAT CBS ISS DELUXE SMARTKEY": { triggerDp: 3200000, cicilan: 960000 },
-        "New BeAT Street": { triggerDp: 3200000, cicilan: 938000 }
+  function boot() {
+    /* ============================================================
+       KONFIGURASI
+       ============================================================ */
+    var CONFIG = {
+      phone: "6285155070692",
+      brand: "Daya Motor Cibiru, Bandung",
+      salesName: "Dion Prayoga",
+      salesRole: "Sales Resmi Daya Motor Cibiru",
+      socials: {
+        tiktok:  "bandung_honda",
+        ig:      "bandunghonda_",
+        youtube: "bandung_honda"
+      },
+      defaultMessage: "Halo Dion, saya dari TikTok. Mau tanya-tanya soal motor Honda.",
+      dpDefaultPct: 15,
+      promo: {
+        beatSeries: {
+          dp: 700000,
+          tenor: 35,
+          perModel: {
+            "New BeAT CBS": { triggerDp: 3000000, cicilan: 893000 },
+            "New BeAT CBS ISS DELUXE": { triggerDp: 3200000, cicilan: 933000 },
+            "New BeAT CBS ISS DELUXE SMARTKEY": { triggerDp: 3200000, cicilan: 960000 },
+            "New BeAT Street": { triggerDp: 3200000, cicilan: 938000 }
+          }
+        }
+      },
+      images: {
+        profil: "",
+        "New BeAT CBS": "",
+        "SCOOPY Energetic & Fashion": "",
+        "All New Vario 125 CBS": "",
+        "PCX 160 CBS": "",
+        "ADV 160 CBS": ""
       }
+    };
+
+    /* ============================================================
+       DATA MOTOR — baca aman dari window / const / let / var
+       ============================================================ */
+    function readMotorData() {
+      try {
+        if (typeof window !== 'undefined' && window.DATA_MOTOR && typeof window.DATA_MOTOR === 'object') {
+          return window.DATA_MOTOR;
+        }
+      } catch (e) {}
+      try {
+        if (typeof DATA_MOTOR !== 'undefined' && DATA_MOTOR && typeof DATA_MOTOR === 'object') {
+          return DATA_MOTOR;
+        }
+      } catch (e) {}
+      return {};
     }
-  },
-
-  images: {
-    profil: "",
-    "New BeAT CBS": "",
-    "SCOOPY Energetic & Fashion": "",
-    "All New Vario 125 CBS": "",
-    "PCX 160 CBS": "",
-    "ADV 160 CBS": ""
-  }
-};
-/* ============================================================ */
-
-const DATA_MOTOR = window.DATA_MOTOR || {};
-const FEATURED_KEYS = ["New BeAT CBS","SCOOPY Energetic & Fashion","All New Vario 125 CBS","PCX 160 CBS","ADV 160 CBS"];
-
-const MODEL_OVERRIDES = {
-  "New BeAT CBS":{tag:"TERLARIS",tagline:"Paling irit untuk harian, cocok pemula",highlights:["Konsumsi BBM sangat irit","Ringan & mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]},
-  "SCOOPY Energetic & Fashion":{tag:"RETRO",tagline:"Gaya retro unik, cocok untuk gaya hidup",highlights:["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]},
-  "All New Vario 125 CBS":{tagline:"Nyaman untuk harian & jarak menengah",highlights:["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]},
-  "PCX 160 CBS":{tag:"PREMIUM",tagline:"Premium untuk jarak jauh",highlights:["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]},
-  "ADV 160 CBS":{tagline:"Gaya adventure, tangguh di segala medan",highlights:["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]}
-};
-
-const CATEGORIES = [
-  { key:"matic", label:"Skutik", icon:"🛵", models:[
-    "New BeAT CBS","New BeAT CBS ISS DELUXE","New BeAT CBS ISS DELUXE SMARTKEY","New BeAT Street",
-    "GENIO CBS","GENIO CBS White & White Red Blue","GENIO CBS ISS",
-    "SCOOPY Energetic & Fashion","SCOOPY Prestige & Stylish",
-    "All New Vario 125 CBS","All New Vario 125 CBS ISS","New Vario 125 Street",
-    "All New Vario 160 CBS","All New Vario 160 CBS ISS SP","All New Vario 160 ABS",
-    "VARIO EVO 160 CBS","VARIO EVO 160 CBS NITRO","VARIO EVO 160 ABS",
-    "PCX 160 CBS","PCX 160 ABS","PCX 160 ABS ROADSYNC",
-    "ADV 160 CBS","ADV 160 ABS","ADV 160 ABS ROADSYNC",
-    "New Stylo 160 CBS","New Stylo 160 ABS","New Stylo 160 ABS SE",
-    "FORZA"
-  ]},
-  { key:"bebek", label:"Bebek", icon:"🏍️", models:[
-    "NEW REVO FIT FI MMC","NEW REVO X",
-    "New Supra X 125 FI SW","New Supra X 125 FI CW",
-    "New Supra GTR 150 Sporty","New Supra GTR 150 Exclusive",
-    "NEW SONIC 150 Standar MMC","SONIC 150 R SE Racing Red & Matte Black"
-  ]},
-  { key:"sport", label:"Sport", icon:"🏁", models:[
-    "CB 150 X SE","CB 150 X STD",
-    "ALL NEW CB 150 R STREETFIRE STD","ALL NEW CB 150 R STREETFIRE SE",
-    "CBR 150 R STD - BK","CBR 150 R STD - MH - RD","CBR 150 R ABS - BK","CBR 150 R ABS - RD",
-    "NEW CBR 250 RR STANDAR BLACK FREEDOM","NEW CBR 250 RR STANDAR MAT GUNPOWDER BLACK METALIC",
-    "NEW CBR 250 RR ABS MYSTIQUE BLUE","NEW CBR 250 RR ABS QS BRAVERY RED BLACK","NEW CBR 250 RR QS RACING RED & TRI-COLOR",
-    "CRF 250 RALLY","CRF 250 L",
-    "CB150 VERZA STD","CB150 VERZA CW"
-  ]},
-  { key:"lifestyle", label:"Lifestyle", icon:"✨", models:[
-    "MONKEY 125","ST 125 DAX","SUPERCUB C125","CT 125"
-  ]},
-  { key:"ev", label:"EV", icon:"⚡", models:[
-    "EM1 e: + Charger","EM1 e Plus: + Charger","CUV eplus: + Charger","ICON E"
-  ]}
-];
-
-const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const formatRp = n => (n === null || n === undefined || isNaN(n)) ? '—' : 'Rp ' + Number(n).toLocaleString('id-ID');
-
-function getAllModelNames(){ return Object.keys(DATA_MOTOR); }
-function getModelData(name){ return DATA_MOTOR[name] || null; }
-function getCategoryOf(name){ return CATEGORIES.find(c => c.models.includes(name)); }
-function getEmojiFor(name){ const c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
-function isBeatSeries(name){ return /beat/i.test(name); }
-
-function getPromoConfig(name){
-  const map = CONFIG.promo.beatSeries.perModel || {};
-  return map[name] || null;
-}
-function getPromoTriggerDp(name){
-  const c = getPromoConfig(name);
-  return c ? c.triggerDp : null;
-}
-function getPromoCicilan(name){
-  const c = getPromoConfig(name);
-  return c ? c.cicilan : null;
-}
-function isPromoAvailable(name){
-  const p = CONFIG.promo.beatSeries;
-  if (!p || p.dp <= 0 || p.tenor <= 0) return false;
-  const c = getPromoConfig(name);
-  if (!c) return false;
-  const model = getModelData(name);
-  if (!model) return false;
-  const opts = getAllDpOptions(model);
-  return opts.includes(c.triggerDp) && c.cicilan > 0;
-}
-
-function getModelMeta(name){
-  const ov = MODEL_OVERRIDES[name] || {};
-  const cat = getCategoryOf(name);
-  return {
-    key:name, name:name, emoji:getEmojiFor(name),
-    category: cat ? cat.key : '',
-    tag: ov.tag || null,
-    tagline: ov.tagline || (cat ? 'Honda ' + name : 'Cek harga OTR & simulasi kredit'),
-    description: ov.description || `Motor Honda ${name}. Harga OTR terbaru dan simulasi kredit FIFGROUP tersedia.`,
-    highlights: ov.highlights || ['Harga OTR terbaru','Simulasi kredit tersedia','Konsultasi via WhatsApp','Sales resmi Honda']
-  };
-}
-
-function getAllDpOptions(model){ return Object.keys(model.tabel).map(Number).sort((a,b)=>a-b); }
-function getSliderDpOptions(model){ return getAllDpOptions(model); }
-
-function getDefaultDp(name){
-  const model = getModelData(name);
-  if (!model) return null;
-  const opts = getSliderDpOptions(model);
-  if (!opts.length) return null;
-  const triggerDp = getPromoTriggerDp(name);
-  if (triggerDp !== null && opts.includes(triggerDp)) return triggerDp;
-  const target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
-  return opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
-}
-
-function getCicilanHeader(name){
-  const model = getModelData(name);
-  if (!model) return null;
-  const opts = getSliderDpOptions(model);
-  if (!opts.length) return null;
-
-  const triggerDp = getPromoTriggerDp(name);
-  if (triggerDp !== null && opts.includes(triggerDp)) {
-    const tbl = model.tabel[String(triggerDp)];
-    const t35 = tbl && tbl[35];
-    if (t35) return { dp: triggerDp, tenor: 35, cicilan: t35 };
-  }
-
-  const target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
-  const dpClose = opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
-  const tbl = model.tabel[String(dpClose)];
-  if (!tbl) return null;
-  const tenors = Object.keys(tbl).map(Number).sort((a,b)=>b-a);
-  if (!tenors.length) return null;
-  const t = tbl[35] ? 35 : tenors[0];
-  return { dp: dpClose, tenor: t, cicilan: tbl[String(t)] };
-}
-
-function getTenors(model, dp){
-  const t = model.tabel[String(dp)];
-  if (!t) return [];
-  return Object.keys(t).map(Number).sort((a,b)=>a-b);
-}
-function getImageForModel(name){ return CONFIG.images[name] || ''; }
-function imgTag(src, alt){ if (!src) return ''; return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`; }
-
-/* ============================================================
-   STATE & DOM REFS
-   ============================================================ */
-const NAV_DURATION = 400;
-const app = document.getElementById('app');
-const floatWa = document.getElementById('floatWa');
-const stack = [];
-let animating = false;
-let pendingKreditModel = null;
-let pendingSheetModel = null;
-
-const stokFilter = { q: '', cat: 'all' };
-const kreditFilter = { q: '', cat: 'all' };
-
-/* ============================================================
-   HELPERS
-   ============================================================ */
-const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
-
-function openWa(msg, btnEl){
-  if (btnEl && btnEl.classList.contains('is-loading')) return;
-  if (btnEl) {
-    btnEl.classList.add('is-loading');
-    setTimeout(() => btnEl.classList.remove('is-loading'), 700);
-  }
-  const url = waLink(msg);
-  const win = window.open(url, '_blank', 'noopener');
-  if (!win) window.location.href = url;
-}
-
-function updateFloatWa(screen){
-  if (!floatWa || !screen) return;
-  const hero = screen.querySelector('.hero');
-  if (!hero) { floatWa.classList.remove('is-hidden'); return; }
-  const heroBottom = hero.getBoundingClientRect().bottom;
-  if (heroBottom > 20) floatWa.classList.add('is-hidden');
-  else floatWa.classList.remove('is-hidden');
-}
-
-function setupStickyHeads(screen){
-  const heads = screen.querySelectorAll('.section-head');
-  if (!heads.length) return;
-  const onScroll = () => {
-    if (!screen.classList.contains('is-active')) return;
-    heads.forEach(head => {
-      const rect = head.getBoundingClientRect();
-      head.classList.toggle('is-stuck', rect.top <= 1 && rect.top >= -1);
-    });
-  };
-  screen.addEventListener('scroll', onScroll, { passive: true });
-  screen._stickyOnScroll = onScroll;
-}
-
-function expandKreditModel(screenEl, name){
-  const card = screenEl.querySelector(`[data-kredit-card="${CSS.escape(name)}"]`);
-  if (!card) return;
-  screenEl.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
-  card.classList.add('open');
-  setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-}
-
-function openActionSheet(name){
-  const data = getModelData(name);
-  if (!data) return;
-  pendingSheetModel = name;
-  document.getElementById('sheetTitle').textContent = name;
-  document.getElementById('sheetSub').textContent = 'OTR ' + formatRp(data.harga);
-  document.getElementById('sheetBackdrop').classList.add('is-open');
-  document.getElementById('actionSheet').classList.add('is-open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeActionSheet(){
-  document.getElementById('sheetBackdrop').classList.remove('is-open');
-  document.getElementById('actionSheet').classList.remove('is-open');
-  document.body.style.overflow = '';
-  pendingSheetModel = null;
-}
-
-function updateKonsultasiBtn(card){
-  const btn = card.querySelector('[data-konsultasi]');
-  if (!btn) return;
-  const name = btn.dataset.konsultasi;
-  const isPromo = card.classList.contains('promo-active');
-  const selDp = card.dataset.selDp;
-  const selTenor = card.dataset.selTenor;
-  const selCicilan = card.dataset.selCicilan;
-
-  btn.classList.remove('has-selection', 'promo-ready');
-
-  if (isPromo) {
-    const p = CONFIG.promo.beatSeries;
-    const cicilan = getPromoCicilan(name);
-    btn.innerHTML = `⚡ Ambil Promo · ${formatRp(cicilan)}/bln · ${p.tenor} bln`;
-    btn.classList.add('promo-ready');
-    return;
-  }
-
-  if (selTenor && selCicilan && selDp) {
-    btn.innerHTML = `✅ Ajukan Pilihan · ${formatRp(+selCicilan)}/bln · ${selTenor} bln`;
-    btn.classList.add('has-selection');
-    return;
-  }
-
-  btn.innerHTML = `💬 Konsultasi Kredit`;
-}
-
-function resetSelection(card){
-  if (!card) return;
-  card.dataset.selDp = '';
-  card.dataset.selTenor = '';
-  card.dataset.selCicilan = '';
-  card.querySelectorAll('.tenor-row.is-selected').forEach(r => r.classList.remove('is-selected'));
-  updateKonsultasiBtn(card);
-}
-
-function buildKonsultasiMsg(card){
-  const btn = card.querySelector('[data-konsultasi]');
-  if (!btn) return CONFIG.defaultMessage;
-  const name = btn.dataset.konsultasi;
-  const isPromo = card.classList.contains('promo-active');
-
-  if (isPromo) {
-    const p = CONFIG.promo.beatSeries;
-    const cicilan = getPromoCicilan(name);
-    return `Halo Dion, saya dari TikTok. Mau ambil PROMO ${name}: DP ${formatRp(p.dp)}, tenor ${p.tenor} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
-  }
-
-  const selDp = card.dataset.selDp;
-  const selTenor = card.dataset.selTenor;
-  const selCicilan = card.dataset.selCicilan;
-
-  if (selTenor && selCicilan && selDp) {
-    return `Halo Dion, saya dari TikTok. Mau kredit ${name} dengan DP ${formatRp(+selDp)}, tenor ${selTenor} bulan, cicilan ${formatRp(+selCicilan)}/bulan.`;
-  }
-
-  return `Halo Dion, saya dari TikTok. Mau konsultasi kredit ${name}.`;
-}
-
-/* ============================================================
-   RENDER — HERO & HOME
-   ============================================================ */
-function renderHero(){
-  const initial = (CONFIG.salesName || 'S').trim().charAt(0).toUpperCase();
-  return `
-    <header class="hero anim-in">
-      <div class="wrap">
-        <div class="hero-top">
-          <div class="hero-profile">
-            <div class="profile-avatar">
-              ${imgTag(CONFIG.images.profil, CONFIG.salesName)}
-              <span>${esc(initial)}</span>
-            </div>
-            <div class="profile-info">
-              <strong>${esc(CONFIG.salesName)}</strong>
-              <span>${esc(CONFIG.salesRole)}</span>
-            </div>
-          </div>
-          <div class="badge"><span class="dot"></span> Online</div>
-        </div>
-        <h1>Sales Resmi Honda Bandung</h1>
-        <p>Harga OTR & simulasi kredit FIFGROUP. Tanya stok, kredit, atau test ride via WhatsApp.</p>
-        <a class="hero-cta" data-msg="${esc(CONFIG.defaultMessage)}">💬 Chat WhatsApp</a>
-      </div>
-    </header>
-  `;
-}
-
-function renderSocials(){
-  const s = CONFIG.socials;
-  const items = [
-    { cls:'social-tiktok', url: s.tiktok ? 'https://tiktok.com/@' + s.tiktok : '',
-      label: s.tiktok ? '@' + s.tiktok : 'TikTok',
-      icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 7.32a4.86 4.86 0 0 1-3.6-1.66v7.62a5.6 5.6 0 1 1-5.6-5.6c.19 0 .37.01.55.03v2.9a2.7 2.7 0 1 0 1.9 2.59V2h2.9a4.86 4.86 0 0 0 4.85 4.7v.62Z"/></svg>' },
-    { cls:'social-ig', url: s.ig ? 'https://instagram.com/' + s.ig : '',
-      label: s.ig ? '@' + s.ig : 'Instagram',
-      icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.8c-3.15 0-3.5.01-4.73.07-1.14.05-1.76.24-2.17.4a2.4 2.4 0 0 0-.87.58 2.4 2.4 0 0 0-.58.87c-.16.41-.35 1.03-.4 2.17-.06 1.23-.07 1.58-.07 4.73s.01 3.5.07 4.73c.05 1.14.24 1.76.4 2.17.14.36.34.66.58.87.21.24.51.44.87.58.41.16 1.03.35 2.17.4 1.23.06 1.58.07 4.73.07s3.5-.01 4.73-.07c1.14-.05 1.76-.24 2.17-.4.36-.14.66-.34.87-.58.24-.21.44-.51.58-.87.16-.41.35-1.03.4-2.17.06-1.23.07-1.58.07-4.73s-.01-3.5-.07-4.73c-.05-1.14-.24-1.76-.4-2.17a2.4 2.4 0 0 0-.58-.87 2.4 2.4 0 0 0-.87-.58c-.41-.16-1.03-.35-2.17-.4-1.23-.06-1.58-.07-4.73-.07Zm0 3.06a4.98 4.98 0 1 1 0 9.96 4.98 4.98 0 0 1 0-9.96Zm0 1.8a3.18 3.18 0 1 0 0 6.36 3.18 3.18 0 0 0 0-6.36Zm5.16-2.2a1.16 1.16 0 1 1 0 2.32 1.16 1.16 0 0 1 0-2.32Z"/></svg>' },
-    { cls:'social-yt', url: s.youtube ? 'https://youtube.com/@' + s.youtube : '',
-      label: s.youtube ? '@' + s.youtube : 'YouTube',
-      icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.13C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.4.52A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.13c1.9.52 9.4.52 9.4.52s7.5 0 9.4-.52a3 3 0 0 0 2.1-2.13A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg>' }
-  ];
-  return `
-    <div class="socials anim-in">
-      ${items.map(it => `
-        <a class="social ${it.cls}" ${it.url ? `href="${esc(it.url)}" target="_blank" rel="noopener"` : ''}>
-          <div class="social-icon">${it.icon}</div>
-          <span>${esc(it.label)}</span>
-        </a>
-      `).join('')}
-    </div>
-  `;
-}
-
-function renderFeaturedCards(){
-  return FEATURED_KEYS.map(name => {
-    const data = getModelData(name);
-    if (!data) return '';
-    const meta = getModelMeta(name);
-    const tagCls = meta.tag === 'PREMIUM' ? ' tag-dark' : '';
-    return `
-      <a class="model" data-nav="/model/${esc(name)}">
-        <div class="model-img">
-          ${imgTag(getImageForModel(name), name)}
-          ${meta.tag ? `<span class="tag${tagCls}">${meta.tag}</span>` : ''}
-          <span>${meta.emoji}</span>
-        </div>
-        <div class="model-body">
-          <h3>${esc(name)}</h3>
-          <p>${esc(meta.tagline)}</p>
-          <div class="model-price">OTR ${formatRp(data.harga)}</div>
-          <span class="model-btn">Lihat Detail →</span>
-        </div>
-      </a>
-    `;
-  }).join('');
-}
-
-function renderHome(){
-  return `
-    ${renderHero()}
-    <main class="wrap">
-      ${renderSocials()}
-      <section class="anim-in">
-        <div class="section-head">
-          <h2 class="section-title">Pilih Kebutuhanmu</h2>
-          <p class="section-sub">Cek harga OTR & stok, atau simulasi kredit.</p>
-        </div>
-        <div class="actions">
-          <a class="action" data-nav="/stok">
-            <div class="action-ico">🏍️</div>
-            <div class="action-body"><strong>Tanya Stok & Harga</strong><span>${getAllModelNames().length} model Honda</span></div>
-            <div class="action-arrow">›</div>
-          </a>
-          <a class="action" data-nav="/kredit">
-            <div class="action-ico">💰</div>
-            <div class="action-body"><strong>Simulasi Kredit</strong><span>DP & cicilan FIFGROUP</span></div>
-            <div class="action-arrow">›</div>
-          </a>
-        </div>
-      </section>
-      <section class="anim-in">
-        <div class="section-head">
-          <h2 class="section-title">Model Favorit</h2>
-          <p class="section-sub">Klik model untuk lihat detail & harga.</p>
-        </div>
-        <div class="models">${renderFeaturedCards()}</div>
-      </section>
-      <section class="anim-in">
-        <div class="section-head">
-          <h2 class="section-title">Kenapa Beli dari Saya?</h2>
-          <p class="section-sub">Bukan calo. Sales resmi, proses transparan.</p>
-        </div>
-        <div class="trust">
-          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Unit ready & bisa dilihat</strong><span>Stok fisik tersedia, bisa cek langsung sebelum beli.</span></div></div>
-          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Bantu proses kredit</strong><span>Dibantu sampai disetujui, tanpa biaya tersembunyi.</span></div></div>
-          <div class="trust-item"><div class="trust-ico">✓</div><div><strong>Sales resmi Honda</strong><span>Bukan perantara. Legal, aman, dan terpercaya.</span></div></div>
-        </div>
-      </section>
-      <section class="anim-in">
-        <div class="terms">
-          <h3>Syarat & Ketentuan</h3>
-          <p>Harga OTR dan simulasi kredit bersifat estimasi berdasarkan pricelist FIFGROUP, dapat berubah sewaktu-waktu tanpa pemberitahuan. Cicilan belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>
-        </div>
-      </section>
-    </main>
-    <footer>© ${new Date().getFullYear()} ${esc(CONFIG.brand)} · ${esc(CONFIG.salesName)}</footer>
-  `;
-}
-
-/* ============================================================
-   DETAIL MODEL
-   ============================================================ */
-function renderBackHeader(title){
-  return `
-    <header class="detail-header anim-in">
-      <button class="back-btn" data-back aria-label="Kembali">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </button>
-      <span class="detail-title">${esc(title)}</span>
-      <div style="width:42px;flex-shrink:0"></div>
-    </header>
-  `;
-}
-
-function renderHargaCard(name){
-  const data = getModelData(name);
-  if (!data) return '';
-  const cicilanHeader = getCicilanHeader(name);
-  return `
-    <div class="harga-card anim-in">
-      <div class="harga-section">
-        <div class="harga-label">Harga OTR</div>
-        <div class="harga-value">${formatRp(data.harga)}</div>
-      </div>
-      ${cicilanHeader ? `
-        <div class="harga-section">
-          <div class="harga-label">Cicilan Mulai</div>
-          <div class="harga-value">${formatRp(cicilanHeader.cicilan)}<small>/bln</small></div>
-          <div class="harga-note">Tenor ${cicilanHeader.tenor} bulan · DP ${formatRp(cicilanHeader.dp)}</div>
-        </div>
-      ` : ''}
-      <a class="harga-cta" data-nav="/kredit" data-expand-kredit="${esc(name)}">
-        Lihat Semua Simulasi Kredit →
-      </a>
-    </div>
-  `;
-}
-
-function renderModelDetail(name){
-  const data = getModelData(name);
-  if (!data) return renderNotFound();
-  const meta = getModelMeta(name);
-  return `
-    ${renderBackHeader(name)}
-    <div class="model-hero anim-in">
-      ${imgTag(getImageForModel(name), name)}
-      ${meta.tag ? `<span class="tag${meta.tag === 'PREMIUM' ? ' tag-dark' : ''}">${meta.tag}</span>` : ''}
-      <span>${meta.emoji}</span>
-    </div>
-    <div class="wrap" style="padding-top:26px">
-      <h2 class="detail-h2 anim-in">${esc(name)}</h2>
-      <p class="detail-tagline anim-in">${esc(meta.tagline)}</p>
-      <p class="detail-desc anim-in">${esc(meta.description)}</p>
-      ${renderHargaCard(name)}
-      <div class="anim-in">
-        <h3 class="detail-h3">Keunggulan</h3>
-        <ul class="highlights">${meta.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
-      </div>
-      <div class="cta-block anim-in">
-        <a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok & harga ${esc(name)}.">💬 Tanya Stok & Harga</a>
-      </div>
-    </div>
-  `;
-}
-
-/* ============================================================
-   STOK
-   ============================================================ */
-function filterModelsByState(f){
-  let names = getAllModelNames();
-  if (f.cat !== 'all') {
-    const cat = CATEGORIES.find(c => c.key === f.cat);
-    if (cat) names = names.filter(n => cat.models.includes(n));
-  }
-  if (f.q) { const q = f.q.toLowerCase(); names = names.filter(n => n.toLowerCase().includes(q)); }
-  return names;
-}
-
-function renderFilterBar(f, prefix){
-  return `
-    <div class="filter-bar">
-      <div class="search-wrap">
-        <input type="search" class="search-input" data-search="${prefix}"
-               placeholder="Cari model... (mis. Beat, Vario, PCX)"
-               value="${esc(f.q)}" autocomplete="off">
-      </div>
-      <div class="cat-tabs">
-        <button class="cat-chip${f.cat === 'all' ? ' is-active' : ''}" data-cat="${prefix}:all">Semua</button>
-        ${CATEGORIES.map(c => `
-          <button class="cat-chip${f.cat === c.key ? ' is-active' : ''}" data-cat="${prefix}:${c.key}">${esc(c.label)}</button>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderStokList(){
-  const names = filterModelsByState(stokFilter);
-  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
-  return names.map(name => {
-    const data = getModelData(name);
-    if (!data) return '';
-    const meta = getModelMeta(name);
-    return `
-      <a class="stok-item" href="#" data-model="${esc(name)}">
-        <div class="stok-item-emoji">${meta.emoji}</div>
-        <div class="stok-item-info">
-          <strong>${esc(name)}</strong>
-          <span>OTR ${formatRp(data.harga)}</span>
-        </div>
-        <div class="stok-item-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </div>
-      </a>
-    `;
-  }).join('');
-}
-
-function renderStok(){
-  return `
-    ${renderBackHeader('Stok & Harga')}
-    <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Daftar harga OTR semua model Honda. Tap model untuk pilih cash atau kredit.</p>
-      ${renderFilterBar(stokFilter, 'stok')}
-      <div id="stok-list-container" class="anim-in">${renderStokList()}</div>
-    </div>
-  `;
-}
-
-/* ============================================================
-   KREDIT
-   ============================================================ */
-function renderTenorRows(name, dp){
-  const data = getModelData(name);
-  if (!data) return '';
-  const tenors = getTenors(data, dp);
-  const tbl = data.tabel[String(dp)] || {};
-  return tenors.map(t => {
-    const cicilan = tbl[t];
-    return `
-      <button class="tenor-row" type="button"
-              data-dp="${dp}" data-tenor="${t}" data-cicilan="${cicilan}"
-              aria-pressed="false">
-        <div class="tenor-dur">${t} bulan</div>
-        <div class="tenor-cicilan">${formatRp(cicilan)}<small>/bln</small></div>
-        <div class="tenor-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </div>
-      </button>
-    `;
-  }).join('');
-}
-
-function renderDpSlider(name, currentDp){
-  const data = getModelData(name);
-  if (!data) return '';
-  const opts = getSliderDpOptions(data);
-  if (!opts.length) return '';
-  const idx = Math.max(0, opts.indexOf(currentDp));
-  const minDp = opts[0];
-  const maxDp = opts[opts.length - 1];
-  const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
-
-  const triggerDp = getPromoTriggerDp(name);
-  const isAtTrigger = triggerDp !== null && opts[idx] === triggerDp;
-  const hasPromo = isBeatSeries(name) && isPromoAvailable(name);
-  const p = CONFIG.promo.beatSeries;
-
-  return `
-    <div class="dp-slider-wrap" data-dp-wrap="${esc(name)}">
-      <div class="dp-display">
-        <div>
-          <span class="dp-display-label">DP Dipilih</span>
-          <span class="dp-display-sub" data-dp-sub>Geser untuk ubah DP</span>
-        </div>
-        <span class="dp-display-value" data-dp-value>${formatRp(opts[idx])}</span>
-      </div>
-      <input type="range" class="dp-slider"
-             data-model="${esc(name)}"
-             min="0" max="${opts.length - 1}" value="${idx}" step="1"
-             style="--pct: ${pct}%"
-             aria-label="Geser untuk atur DP">
-      <div class="dp-slider-labels">
-        <span>${formatRp(minDp)}</span>
-        <span>${formatRp(maxDp)}</span>
-      </div>
-      <div class="dp-note">Belum termasuk diskon & potongan tenor</div>
-      ${hasPromo ? `
-        <div class="promo-container${isAtTrigger ? ' is-visible' : ''}" data-promo-container="${esc(name)}">
-          <div class="promo-divider">atau</div>
-          <button class="promo-btn" data-promo-toggle="${esc(name)}" type="button">
-            ⚡ Coba DP Promo ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
-          </button>
-        </div>
-      ` : ''}
-    </div>
-  `;
-}
-
-function renderPromoView(name){
-  if (!isBeatSeries(name)) return '';
-  if (!isPromoAvailable(name)) return '';
-  const p = CONFIG.promo.beatSeries;
-  const cicilan = getPromoCicilan(name);
-  return `
-    <div class="promo-view">
-      <div class="promo-banner">
-        <div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>
-        <div class="promo-banner-value">${formatRp(cicilan)}<small>/bln</small></div>
-        <div class="promo-banner-meta">
-          DP ${formatRp(p.dp)} · Tenor ${p.tenor} bulan
-        </div>
-        <div class="promo-banner-note">
-          Cicilan promo belum termasuk diskon & potongan tenor. Ketuk tombol di bawah untuk konfirmasi via WhatsApp.
-        </div>
-        <button class="promo-banner-back" data-promo-toggle="${esc(name)}" type="button">
-          ← Kembali ke DP Normal
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-function renderKreditCardsList(){
-  const names = filterModelsByState(kreditFilter);
-  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
-  return names.map(name => {
-    const data = getModelData(name);
-    if (!data) return '';
-    const meta = getModelMeta(name);
-    const cicilanHeader = getCicilanHeader(name);
-    const defaultDp = getDefaultDp(name);
-    return `
-      <div class="kredit-card" data-kredit-card="${esc(name)}"
-           data-sel-dp="" data-sel-tenor="" data-sel-cicilan="">
-        <button class="kredit-head" data-toggle-kredit="${esc(name)}" type="button">
-          <div class="kredit-emoji">${meta.emoji}</div>
-          <div class="kredit-info">
-            <strong>${esc(name)}</strong>
-            ${cicilanHeader
-              ? `<span class="kredit-mulai">Mulai ${formatRp(cicilanHeader.cicilan)}/bln</span>`
-              : `<span class="kredit-mulai" style="color:var(--label-3)">Belum tersedia</span>`}
-            <span class="kredit-otr">OTR ${formatRp(data.harga)}</span>
-          </div>
-          <div class="kredit-chevron">›</div>
-        </button>
-        <div class="kredit-detail">
-          <div class="kredit-detail-inner">
-            <div class="kredit-body">
-              <div class="kredit-body-inner">
-                ${renderDpSlider(name, defaultDp)}
-                ${renderPromoView(name)}
-                <div class="tenor-list" data-tenor-list="${esc(name)}">
-                  ${renderTenorRows(name, defaultDp)}
-                </div>
-                <button class="wa-btn" type="button" data-konsultasi="${esc(name)}">
-                  💬 Konsultasi Kredit
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function renderKredit(){
-  return `
-    ${renderBackHeader('Simulasi Kredit')}
-    <div class="wrap" style="padding-top:8px">
-      <p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model & atur DP. Tap tenor untuk pilih cicilan, lalu kirim via WhatsApp. Angka dari pricelist FIFGROUP.</p>
-      ${renderFilterBar(kreditFilter, 'kredit')}
-      <div id="kredit-list-container" class="anim-in">${renderKreditCardsList()}</div>
-    </div>
-  `;
-}
-
-function renderNotFound(){
-  return `
-    ${renderBackHeader('Tidak Ditemukan')}
-    <div class="not-found">
-      <h2>Halaman tidak ditemukan</h2>
-      <p>Halaman yang Anda cari tidak tersedia.</p>
-      <a class="wa-btn" data-back>← Kembali</a>
-    </div>
-  `;
-}
-
-/* ============================================================
-   ROUTER
-   ============================================================ */
-function renderRoute(route){
-  if (!route || route === '/') return renderHome();
-  if (route.startsWith('/model/')) return renderModelDetail(route.slice(7));
-  if (route === '/stok') return renderStok();
-  if (route === '/kredit') return renderKredit();
-  return renderNotFound();
-}
-
-function routeToHash(route){
-  if (route.startsWith('/model/')) return '/model/' + encodeURIComponent(route.slice(7));
-  return route || '/';
-}
-
-function hashToRoute(hash){
-  let path = hash.startsWith('#') ? hash.slice(1) : hash;
-  if (!path) return '/';
-  if (path.startsWith('/model/')) {
-    const raw = path.slice(7);
-    try { return '/model/' + decodeURIComponent(raw); }
-    catch (e) { return '/model/' + raw; }
-  }
-  return path;
-}
-
-/* ============================================================
-   NAVIGATION ENGINE
-   ============================================================ */
-function makeScreen(route){
-  const el = document.createElement('section');
-  el.className = 'screen';
-  el.dataset.route = route;
-  el.innerHTML = renderRoute(route);
-  const onScroll = () => { if (!el.classList.contains('is-active')) return; updateFloatWa(el); };
-  el.addEventListener('scroll', onScroll, { passive: true });
-  el._onScroll = onScroll;
-  setupStickyHeads(el);
-  return el;
-}
-
-function pushScreen(route, animate){
-  if (animate && animating) return;
-  const current = stack[stack.length - 1];
-  const el = makeScreen(route);
-  app.appendChild(el);
-
-  const afterActivate = () => {
-    animating = false;
-    updateFloatWa(el);
-    if (pendingKreditModel && route === '/kredit') {
-      const target = pendingKreditModel;
-      pendingKreditModel = null;
-      setTimeout(() => expandKreditModel(el, target), 120);
-    }
-  };
-
-  if (animate && current) {
-    animating = true;
-    void el.offsetWidth;
-    current.classList.remove('is-active');
-    current.classList.add('is-behind');
-    el.classList.add('is-active');
-    setTimeout(afterActivate, NAV_DURATION);
-  } else if (animate) {
-    animating = true;
-    el.classList.add('is-active');
-    setTimeout(afterActivate, NAV_DURATION);
-  } else {
-    el.classList.add('no-transition', 'is-active');
-    if (current) {
-      current.classList.add('no-transition');
-      current.classList.remove('is-active');
-      current.classList.add('is-behind');
-    }
-    requestAnimationFrame(() => {
-      el.classList.remove('no-transition');
-      if (current) current.classList.remove('no-transition');
-      afterActivate();
-    });
-  }
-  stack.push(el);
-}
-
-function popScreen(animate){
-  if (animate && animating) return;
-  if (stack.length <= 1) return;
-  const current = stack.pop();
-  const prev = stack[stack.length - 1];
-
-  if (animate) {
-    animating = true;
-    current.classList.remove('is-active');
-    prev.classList.remove('is-behind');
-    prev.classList.add('is-active');
-    setTimeout(() => {
-      if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
-      current.remove();
-      animating = false;
-      updateFloatWa(prev);
-    }, NAV_DURATION);
-  } else {
-    if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
-    current.remove();
-    prev.classList.remove('is-behind');
-    prev.classList.add('is-active');
-    updateFloatWa(prev);
-  }
-}
-
-function popTo(index){
-  if (index < 0 || index >= stack.length - 1) return;
-  while (stack.length - 1 > index + 1) {
-    const s = stack.pop();
-    if (s._onScroll) s.removeEventListener('scroll', s._onScroll);
-    s.remove();
-  }
-  popScreen(true);
-}
-
-function navigate(route){
-  if (animating) return;
-  const current = stack[stack.length - 1];
-  if (current && current.dataset.route === route) return;
-  history.pushState({ index: stack.length, route }, '', '#' + routeToHash(route));
-  pushScreen(route, true);
-}
-
-function goBack(){
-  if (stack.length > 1) {
-    history.back();
-  } else {
-    const current = stack[0];
-    if (current && current.dataset.route !== '/') {
-      history.replaceState({ index: 0, route: '/' }, '', '#/');
-      const home = makeScreen('/');
-      app.appendChild(home);
-      home.classList.add('no-transition', 'is-active');
-      current.classList.add('no-transition');
-      current.classList.remove('is-active');
-      current.classList.add('is-behind');
-      requestAnimationFrame(() => {
-        home.classList.remove('no-transition');
-        current.classList.remove('no-transition');
-        updateFloatWa(home);
+    var MOTOR_DATA = readMotorData();
+
+    var FEATURED_KEYS = ["New BeAT CBS","SCOOPY Energetic & Fashion","All New Vario 125 CBS","PCX 160 CBS","ADV 160 CBS"];
+
+    var MODEL_OVERRIDES = {
+      "New BeAT CBS":{tag:"TERLARIS",tagline:"Paling irit untuk harian, cocok pemula",highlights:["Konsumsi BBM sangat irit","Ringan & mudah dikendarai","Biaya perawatan terjangkau","Cocok untuk pemula"]},
+      "SCOOPY Energetic & Fashion":{tag:"RETRO",tagline:"Gaya retro unik, cocok untuk gaya hidup",highlights:["Desain retro stylish","Irit bahan bakar","Ringan & mudah dikendarai","Cocok untuk gaya hidup"]},
+      "All New Vario 125 CBS":{tagline:"Nyaman untuk harian & jarak menengah",highlights:["Bagasi luas","Posisi berkendara nyaman","Mesin bertenaga","Desain premium"]},
+      "PCX 160 CBS":{tag:"PREMIUM",tagline:"Premium untuk jarak jauh",highlights:["Fitur lengkap & modern","Nyaman untuk touring","Desain elegan","Performa bertenaga"]},
+      "ADV 160 CBS":{tagline:"Gaya adventure, tangguh di segala medan",highlights:["Desain adventure","Tangguh di segala medan","Posisi berkendara tegak","Performa bertenaga"]}
+    };
+
+    var CATEGORIES = [
+      { key:"matic", label:"Skutik", icon:"🛵", models:[
+        "New BeAT CBS","New BeAT CBS ISS DELUXE","New BeAT CBS ISS DELUXE SMARTKEY","New BeAT Street",
+        "GENIO CBS","GENIO CBS White & White Red Blue","GENIO CBS ISS",
+        "SCOOPY Energetic & Fashion","SCOOPY Prestige & Stylish",
+        "All New Vario 125 CBS","All New Vario 125 CBS ISS","New Vario 125 Street",
+        "All New Vario 160 CBS","All New Vario 160 CBS ISS SP","All New Vario 160 ABS",
+        "VARIO EVO 160 CBS","VARIO EVO 160 CBS NITRO","VARIO EVO 160 ABS",
+        "PCX 160 CBS","PCX 160 ABS","PCX 160 ABS ROADSYNC",
+        "ADV 160 CBS","ADV 160 ABS","ADV 160 ABS ROADSYNC",
+        "New Stylo 160 CBS","New Stylo 160 ABS","New Stylo 160 ABS SE",
+        "FORZA"
+      ]},
+      { key:"bebek", label:"Bebek", icon:"🏍️", models:[
+        "NEW REVO FIT FI MMC","NEW REVO X",
+        "New Supra X 125 FI SW","New Supra X 125 FI CW",
+        "New Supra GTR 150 Sporty","New Supra GTR 150 Exclusive",
+        "NEW SONIC 150 Standar MMC","SONIC 150 R SE Racing Red & Matte Black"
+      ]},
+      { key:"sport", label:"Sport", icon:"🏁", models:[
+        "CB 150 X SE","CB 150 X STD",
+        "ALL NEW CB 150 R STREETFIRE STD","ALL NEW CB 150 R STREETFIRE SE",
+        "CBR 150 R STD - BK","CBR 150 R STD - MH - RD","CBR 150 R ABS - BK","CBR 150 R ABS - RD",
+        "NEW CBR 250 RR STANDAR BLACK FREEDOM","NEW CBR 250 RR STANDAR MAT GUNPOWDER BLACK METALIC",
+        "NEW CBR 250 RR ABS MYSTIQUE BLUE","NEW CBR 250 RR ABS QS BRAVERY RED BLACK","NEW CBR 250 RR QS RACING RED & TRI-COLOR",
+        "CRF 250 RALLY","CRF 250 L",
+        "CB150 VERZA STD","CB150 VERZA CW"
+      ]},
+      { key:"lifestyle", label:"Lifestyle", icon:"✨", models:[
+        "MONKEY 125","ST 125 DAX","SUPERCUB C125","CT 125"
+      ]},
+      { key:"ev", label:"EV", icon:"⚡", models:[
+        "EM1 e: + Charger","EM1 e Plus: + Charger","CUV eplus: + Charger","ICON E"
+      ]}
+    ];
+
+    /* ============================================================
+       UTIL
+       ============================================================ */
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
       });
-      stack.length = 0;
-      stack.push(home);
-      if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
-      current.remove();
     }
-  }
-}
+    function formatRp(n) {
+      if (n === null || n === undefined || isNaN(n)) return '—';
+      return 'Rp ' + Number(n).toLocaleString('id-ID');
+    }
+    function imgTag(src, alt) {
+      if (!src) return '';
+      return '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" onerror="this.remove()">';
+    }
 
-function refreshActiveList(prefix){
-  const screen = stack[stack.length - 1];
-  if (!screen) return;
-  if (prefix === 'stok') {
-    const c = screen.querySelector('#stok-list-container');
-    if (c) c.innerHTML = renderStokList();
-  } else if (prefix === 'kredit') {
-    const c = screen.querySelector('#kredit-list-container');
-    if (c) c.innerHTML = renderKreditCardsList();
-  }
-}
+    /* ============================================================
+       DATA HELPERS
+       ============================================================ */
+    function getAllModelNames(){ return Object.keys(MOTOR_DATA); }
+    function getModelData(name){ return MOTOR_DATA[name] || null; }
 
-/* ============================================================
-   EVENT HANDLERS
-   ============================================================ */
-function handleSliderInput(slider){
-  const card = slider.closest('.kredit-card');
-  if (!card || card.classList.contains('promo-active')) return;
-  const name = slider.dataset.model;
-  const data = getModelData(name);
-  if (!data) return;
-
-  const opts = getSliderDpOptions(data);
-  const idx = Math.max(0, Math.min(opts.length - 1, Number(slider.value)));
-  const dp = opts[idx];
-  const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
-
-  slider.style.setProperty('--pct', pct + '%');
-
-  const display = card.querySelector('[data-dp-value]');
-  if (display) display.textContent = formatRp(dp);
-
-  const tenorList = card.querySelector('[data-tenor-list]');
-  if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
-
-  const promoContainer = card.querySelector('[data-promo-container]');
-  if (promoContainer) {
-    const triggerDp = getPromoTriggerDp(name);
-    if (triggerDp !== null && dp === triggerDp) promoContainer.classList.add('is-visible');
-    else promoContainer.classList.remove('is-visible');
-  }
-
-  resetSelection(card);
-}
-
-function handleSearchInput(input){
-  const prefix = input.dataset.search;
-  const val = input.value;
-  if (prefix === 'stok') stokFilter.q = val;
-  else if (prefix === 'kredit') kreditFilter.q = val;
-  else return;
-  refreshActiveList(prefix);
-}
-
-/* --- input / change delegation --- */
-app.addEventListener('input', e => {
-  if (e.target.closest('[data-search]')) { handleSearchInput(e.target); return; }
-  if (e.target.classList && e.target.classList.contains('dp-slider')) { handleSliderInput(e.target); return; }
-});
-
-/* --- click delegation --- */
-app.addEventListener('click', e => {
-  if (animating) return;
-
-  /* 1. Tombol kembali */
-  const backEl = e.target.closest('[data-back]');
-  if (backEl) {
-    e.preventDefault();
-    goBack();
-    return;
-  }
-
-  /* 2. Navigasi antar halaman */
-  const navEl = e.target.closest('[data-nav]');
-  if (navEl) {
-    e.preventDefault();
-    if (navEl.dataset.expandKredit) pendingKreditModel = navEl.dataset.expandKredit;
-    navigate(navEl.dataset.nav);
-    return;
-  }
-
-  /* 3. Tombol WhatsApp (data-msg) */
-  const msgEl = e.target.closest('[data-msg]');
-  if (msgEl) {
-    e.preventDefault();
-    openWa(msgEl.dataset.msg, msgEl);
-    return;
-  }
-
-  /* 4. Item stok → action sheet */
-  const stokEl = e.target.closest('.stok-item');
-  if (stokEl) {
-    e.preventDefault();
-    const name = stokEl.dataset.model;
-    if (name) openActionSheet(name);
-    return;
-  }
-
-  /* 5. Buka/tutup kartu kredit */
-  const toggleEl = e.target.closest('[data-toggle-kredit]');
-  if (toggleEl) {
-    e.preventDefault();
-    const card = toggleEl.closest('.kredit-card');
-    if (!card) return;
-    const wasOpen = card.classList.contains('open');
-    const parent = card.parentElement;
-    if (parent) parent.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
-    card.classList.toggle('open', !wasOpen);
-    return;
-  }
-
-  /* 6. Pilih tenor */
-  const tenorEl = e.target.closest('.tenor-row');
-  if (tenorEl) {
-    e.preventDefault();
-    const card = tenorEl.closest('.kredit-card');
-    if (!card || card.classList.contains('promo-active')) return;
-    const dp = tenorEl.dataset.dp;
-    const tenor = tenorEl.dataset.tenor;
-    const cicilan = tenorEl.dataset.cicilan;
-    if (!dp || !tenor || !cicilan) return;
-
-    card.querySelectorAll('.tenor-row').forEach(r => {
-      r.classList.remove('is-selected');
-      r.setAttribute('aria-pressed', 'false');
-    });
-    tenorEl.classList.add('is-selected');
-    tenorEl.setAttribute('aria-pressed', 'true');
-
-    card.dataset.selDp = dp;
-    card.dataset.selTenor = tenor;
-    card.dataset.selCicilan = cicilan;
-
-    updateKonsultasiBtn(card);
-    return;
-  }
-
-  /* 7. Konsultasi via WhatsApp */
-  const konsulEl = e.target.closest('[data-konsultasi]');
-  if (konsulEl) {
-    e.preventDefault();
-    const card = konsulEl.closest('.kredit-card');
-    if (!card) return;
-    openWa(buildKonsultasiMsg(card), konsulEl);
-    return;
-  }
-
-  /* 8. Toggle promo */
-  const promoBtn = e.target.closest('[data-promo-toggle]');
-  if (promoBtn) {
-    e.preventDefault();
-    const name = promoBtn.dataset.promoToggle;
-    const card = promoBtn.closest('.kredit-card');
-    if (!card) return;
-    const data = getModelData(name);
-    if (!data) return;
-    const wasActive = card.classList.contains('promo-active');
-    const p = CONFIG.promo.beatSeries;
-
-    if (!wasActive) {
-      resetSelection(card);
-      card.classList.add('promo-active');
-      const display = card.querySelector('[data-dp-value]');
-      if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9f0a;font-weight:800;margin-left:4px">PROMO</small>`;
-      const sub = card.querySelector('[data-dp-sub]');
-      if (sub) sub.textContent = 'Mode Promo Aktif';
-      updateKonsultasiBtn(card);
-    } else {
-      card.classList.remove('promo-active');
-      const triggerDp = getPromoTriggerDp(name);
-      const opts = getSliderDpOptions(data);
-      const targetDp = (triggerDp !== null && opts.includes(triggerDp)) ? triggerDp : getDefaultDp(name);
-      const targetIdx = opts.indexOf(targetDp);
-      const slider = card.querySelector('.dp-slider');
-      if (slider && targetIdx >= 0) {
-        slider.value = targetIdx;
-        const pct = opts.length > 1 ? (targetIdx / (opts.length - 1)) * 100 : 0;
-        slider.style.setProperty('--pct', pct + '%');
+    function getCategoryOf(name){
+      for (var i = 0; i < CATEGORIES.length; i++) {
+        if (CATEGORIES[i].models.indexOf(name) !== -1) return CATEGORIES[i];
       }
-      const display = card.querySelector('[data-dp-value]');
-      if (display) display.textContent = formatRp(targetDp);
-      const sub = card.querySelector('[data-dp-sub]');
-      if (sub) sub.textContent = 'Geser untuk ubah DP';
-      const tenorList = card.querySelector('[data-tenor-list]');
-      if (tenorList) tenorList.innerHTML = renderTenorRows(name, targetDp);
-      const promoContainer = card.querySelector('[data-promo-container]');
+      return null;
+    }
+    function getEmojiFor(name){ var c = getCategoryOf(name); return c ? c.icon : '🏍️'; }
+    function isBeatSeries(name){ return /beat/i.test(name); }
+
+    function getPromoConfig(name){
+      var map = CONFIG.promo.beatSeries.perModel || {};
+      return map[name] || null;
+    }
+    function getPromoTriggerDp(name){
+      var c = getPromoConfig(name);
+      return c ? c.triggerDp : null;
+    }
+    function getPromoCicilan(name){
+      var c = getPromoConfig(name);
+      return c ? c.cicilan : null;
+    }
+    function isPromoAvailable(name){
+      var p = CONFIG.promo.beatSeries;
+      if (!p || p.dp <= 0 || p.tenor <= 0) return false;
+      var c = getPromoConfig(name);
+      if (!c) return false;
+      var model = getModelData(name);
+      if (!model) return false;
+      var opts = getAllDpOptions(model);
+      return opts.indexOf(c.triggerDp) !== -1 && c.cicilan > 0;
+    }
+
+    function getModelMeta(name){
+      var ov = MODEL_OVERRIDES[name] || {};
+      var cat = getCategoryOf(name);
+      return {
+        key: name, name: name, emoji: getEmojiFor(name),
+        category: cat ? cat.key : '',
+        tag: ov.tag || null,
+        tagline: ov.tagline || (cat ? 'Honda ' + name : 'Cek harga OTR & simulasi kredit'),
+        description: ov.description || ('Motor Honda ' + name + '. Harga OTR terbaru dan simulasi kredit FIFGROUP tersedia.'),
+        highlights: ov.highlights || ['Harga OTR terbaru','Simulasi kredit tersedia','Konsultasi via WhatsApp','Sales resmi Honda']
+      };
+    }
+
+    function getAllDpOptions(model){
+      if (!model || !model.tabel) return [];
+      return Object.keys(model.tabel).map(Number).sort(function(a,b){ return a-b; });
+    }
+    function getSliderDpOptions(model){ return getAllDpOptions(model); }
+
+    function getDefaultDp(name){
+      var model = getModelData(name);
+      if (!model) return null;
+      var opts = getSliderDpOptions(model);
+      if (!opts.length) return null;
+      var triggerDp = getPromoTriggerDp(name);
+      if (triggerDp !== null && opts.indexOf(triggerDp) !== -1) return triggerDp;
+      var target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
+      return opts.reduce(function(best, cur){
+        return Math.abs(cur - target) < Math.abs(best - target) ? cur : best;
+      }, opts[0]);
+    }
+
+    function getCicilanHeader(name){
+      var model = getModelData(name);
+      if (!model) return null;
+      var opts = getSliderDpOptions(model);
+      if (!opts.length) return null;
+
+      var triggerDp = getPromoTriggerDp(name);
+      if (triggerDp !== null && opts.indexOf(triggerDp) !== -1) {
+        var tbl0 = model.tabel[String(triggerDp)];
+        var t35 = tbl0 && tbl0[35];
+        if (t35) return { dp: triggerDp, tenor: 35, cicilan: t35 };
+      }
+
+      var target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
+      var dpClose = opts.reduce(function(best, cur){
+        return Math.abs(cur - target) < Math.abs(best - target) ? cur : best;
+      }, opts[0]);
+      var tbl = model.tabel[String(dpClose)];
+      if (!tbl) return null;
+      var tenors = Object.keys(tbl).map(Number).sort(function(a,b){ return b-a; });
+      if (!tenors.length) return null;
+      var t = tbl[35] ? 35 : tenors[0];
+      return { dp: dpClose, tenor: t, cicilan: tbl[String(t)] };
+    }
+
+    function getTenors(model, dp){
+      if (!model || !model.tabel) return [];
+      var t = model.tabel[String(dp)];
+      if (!t) return [];
+      return Object.keys(t).map(Number).sort(function(a,b){ return a-b; });
+    }
+
+    function getImageForModel(name){ return CONFIG.images[name] || ''; }
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    var app = document.getElementById('app');
+    var floatWa = document.getElementById('floatWa');
+    var NAV_DURATION = 400;
+    var stack = [];
+    var animating = false;
+    var pendingKreditModel = null;
+    var pendingSheetModel = null;
+    var historyOK = false;
+    var stokFilter = { q: '', cat: 'all' };
+    var kreditFilter = { q: '', cat: 'all' };
+
+    /* ============================================================
+       HELPER WA & HISTORY
+       ============================================================ */
+    function waLink(msg){
+      return 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
+    }
+    function openWa(msg, btnEl){
+      if (btnEl && btnEl.classList.contains('is-loading')) return;
+      if (btnEl) {
+        btnEl.classList.add('is-loading');
+        setTimeout(function(){ btnEl.classList.remove('is-loading'); }, 700);
+      }
+      var url = waLink(msg);
+      var win = null;
+      try { win = window.open(url, '_blank', 'noopener'); } catch (e) {}
+      if (!win) { try { window.location.href = url; } catch (e2) {} }
+    }
+
+    function routeToHash(route){
+      if (route.indexOf('/model/') === 0) {
+        return '/model/' + encodeURIComponent(route.slice(7));
+      }
+      return route || '/';
+    }
+    function hashToRoute(hash){
+      var path = hash && hash.charAt(0) === '#' ? hash.slice(1) : (hash || '');
+      if (!path) return '/';
+      if (path.indexOf('/model/') === 0) {
+        var raw = path.slice(7);
+        try { return '/model/' + decodeURIComponent(raw); }
+        catch (e) { return '/model/' + raw; }
+      }
+      return path;
+    }
+    function safePush(route){
+      try {
+        history.pushState({ route: route }, '', '#' + routeToHash(route));
+        historyOK = true;
+      } catch (e) { historyOK = false; }
+    }
+    function safeReplace(route){
+      try {
+        history.replaceState({ route: route }, '', '#' + routeToHash(route));
+        historyOK = true;
+      } catch (e) { historyOK = false; }
+    }
+
+    function updateFloatWa(screen){
+      if (!floatWa || !screen) return;
+      var hero = screen.querySelector('.hero');
+      if (!hero) { floatWa.classList.remove('is-hidden'); return; }
+      var heroBottom = hero.getBoundingClientRect().bottom;
+      if (heroBottom > 20) floatWa.classList.add('is-hidden');
+      else floatWa.classList.remove('is-hidden');
+    }
+
+    function setupStickyHeads(screen){
+      var heads = screen.querySelectorAll('.section-head');
+      if (!heads.length) return;
+      var onScroll = function () {
+        if (!screen.classList.contains('is-active')) return;
+        for (var i = 0; i < heads.length; i++) {
+          var rect = heads[i].getBoundingClientRect();
+          heads[i].classList.toggle('is-stuck', rect.top <= 1 && rect.top >= -1);
+        }
+      };
+      screen.addEventListener('scroll', onScroll, { passive: true });
+      screen._stickyOnScroll = onScroll;
+    }
+
+    function expandKreditModel(screenEl, name){
+      var cards = screenEl.querySelectorAll('[data-kredit-card]');
+      var card = null;
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].getAttribute('data-kredit-card') === name) { card = cards[i]; break; }
+      }
+      if (!card) return;
+      var opened = screenEl.querySelectorAll('.kredit-card.open');
+      for (var j = 0; j < opened.length; j++) { if (opened[j] !== card) opened[j].classList.remove('open'); }
+      card.classList.add('open');
+      setTimeout(function(){ try { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} }, 100);
+    }
+
+    /* ============================================================
+       ACTION SHEET
+       ============================================================ */
+    var sheetBackdrop = document.getElementById('sheetBackdrop');
+    var actionSheet = document.getElementById('actionSheet');
+
+    function openActionSheet(name){
+      var data = getModelData(name);
+      if (!data) return;
+      pendingSheetModel = name;
+      document.getElementById('sheetTitle').textContent = name;
+      document.getElementById('sheetSub').textContent = 'OTR ' + formatRp(data.harga);
+      if (sheetBackdrop) sheetBackdrop.classList.add('is-open');
+      if (actionSheet) actionSheet.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeActionSheet(){
+      if (sheetBackdrop) sheetBackdrop.classList.remove('is-open');
+      if (actionSheet) actionSheet.classList.remove('is-open');
+      document.body.style.overflow = '';
+      pendingSheetModel = null;
+    }
+
+    /* ============================================================
+       KREDIT HELPERS
+       ============================================================ */
+    function updateKonsultasiBtn(card){
+      var btn = card.querySelector('[data-konsultasi]');
+      if (!btn) return;
+      var name = btn.getAttribute('data-konsultasi');
+      var isPromo = card.classList.contains('promo-active');
+      var selDp = card.getAttribute('data-sel-dp');
+      var selTenor = card.getAttribute('data-sel-tenor');
+      var selCicilan = card.getAttribute('data-sel-cicilan');
+
+      btn.classList.remove('has-selection', 'promo-ready');
+
+      if (isPromo) {
+        var p = CONFIG.promo.beatSeries;
+        var cicilan = getPromoCicilan(name);
+        btn.innerHTML = '⚡ Ambil Promo · ' + formatRp(cicilan) + '/bln · ' + p.tenor + ' bln';
+        btn.classList.add('promo-ready');
+        return;
+      }
+      if (selTenor && selCicilan && selDp) {
+        btn.innerHTML = '✅ Ajukan Pilihan · ' + formatRp(+selCicilan) + '/bln · ' + selTenor + ' bln';
+        btn.classList.add('has-selection');
+        return;
+      }
+      btn.innerHTML = '💬 Konsultasi Kredit';
+    }
+
+    function resetSelection(card){
+      if (!card) return;
+      card.setAttribute('data-sel-dp', '');
+      card.setAttribute('data-sel-tenor', '');
+      card.setAttribute('data-sel-cicilan', '');
+      var rows = card.querySelectorAll('.tenor-row.is-selected');
+      for (var i = 0; i < rows.length; i++) rows[i].classList.remove('is-selected');
+      updateKonsultasiBtn(card);
+    }
+
+    function buildKonsultasiMsg(card){
+      var btn = card.querySelector('[data-konsultasi]');
+      if (!btn) return CONFIG.defaultMessage;
+      var name = btn.getAttribute('data-konsultasi');
+      var isPromo = card.classList.contains('promo-active');
+
+      if (isPromo) {
+        var p = CONFIG.promo.beatSeries;
+        var cicilan = getPromoCicilan(name);
+        return 'Halo Dion, saya dari TikTok. Mau ambil PROMO ' + name + ': DP ' + formatRp(p.dp) + ', tenor ' + p.tenor + ' bulan, cicilan ' + formatRp(cicilan) + '/bulan.';
+      }
+      var selDp = card.getAttribute('data-sel-dp');
+      var selTenor = card.getAttribute('data-sel-tenor');
+      var selCicilan = card.getAttribute('data-sel-cicilan');
+      if (selTenor && selCicilan && selDp) {
+        return 'Halo Dion, saya dari TikTok. Mau kredit ' + name + ' dengan DP ' + formatRp(+selDp) + ', tenor ' + selTenor + ' bulan, cicilan ' + formatRp(+selCicilan) + '/bulan.';
+      }
+      return 'Halo Dion, saya dari TikTok. Mau konsultasi kredit ' + name + '.';
+    }
+
+    /* ============================================================
+       RENDER — HOME
+       ============================================================ */
+    function renderHero(){
+      var initial = (CONFIG.salesName || 'S').trim().charAt(0).toUpperCase();
+      return ''
+        + '<header class="hero anim-in">'
+        +   '<div class="wrap">'
+        +     '<div class="hero-top">'
+        +       '<div class="hero-profile">'
+        +         '<div class="profile-avatar">'
+        +           imgTag(CONFIG.images.profil, CONFIG.salesName)
+        +           '<span>' + esc(initial) + '</span>'
+        +         '</div>'
+        +         '<div class="profile-info">'
+        +           '<strong>' + esc(CONFIG.salesName) + '</strong>'
+        +           '<span>' + esc(CONFIG.salesRole) + '</span>'
+        +         '</div>'
+        +       '</div>'
+        +       '<div class="badge"><span class="dot"></span> Online</div>'
+        +     '</div>'
+        +     '<h1>Sales Resmi Honda Bandung</h1>'
+        +     '<p>Harga OTR &amp; simulasi kredit FIFGROUP. Tanya stok, kredit, atau test ride via WhatsApp.</p>'
+        +     '<a class="hero-cta" data-msg="' + esc(CONFIG.defaultMessage) + '">💬 Chat WhatsApp</a>'
+        +   '</div>'
+        + '</header>';
+    }
+
+    function renderSocials(){
+      var s = CONFIG.socials;
+      var items = [
+        {
+          cls: 'social-tiktok',
+          url: s.tiktok ? 'https://tiktok.com/@' + s.tiktok : '',
+          label: s.tiktok ? '@' + s.tiktok : 'TikTok',
+          icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 7.32a4.86 4.86 0 0 1-3.6-1.66v7.62a5.6 5.6 0 1 1-5.6-5.6c.19 0 .37.01.55.03v2.9a2.7 2.7 0 1 0 1.9 2.59V2h2.9a4.86 4.86 0 0 0 4.85 4.7v.62Z"/></svg>'
+        },
+        {
+          cls: 'social-ig',
+          url: s.ig ? 'https://instagram.com/' + s.ig : '',
+          label: s.ig ? '@' + s.ig : 'Instagram',
+          icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 1.8c-3.15 0-3.5.01-4.73.07-1.14.05-1.76.24-2.17.4a2.4 2.4 0 0 0-.87.58 2.4 2.4 0 0 0-.58.87c-.16.41-.35 1.03-.4 2.17-.06 1.23-.07 1.58-.07 4.73s.01 3.5.07 4.73c.05 1.14.24 1.76.4 2.17.14.36.34.66.58.87.21.24.51.44.87.58.41.16 1.03.35 2.17.4 1.23.06 1.58.07 4.73.07s3.5-.01 4.73-.07c1.14-.05 1.76-.24 2.17-.4.36-.14.66-.34.87-.58.24-.21.44-.51.58-.87.16-.41.35-1.03.4-2.17.06-1.23.07-1.58.07-4.73s-.01-3.5-.07-4.73c-.05-1.14-.24-1.76-.4-2.17a2.4 2.4 0 0 0-.58-.87 2.4 2.4 0 0 0-.87-.58c-.41-.16-1.03-.35-2.17-.4-1.23-.06-1.58-.07-4.73-.07Zm0 3.06a4.98 4.98 0 1 1 0 9.96 4.98 4.98 0 0 1 0-9.96Zm0 1.8a3.18 3.18 0 1 0 0 6.36 3.18 3.18 0 0 0 0-6.36Zm5.16-2.2a1.16 1.16 0 1 1 0 2.32 1.16 1.16 0 0 1 0-2.32Z"/></svg>'
+        },
+        {
+          cls: 'social-yt',
+          url: s.youtube ? 'https://youtube.com/@' + s.youtube : '',
+          label: s.youtube ? '@' + s.youtube : 'YouTube',
+          icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.13C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.4.52A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.13c1.9.52 9.4.52 9.4.52s7.5 0 9.4-.52a3 3 0 0 0 2.1-2.13A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></svg>'
+        }
+      ];
+      var html = '<div class="socials anim-in">';
+      for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        var href = it.url ? ' href="' + esc(it.url) + '" target="_blank" rel="noopener"' : '';
+        html += '<a class="social ' + it.cls + '"' + href + '>'
+              +   '<div class="social-icon">' + it.icon + '</div>'
+              +   '<span>' + esc(it.label) + '</span>'
+              + '</a>';
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function renderFeaturedCards(){
+      var html = '';
+      for (var i = 0; i < FEATURED_KEYS.length; i++) {
+        var name = FEATURED_KEYS[i];
+        var data = getModelData(name);
+        if (!data) continue;
+        var meta = getModelMeta(name);
+        var tagCls = meta.tag === 'PREMIUM' ? ' tag-dark' : '';
+        html += '<a class="model" data-nav="/model/' + esc(name) + '">'
+              +   '<div class="model-img">'
+              +     imgTag(getImageForModel(name), name)
+              +     (meta.tag ? '<span class="tag' + tagCls + '">' + meta.tag + '</span>' : '')
+              +     '<span>' + meta.emoji + '</span>'
+              +   '</div>'
+              +   '<div class="model-body">'
+              +     '<h3>' + esc(name) + '</h3>'
+              +     '<p>' + esc(meta.tagline) + '</p>'
+              +     '<div class="model-price">OTR ' + formatRp(data.harga) + '</div>'
+              +     '<span class="model-btn">Lihat Detail →</span>'
+              +   '</div>'
+              + '</a>';
+      }
+      return html;
+    }
+
+    function renderHome(){
+      return renderHero()
+        + '<main class="wrap">'
+        +   renderSocials()
+        +   '<section class="anim-in">'
+        +     '<div class="section-head">'
+        +       '<h2 class="section-title">Pilih Kebutuhanmu</h2>'
+        +       '<p class="section-sub">Cek harga OTR &amp; stok, atau simulasi kredit.</p>'
+        +     '</div>'
+        +     '<div class="actions">'
+        +       '<a class="action" data-nav="/stok">'
+        +         '<div class="action-ico">🏍️</div>'
+        +         '<div class="action-body"><strong>Tanya Stok &amp; Harga</strong><span>' + getAllModelNames().length + ' model Honda</span></div>'
+        +         '<div class="action-arrow">›</div>'
+        +       '</a>'
+        +       '<a class="action" data-nav="/kredit">'
+        +         '<div class="action-ico">💰</div>'
+        +         '<div class="action-body"><strong>Simulasi Kredit</strong><span>DP &amp; cicilan FIFGROUP</span></div>'
+        +         '<div class="action-arrow">›</div>'
+        +       '</a>'
+        +     '</div>'
+        +   '</section>'
+        +   '<section class="anim-in">'
+        +     '<div class="section-head">'
+        +       '<h2 class="section-title">Model Favorit</h2>'
+        +       '<p class="section-sub">Klik model untuk lihat detail &amp; harga.</p>'
+        +     '</div>'
+        +     '<div class="models">' + renderFeaturedCards() + '</div>'
+        +   '</section>'
+        +   '<section class="anim-in">'
+        +     '<div class="section-head">'
+        +       '<h2 class="section-title">Kenapa Beli dari Saya?</h2>'
+        +       '<p class="section-sub">Bukan calo. Sales resmi, proses transparan.</p>'
+        +     '</div>'
+        +     '<div class="trust">'
+        +       '<div class="trust-item"><div class="trust-ico">✓</div><div><strong>Unit ready &amp; bisa dilihat</strong><span>Stok fisik tersedia, bisa cek langsung sebelum beli.</span></div></div>'
+        +       '<div class="trust-item"><div class="trust-ico">✓</div><div><strong>Bantu proses kredit</strong><span>Dibantu sampai disetujui, tanpa biaya tersembunyi.</span></div></div>'
+        +       '<div class="trust-item"><div class="trust-ico">✓</div><div><strong>Sales resmi Honda</strong><span>Bukan perantara. Legal, aman, dan terpercaya.</span></div></div>'
+        +     '</div>'
+        +   '</section>'
+        +   '<section class="anim-in">'
+        +     '<div class="terms">'
+        +       '<h3>Syarat &amp; Ketentuan</h3>'
+        +       '<p>Harga OTR dan simulasi kredit bersifat estimasi berdasarkan pricelist FIFGROUP, dapat berubah sewaktu-waktu tanpa pemberitahuan. Cicilan belum termasuk diskon dan potongan tenor. Harga final, ketersediaan unit, dan persetujuan kredit akan dikonfirmasi langsung via WhatsApp.</p>'
+        +     '</div>'
+        +   '</section>'
+        + '</main>'
+        + '<footer>© ' + new Date().getFullYear() + ' ' + esc(CONFIG.brand) + ' · ' + esc(CONFIG.salesName) + '</footer>';
+    }
+
+    /* ============================================================
+       RENDER — DETAIL MODEL
+       ============================================================ */
+    function renderBackHeader(title){
+      return '<header class="detail-header anim-in">'
+        + '<button class="back-btn" data-back aria-label="Kembali">'
+        +   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"></polyline></svg>'
+        + '</button>'
+        + '<span class="detail-title">' + esc(title) + '</span>'
+        + '<div style="width:42px;flex-shrink:0"></div>'
+        + '</header>';
+    }
+
+    function renderHargaCard(name){
+      var data = getModelData(name);
+      if (!data) return '';
+      var cicilanHeader = getCicilanHeader(name);
+      var html = '<div class="harga-card anim-in">'
+        + '<div class="harga-section">'
+        +   '<div class="harga-label">Harga OTR</div>'
+        +   '<div class="harga-value">' + formatRp(data.harga) + '</div>'
+        + '</div>';
+      if (cicilanHeader) {
+        html += '<div class="harga-section">'
+             +   '<div class="harga-label">Cicilan Mulai</div>'
+             +   '<div class="harga-value">' + formatRp(cicilanHeader.cicilan) + '<small>/bln</small></div>'
+             +   '<div class="harga-note">Tenor ' + cicilanHeader.tenor + ' bulan · DP ' + formatRp(cicilanHeader.dp) + '</div>'
+             + '</div>';
+      }
+      html += '<a class="harga-cta" data-nav="/kredit" data-expand-kredit="' + esc(name) + '">Lihat Semua Simulasi Kredit →</a>'
+           + '</div>';
+      return html;
+    }
+
+    function renderModelDetail(name){
+      var data = getModelData(name);
+      if (!data) return renderNotFound();
+      var meta = getModelMeta(name);
+      var tagHtml = meta.tag ? '<span class="tag' + (meta.tag === 'PREMIUM' ? ' tag-dark' : '') + '">' + meta.tag + '</span>' : '';
+      var hl = '';
+      for (var i = 0; i < meta.highlights.length; i++) hl += '<li>' + esc(meta.highlights[i]) + '</li>';
+      return renderBackHeader(name)
+        + '<div class="model-hero anim-in">'
+        +   imgTag(getImageForModel(name), name)
+        +   tagHtml
+        +   '<span>' + meta.emoji + '</span>'
+        + '</div>'
+        + '<div class="wrap" style="padding-top:26px">'
+        +   '<h2 class="detail-h2 anim-in">' + esc(name) + '</h2>'
+        +   '<p class="detail-tagline anim-in">' + esc(meta.tagline) + '</p>'
+        +   '<p class="detail-desc anim-in">' + esc(meta.description) + '</p>'
+        +   renderHargaCard(name)
+        +   '<div class="anim-in">'
+        +     '<h3 class="detail-h3">Keunggulan</h3>'
+        +     '<ul class="highlights">' + hl + '</ul>'
+        +   '</div>'
+        +   '<div class="cta-block anim-in">'
+        +     '<a class="wa-btn" data-msg="Halo Dion, saya dari TikTok. Mau tanya stok &amp; harga ' + esc(name) + '.">💬 Tanya Stok &amp; Harga</a>'
+        +   '</div>'
+        + '</div>';
+    }
+
+    /* ============================================================
+       RENDER — STOK
+       ============================================================ */
+    function filterModelsByState(f){
+      var names = getAllModelNames();
+      if (f.cat !== 'all') {
+        var cat = null;
+        for (var i = 0; i < CATEGORIES.length; i++) if (CATEGORIES[i].key === f.cat) { cat = CATEGORIES[i]; break; }
+        if (cat) names = names.filter(function(n){ return cat.models.indexOf(n) !== -1; });
+      }
+      if (f.q) {
+        var q = f.q.toLowerCase();
+        names = names.filter(function(n){ return n.toLowerCase().indexOf(q) !== -1; });
+      }
+      return names;
+    }
+
+    function renderFilterBar(f, prefix){
+      var html = '<div class="filter-bar">'
+        + '<div class="search-wrap">'
+        +   '<input type="search" class="search-input" data-search="' + prefix + '" placeholder="Cari model... (mis. Beat, Vario, PCX)" value="' + esc(f.q) + '" autocomplete="off">'
+        + '</div>'
+        + '<div class="cat-tabs">'
+        +   '<button class="cat-chip' + (f.cat === 'all' ? ' is-active' : '') + '" data-cat="' + prefix + ':all">Semua</button>';
+      for (var i = 0; i < CATEGORIES.length; i++) {
+        var c = CATEGORIES[i];
+        html += '<button class="cat-chip' + (f.cat === c.key ? ' is-active' : '') + '" data-cat="' + prefix + ':' + c.key + '">' + esc(c.label) + '</button>';
+      }
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderStokList(){
+      var names = filterModelsByState(stokFilter);
+      if (!names.length) return '<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>';
+      var html = '';
+      for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var data = getModelData(name);
+        if (!data) continue;
+        var meta = getModelMeta(name);
+        html += '<a class="stok-item" href="#" data-model="' + esc(name) + '">'
+              +   '<div class="stok-item-emoji">' + meta.emoji + '</div>'
+              +   '<div class="stok-item-info">'
+              +     '<strong>' + esc(name) + '</strong>'
+              +     '<span>OTR ' + formatRp(data.harga) + '</span>'
+              +   '</div>'
+              +   '<div class="stok-item-arrow">'
+              +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+              +   '</div>'
+              + '</a>';
+      }
+      return html;
+    }
+
+    function renderStok(){
+      return renderBackHeader('Stok & Harga')
+        + '<div class="wrap" style="padding-top:8px">'
+        +   '<p class="detail-desc anim-in" style="margin-bottom:4px">Daftar harga OTR semua model Honda. Tap model untuk pilih cash atau kredit.</p>'
+        +   renderFilterBar(stokFilter, 'stok')
+        +   '<div id="stok-list-container" class="anim-in">' + renderStokList() + '</div>'
+        + '</div>';
+    }
+
+    /* ============================================================
+       RENDER — KREDIT
+       ============================================================ */
+    function renderTenorRows(name, dp){
+      var data = getModelData(name);
+      if (!data) return '';
+      var tenors = getTenors(data, dp);
+      var tbl = data.tabel[String(dp)] || {};
+      var html = '';
+      for (var i = 0; i < tenors.length; i++) {
+        var t = tenors[i];
+        var cicilan = tbl[t];
+        html += '<button class="tenor-row" type="button" data-dp="' + dp + '" data-tenor="' + t + '" data-cicilan="' + cicilan + '" aria-pressed="false">'
+              +   '<div class="tenor-dur">' + t + ' bulan</div>'
+              +   '<div class="tenor-cicilan">' + formatRp(cicilan) + '<small>/bln</small></div>'
+              +   '<div class="tenor-arrow">'
+              +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+              +   '</div>'
+              + '</button>';
+      }
+      return html;
+    }
+
+    function renderDpSlider(name, currentDp){
+      var data = getModelData(name);
+      if (!data) return '';
+      var opts = getSliderDpOptions(data);
+      if (!opts.length) return '';
+      var idx = opts.indexOf(currentDp);
+      if (idx < 0) idx = 0;
+      var minDp = opts[0];
+      var maxDp = opts[opts.length - 1];
+      var pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
+
+      var triggerDp = getPromoTriggerDp(name);
+      var isAtTrigger = triggerDp !== null && opts[idx] === triggerDp;
+      var hasPromo = isBeatSeries(name) && isPromoAvailable(name);
+      var p = CONFIG.promo.beatSeries;
+
+      var promoHtml = '';
+      if (hasPromo) {
+        promoHtml = '<div class="promo-container' + (isAtTrigger ? ' is-visible' : '') + '" data-promo-container="' + esc(name) + '">'
+          + '<div class="promo-divider">atau</div>'
+          + '<button class="promo-btn" data-promo-toggle="' + esc(name) + '" type="button">'
+          + '⚡ Coba DP Promo ' + formatRp(p.dp) + ' · Tenor ' + p.tenor + ' bulan'
+          + '</button>'
+          + '</div>';
+      }
+
+      return '<div class="dp-slider-wrap" data-dp-wrap="' + esc(name) + '">'
+        + '<div class="dp-display">'
+        +   '<div>'
+        +     '<span class="dp-display-label">DP Dipilih</span>'
+        +     '<span class="dp-display-sub" data-dp-sub>Geser untuk ubah DP</span>'
+        +   '</div>'
+        +   '<span class="dp-display-value" data-dp-value>' + formatRp(opts[idx]) + '</span>'
+        + '</div>'
+        + '<input type="range" class="dp-slider" data-model="' + esc(name) + '" min="0" max="' + (opts.length - 1) + '" value="' + idx + '" step="1" style="--pct: ' + pct + '%" aria-label="Geser untuk atur DP">'
+        + '<div class="dp-slider-labels">'
+        +   '<span>' + formatRp(minDp) + '</span>'
+        +   '<span>' + formatRp(maxDp) + '</span>'
+        + '</div>'
+        + '<div class="dp-note">Belum termasuk diskon &amp; potongan tenor</div>'
+        + promoHtml
+        + '</div>';
+    }
+
+    function renderPromoView(name){
+      if (!isBeatSeries(name)) return '';
+      if (!isPromoAvailable(name)) return '';
+      var p = CONFIG.promo.beatSeries;
+      var cicilan = getPromoCicilan(name);
+      return '<div class="promo-view">'
+        + '<div class="promo-banner">'
+        +   '<div class="promo-banner-label">⚡ Promo Spesial Beat Series</div>'
+        +   '<div class="promo-banner-value">' + formatRp(cicilan) + '<small>/bln</small></div>'
+        +   '<div class="promo-banner-meta">DP ' + formatRp(p.dp) + ' · Tenor ' + p.tenor + ' bulan</div>'
+        +   '<div class="promo-banner-note">Cicilan promo belum termasuk diskon &amp; potongan tenor. Ketuk tombol di bawah untuk konfirmasi via WhatsApp.</div>'
+        +   '<button class="promo-banner-back" data-promo-toggle="' + esc(name) + '" type="button">← Kembali ke DP Normal</button>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function renderKreditCardsList(){
+      var names = filterModelsByState(kreditFilter);
+      if (!names.length) return '<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>';
+      var html = '';
+      for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var data = getModelData(name);
+        if (!data) continue;
+        var meta = getModelMeta(name);
+        var cicilanHeader = getCicilanHeader(name);
+        var defaultDp = getDefaultDp(name);
+        var mulaiHtml = cicilanHeader
+          ? '<span class="kredit-mulai">Mulai ' + formatRp(cicilanHeader.cicilan) + '/bln</span>'
+          : '<span class="kredit-mulai" style="color:var(--label-3)">Belum tersedia</span>';
+
+        html += '<div class="kredit-card" data-kredit-card="' + esc(name) + '" data-sel-dp="" data-sel-tenor="" data-sel-cicilan="">'
+          + '<button class="kredit-head" data-toggle-kredit="' + esc(name) + '" type="button">'
+          +   '<div class="kredit-emoji">' + meta.emoji + '</div>'
+          +   '<div class="kredit-info">'
+          +     '<strong>' + esc(name) + '</strong>'
+          +     mulaiHtml
+          +     '<span class="kredit-otr">OTR ' + formatRp(data.harga) + '</span>'
+          +   '</div>'
+          +   '<div class="kredit-chevron">›</div>'
+          + '</button>'
+          + '<div class="kredit-detail">'
+          +   '<div class="kredit-detail-inner">'
+          +     '<div class="kredit-body">'
+          +       '<div class="kredit-body-inner">'
+          +         renderDpSlider(name, defaultDp)
+          +         renderPromoView(name)
+          +         '<div class="tenor-list" data-tenor-list="' + esc(name) + '">' + renderTenorRows(name, defaultDp) + '</div>'
+          +         '<button class="wa-btn" type="button" data-konsultasi="' + esc(name) + '">💬 Konsultasi Kredit</button>'
+          +       '</div>'
+          +     '</div>'
+          +   '</div>'
+          + '</div>'
+          + '</div>';
+      }
+      return html;
+    }
+
+    function renderKredit(){
+      return renderBackHeader('Simulasi Kredit')
+        + '<div class="wrap" style="padding-top:8px">'
+        +   '<p class="detail-desc anim-in" style="margin-bottom:4px">Pilih model &amp; atur DP. Tap tenor untuk pilih cicilan, lalu kirim via WhatsApp. Angka dari pricelist FIFGROUP.</p>'
+        +   renderFilterBar(kreditFilter, 'kredit')
+        +   '<div id="kredit-list-container" class="anim-in">' + renderKreditCardsList() + '</div>'
+        + '</div>';
+    }
+
+    function renderNotFound(){
+      return renderBackHeader('Tidak Ditemukan')
+        + '<div class="not-found">'
+        +   '<h2>Halaman tidak ditemukan</h2>'
+        +   '<p>Halaman yang Anda cari tidak tersedia.</p>'
+        +   '<a class="wa-btn" data-back>← Kembali</a>'
+        + '</div>';
+    }
+
+    /* ============================================================
+       ROUTER
+       ============================================================ */
+    function renderRoute(route){
+      if (!route || route === '/') return renderHome();
+      if (route.indexOf('/model/') === 0) return renderModelDetail(route.slice(7));
+      if (route === '/stok') return renderStok();
+      if (route === '/kredit') return renderKredit();
+      return renderNotFound();
+    }
+
+    /* ============================================================
+       NAVIGATION ENGINE
+       ============================================================ */
+    function makeScreen(route){
+      var el = document.createElement('section');
+      el.className = 'screen';
+      el.setAttribute('data-route', route);
+      el.innerHTML = renderRoute(route);
+      var onScroll = function(){ if (!el.classList.contains('is-active')) return; updateFloatWa(el); };
+      el.addEventListener('scroll', onScroll, { passive: true });
+      el._onScroll = onScroll;
+      setupStickyHeads(el);
+      return el;
+    }
+
+    function pushScreen(route, animate){
+      if (animate && animating) return;
+      var current = stack[stack.length - 1];
+      var el = makeScreen(route);
+      app.appendChild(el);
+
+      var afterActivate = function(){
+        animating = false;
+        updateFloatWa(el);
+        if (pendingKreditModel && route === '/kredit') {
+          var target = pendingKreditModel;
+          pendingKreditModel = null;
+          setTimeout(function(){ expandKreditModel(el, target); }, 120);
+        }
+      };
+
+      if (animate && current) {
+        animating = true;
+        void el.offsetWidth;
+        current.classList.remove('is-active');
+        current.classList.add('is-behind');
+        el.classList.add('is-active');
+        setTimeout(afterActivate, NAV_DURATION);
+      } else if (animate) {
+        animating = true;
+        el.classList.add('is-active');
+        setTimeout(afterActivate, NAV_DURATION);
+      } else {
+        el.classList.add('no-transition', 'is-active');
+        if (current) {
+          current.classList.add('no-transition');
+          current.classList.remove('is-active');
+          current.classList.add('is-behind');
+        }
+        requestAnimationFrame(function(){
+          el.classList.remove('no-transition');
+          if (current) current.classList.remove('no-transition');
+          afterActivate();
+        });
+      }
+      stack.push(el);
+    }
+
+    function popScreen(animate){
+      if (animate && animating) return;
+      if (stack.length <= 1) return;
+      var current = stack.pop();
+      var prev = stack[stack.length - 1];
+
+      if (animate) {
+        animating = true;
+        current.classList.remove('is-active');
+        prev.classList.remove('is-behind');
+        prev.classList.add('is-active');
+        setTimeout(function(){
+          if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+          current.remove();
+          animating = false;
+          updateFloatWa(prev);
+        }, NAV_DURATION);
+      } else {
+        if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+        current.remove();
+        prev.classList.remove('is-behind');
+        prev.classList.add('is-active');
+        updateFloatWa(prev);
+      }
+    }
+
+    function popTo(index){
+      if (index < 0 || index >= stack.length - 1) return;
+      while (stack.length - 1 > index + 1) {
+        var s = stack.pop();
+        if (s._onScroll) s.removeEventListener('scroll', s._onScroll);
+        s.remove();
+      }
+      popScreen(true);
+    }
+
+    function navigate(route){
+      if (animating) return;
+      var current = stack[stack.length - 1];
+      if (current && current.getAttribute('data-route') === route) return;
+      safePush(route);
+      pushScreen(route, true);
+    }
+
+    function goBack(){
+      if (animating) return;
+      if (stack.length > 1) {
+        if (historyOK) {
+          try { history.back(); return; } catch (e) {}
+        }
+        popScreen(true);
+        var prev = stack[stack.length - 1];
+        if (prev) safeReplace(prev.getAttribute('data-route'));
+        return;
+      }
+      // di root tapi bukan home → ganti ke home
+      var current = stack[0];
+      if (current && current.getAttribute('data-route') !== '/') {
+        var home = makeScreen('/');
+        app.appendChild(home);
+        home.classList.add('no-transition', 'is-active');
+        current.classList.add('no-transition');
+        current.classList.remove('is-active');
+        current.classList.add('is-behind');
+        requestAnimationFrame(function(){
+          home.classList.remove('no-transition');
+          current.classList.remove('no-transition');
+          updateFloatWa(home);
+        });
+        stack.length = 0;
+        stack.push(home);
+        if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+        current.remove();
+        safeReplace('/');
+      }
+    }
+
+    function refreshActiveList(prefix){
+      var screen = stack[stack.length - 1];
+      if (!screen) return;
+      if (prefix === 'stok') {
+        var c1 = screen.querySelector('#stok-list-container');
+        if (c1) c1.innerHTML = renderStokList();
+      } else if (prefix === 'kredit') {
+        var c2 = screen.querySelector('#kredit-list-container');
+        if (c2) c2.innerHTML = renderKreditCardsList();
+      }
+    }
+
+    /* ============================================================
+       INPUT / SLIDER
+       ============================================================ */
+    function handleSliderInput(slider){
+      var card = slider.closest('.kredit-card');
+      if (!card || card.classList.contains('promo-active')) return;
+      var name = slider.getAttribute('data-model');
+      var data = getModelData(name);
+      if (!data) return;
+
+      var opts = getSliderDpOptions(data);
+      var idx = Math.max(0, Math.min(opts.length - 1, Number(slider.value)));
+      var dp = opts[idx];
+      var pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
+
+      slider.style.setProperty('--pct', pct + '%');
+
+      var display = card.querySelector('[data-dp-value]');
+      if (display) display.textContent = formatRp(dp);
+
+      var tenorList = card.querySelector('[data-tenor-list]');
+      if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+
+      var promoContainer = card.querySelector('[data-promo-container]');
       if (promoContainer) {
-        if (targetDp === triggerDp) promoContainer.classList.add('is-visible');
+        var triggerDp = getPromoTriggerDp(name);
+        if (triggerDp !== null && dp === triggerDp) promoContainer.classList.add('is-visible');
         else promoContainer.classList.remove('is-visible');
       }
       resetSelection(card);
     }
-    return;
-  }
 
-  /* 9. Filter kategori */
-  const catEl = e.target.closest('[data-cat]');
-  if (catEl) {
-    e.preventDefault();
-    const parts = catEl.dataset.cat.split(':');
-    const prefix = parts[0];
-    const cat = parts[1];
-    const target = prefix === 'stok' ? stokFilter : kreditFilter;
-    target.cat = cat;
-    const tabs = catEl.parentElement;
-    if (tabs) tabs.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('is-active'));
-    catEl.classList.add('is-active');
-    refreshActiveList(prefix);
-    return;
-  }
-});
-
-/* --- Action sheet --- */
-document.getElementById('sheetCancel').addEventListener('click', closeActionSheet);
-document.getElementById('sheetBackdrop').addEventListener('click', closeActionSheet);
-
-document.querySelectorAll('[data-sheet-action]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const name = pendingSheetModel;
-    const action = btn.dataset.sheetAction;
-    closeActionSheet();
-    if (!name) return;
-    if (action === 'cash') {
-      openWa(`Halo Dion, saya dari TikTok. Mau tanya harga cash & stok ${name}.`, btn);
-    } else if (action === 'kredit') {
-      pendingKreditModel = name;
-      navigate('/kredit');
+    function handleSearchInput(input){
+      var prefix = input.getAttribute('data-search');
+      var val = input.value;
+      if (prefix === 'stok') stokFilter.q = val;
+      else if (prefix === 'kredit') kreditFilter.q = val;
+      else return;
+      refreshActiveList(prefix);
     }
-  });
-});
 
-/* --- Floating WhatsApp --- */
-if (floatWa) {
-  floatWa.addEventListener('click', e => {
-    e.preventDefault();
-    openWa(CONFIG.defaultMessage, null);
-  });
-}
+    /* ============================================================
+       EVENT DELEGATION
+       ============================================================ */
+    app.addEventListener('input', function(e){
+      var t = e.target;
+      if (t && t.closest && t.closest('[data-search]')) { handleSearchInput(t); return; }
+      if (t && t.classList && t.classList.contains('dp-slider')) { handleSliderInput(t); return; }
+    });
 
-/* --- Browser back / forward --- */
-window.addEventListener('popstate', () => {
-  const route = hashToRoute(location.hash);
-  const current = stack[stack.length - 1];
-  if (current && current.dataset.route === route) return;
+    app.addEventListener('click', function(e){
+      if (animating) return;
+      var target = e.target;
 
-  const idx = stack.findIndex(s => s.dataset.route === route);
-  if (idx >= 0 && idx < stack.length - 1) {
-    popTo(idx);
+      // 1. Tombol kembali
+      var backEl = target.closest('[data-back]');
+      if (backEl) { e.preventDefault(); goBack(); return; }
+
+      // 2. Navigasi halaman
+      var navEl = target.closest('[data-nav]');
+      if (navEl) {
+        e.preventDefault();
+        var expand = navEl.getAttribute('data-expand-kredit');
+        if (expand) pendingKreditModel = expand;
+        navigate(navEl.getAttribute('data-nav'));
+        return;
+      }
+
+      // 3. Tombol WhatsApp generik
+      var msgEl = target.closest('[data-msg]');
+      if (msgEl) { e.preventDefault(); openWa(msgEl.getAttribute('data-msg'), msgEl); return; }
+
+      // 4. Item stok → action sheet
+      var stokEl = target.closest('.stok-item');
+      if (stokEl) {
+        e.preventDefault();
+        var mname = stokEl.getAttribute('data-model');
+        if (mname) openActionSheet(mname);
+        return;
+      }
+
+      // 5. Buka/tutup kartu kredit
+      var toggleEl = target.closest('[data-toggle-kredit]');
+      if (toggleEl) {
+        e.preventDefault();
+        var card = toggleEl.closest('.kredit-card');
+        if (!card) return;
+        var wasOpen = card.classList.contains('open');
+        var parent = card.parentElement;
+        if (parent) {
+          var opened = parent.querySelectorAll('.kredit-card.open');
+          for (var i = 0; i < opened.length; i++) if (opened[i] !== card) opened[i].classList.remove('open');
+        }
+        if (wasOpen) card.classList.remove('open');
+        else card.classList.add('open');
+        return;
+      }
+
+      // 6. Pilih tenor
+      var tenorEl = target.closest('.tenor-row');
+      if (tenorEl) {
+        e.preventDefault();
+        var card2 = tenorEl.closest('.kredit-card');
+        if (!card2 || card2.classList.contains('promo-active')) return;
+        var dp = tenorEl.getAttribute('data-dp');
+        var tenor = tenorEl.getAttribute('data-tenor');
+        var cicilan = tenorEl.getAttribute('data-cicilan');
+        if (!dp || !tenor || !cicilan) return;
+
+        var rows = card2.querySelectorAll('.tenor-row');
+        for (var j = 0; j < rows.length; j++) { rows[j].classList.remove('is-selected'); rows[j].setAttribute('aria-pressed', 'false'); }
+        tenorEl.classList.add('is-selected');
+        tenorEl.setAttribute('aria-pressed', 'true');
+
+        card2.setAttribute('data-sel-dp', dp);
+        card2.setAttribute('data-sel-tenor', tenor);
+        card2.setAttribute('data-sel-cicilan', cicilan);
+        updateKonsultasiBtn(card2);
+        return;
+      }
+
+      // 7. Konsultasi via WA
+      var konsulEl = target.closest('[data-konsultasi]');
+      if (konsulEl) {
+        e.preventDefault();
+        var card3 = konsulEl.closest('.kredit-card');
+        if (!card3) return;
+        openWa(buildKonsultasiMsg(card3), konsulEl);
+        return;
+      }
+
+      // 8. Toggle promo
+      var promoBtn = target.closest('[data-promo-toggle]');
+      if (promoBtn) {
+        e.preventDefault();
+        var pname = promoBtn.getAttribute('data-promo-toggle');
+        var card4 = promoBtn.closest('.kredit-card');
+        if (!card4) return;
+        var data = getModelData(pname);
+        if (!data) return;
+        var wasActive = card4.classList.contains('promo-active');
+        var p = CONFIG.promo.beatSeries;
+
+        if (!wasActive) {
+          resetSelection(card4);
+          card4.classList.add('promo-active');
+          var disp = card4.querySelector('[data-dp-value]');
+          if (disp) disp.innerHTML = formatRp(p.dp) + ' <small style="font-size:10px;color:#ff9f0a;font-weight:800;margin-left:4px">PROMO</small>';
+          var sub = card4.querySelector('[data-dp-sub]');
+          if (sub) sub.textContent = 'Mode Promo Aktif';
+          updateKonsultasiBtn(card4);
+        } else {
+          card4.classList.remove('promo-active');
+          var triggerDp = getPromoTriggerDp(pname);
+          var opts = getSliderDpOptions(data);
+          var targetDp = (triggerDp !== null && opts.indexOf(triggerDp) !== -1) ? triggerDp : getDefaultDp(pname);
+          var targetIdx = opts.indexOf(targetDp);
+          var slider = card4.querySelector('.dp-slider');
+          if (slider && targetIdx >= 0) {
+            slider.value = targetIdx;
+            var pct = opts.length > 1 ? (targetIdx / (opts.length - 1)) * 100 : 0;
+            slider.style.setProperty('--pct', pct + '%');
+          }
+          var disp2 = card4.querySelector('[data-dp-value]');
+          if (disp2) disp2.textContent = formatRp(targetDp);
+          var sub2 = card4.querySelector('[data-dp-sub]');
+          if (sub2) sub2.textContent = 'Geser untuk ubah DP';
+          var tenorList = card4.querySelector('[data-tenor-list]');
+          if (tenorList) tenorList.innerHTML = renderTenorRows(pname, targetDp);
+          var promoContainer = card4.querySelector('[data-promo-container]');
+          if (promoContainer) {
+            if (targetDp === triggerDp) promoContainer.classList.add('is-visible');
+            else promoContainer.classList.remove('is-visible');
+          }
+          resetSelection(card4);
+        }
+        return;
+      }
+
+      // 9. Filter kategori
+      var catEl = target.closest('[data-cat]');
+      if (catEl) {
+        e.preventDefault();
+        var parts = catEl.getAttribute('data-cat').split(':');
+        var prefix = parts[0];
+        var cat = parts[1];
+        var f = prefix === 'stok' ? stokFilter : kreditFilter;
+        f.cat = cat;
+        var tabs = catEl.parentElement;
+        if (tabs) {
+          var chips = tabs.querySelectorAll('.cat-chip');
+          for (var k = 0; k < chips.length; k++) chips[k].classList.remove('is-active');
+        }
+        catEl.classList.add('is-active');
+        refreshActiveList(prefix);
+        return;
+      }
+    });
+
+    /* ============================================================
+       ACTION SHEET EVENTS
+       ============================================================ */
+    var sheetCancel = document.getElementById('sheetCancel');
+    if (sheetCancel) sheetCancel.addEventListener('click', closeActionSheet);
+    if (sheetBackdrop) sheetBackdrop.addEventListener('click', closeActionSheet);
+
+    var sheetActionBtns = document.querySelectorAll('[data-sheet-action]');
+    for (var si = 0; si < sheetActionBtns.length; si++) {
+      (function(btn){
+        btn.addEventListener('click', function(){
+          var name = pendingSheetModel;
+          var action = btn.getAttribute('data-sheet-action');
+          closeActionSheet();
+          if (!name) return;
+          if (action === 'cash') {
+            openWa('Halo Dion, saya dari TikTok. Mau tanya harga cash & stok ' + name + '.', btn);
+          } else if (action === 'kredit') {
+            pendingKreditModel = name;
+            navigate('/kredit');
+          }
+        });
+      })(sheetActionBtns[si]);
+    }
+
+    /* ============================================================
+       FLOATING WHATSAPP
+       ============================================================ */
+    if (floatWa) {
+      floatWa.addEventListener('click', function(e){
+        e.preventDefault();
+        openWa(CONFIG.defaultMessage, null);
+      });
+    }
+
+    /* ============================================================
+       POPSTATE (browser back / forward)
+       ============================================================ */
+    window.addEventListener('popstate', function(){
+      var route = hashToRoute(location.hash || '');
+      var current = stack[stack.length - 1];
+      if (current && current.getAttribute('data-route') === route) return;
+
+      var idx = -1;
+      for (var i = 0; i < stack.length; i++) {
+        if (stack[i].getAttribute('data-route') === route) { idx = i; break; }
+      }
+      if (idx >= 0 && idx < stack.length - 1) popTo(idx);
+      else pushScreen(route, true);
+    });
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    var initialRoute = hashToRoute(location.hash || '');
+    if (!initialRoute || initialRoute.charAt(0) !== '/') initialRoute = '/';
+
+    try {
+      history.replaceState({ route: '/' }, '', '#/');
+      historyOK = true;
+    } catch (e) {
+      historyOK = false;
+    }
+
+    try {
+      pushScreen('/', false);
+    } catch (err) {
+      app.innerHTML =
+        '<div style="padding:48px 24px;font-family:-apple-system,sans-serif;color:#1c1c1e;line-height:1.5">' +
+          '<h2 style="font-size:20px;margin-bottom:8px">Gagal memuat halaman</h2>' +
+          '<p style="color:#6b6b70;font-size:14px">' + esc(String((err && err.message) || err)) + '</p>' +
+        '</div>';
+      return;
+    }
+
+    if (initialRoute !== '/') {
+      try {
+        safePush(initialRoute);
+        pushScreen(initialRoute, false);
+      } catch (e2) {}
+    }
+
+    if (!Object.keys(MOTOR_DATA).length) {
+      console.warn('[Honda] DATA_MOTOR kosong — pastikan data.js memuat data motor.');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    pushScreen(route, true);
-  }
-});
-
-/* ============================================================
-   INIT
-   ============================================================ */
-(function init(){
-  const initialRoute = hashToRoute(location.hash || '#/');
-  history.replaceState({ index: 0, route: '/' }, '', '#/');
-  pushScreen('/', false);
-
-  if (initialRoute && initialRoute !== '/') {
-    history.pushState({ index: 1, route: initialRoute }, '', '#' + routeToHash(initialRoute));
-    pushScreen(initialRoute, false);
-  }
-
-  if (!Object.keys(DATA_MOTOR).length) {
-    console.warn('[Honda] data.js tidak memuat DATA_MOTOR — daftar model kosong.');
+    boot();
   }
 })();
 </script>
