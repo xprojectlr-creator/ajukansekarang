@@ -7,56 +7,44 @@
 <meta name="theme-color" content="#1c1c1e">
 <style>
 :root{
-  /* iOS system palette */
   --bg:#f2f2f7;
   --bg-glass:rgba(242,242,247,0.82);
   --surface:#ffffff;
   --surface-2:#fbfbfd;
-
   --label:#1c1c1e;
   --label-2:#6b6b70;
   --label-3:#8e8e93;
-
   --separator:rgba(60,60,67,0.06);
   --fill:rgba(120,120,128,0.08);
   --fill-2:rgba(120,120,128,0.14);
-
   --accent:#ff9f0a;
   --accent-2:#ff8c00;
   --accent-text:#1c1c1e;
   --accent-soft:rgba(255,159,10,0.14);
-
   --wa:#25d366;
   --wa-2:#1da851;
   --wa-glass:rgba(37,211,102,0.88);
-
-  /* Liquid glass system */
   --glass-blur:blur(24px) saturate(180%);
   --glass-blur-sm:blur(16px) saturate(180%);
   --glass-border:rgba(255,255,255,0.55);
   --glass-border-dark:rgba(255,255,255,0.12);
-
   --shadow-liquid:
     inset 0 1px 0 rgba(255,255,255,0.9),
     0 1px 2px rgba(0,0,0,0.03),
     0 4px 12px rgba(0,0,0,0.04),
     0 16px 32px rgba(0,0,0,0.05);
-
   --shadow-liquid-sm:
     inset 0 1px 0 rgba(255,255,255,0.85),
     0 1px 2px rgba(0,0,0,0.03),
     0 8px 20px rgba(0,0,0,0.05);
-
   --shadow-float:
     inset 0 1px 0 rgba(255,255,255,0.35),
     0 8px 24px rgba(37,211,102,.4),
     0 2px 8px rgba(0,0,0,.12);
-
   --radius-card:24px;
   --radius-button:16px;
   --radius-pill:999px;
   --radius-hero:32px;
-
   --spring:cubic-bezier(.34,1.56,.64,1);
   --smooth:cubic-bezier(.4,0,.2,1);
   --nav-duration:400ms;
@@ -115,7 +103,6 @@ a{color:inherit;text-decoration:none}
 .hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ============ HERO (liquid dark) ============ */
 .hero{
   background:
     radial-gradient(ellipse at 75% 15%,rgba(255,159,10,0.28) 0%,transparent 50%),
@@ -185,7 +172,6 @@ a{color:inherit;text-decoration:none}
     0 2px 6px rgba(255,159,10,0.3);
 }
 
-/* ============ SECTIONS ============ */
 section{padding:8px 0 0}
 .section-head{
   position:sticky;top:0;z-index:5;
@@ -204,7 +190,6 @@ section{padding:8px 0 0}
 .section-title{font-size:21px;font-weight:800;letter-spacing:-.025em;margin-bottom:4px;color:var(--label)}
 .section-sub{font-size:13.5px;color:var(--label-2);margin:0;letter-spacing:-.005em}
 
-/* ============ SOCIAL ============ */
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
 .social{
   display:flex;flex-direction:column;align-items:center;gap:9px;
@@ -223,7 +208,6 @@ section{padding:8px 0 0}
 .social-yt .social-icon{background:#ff0000}
 .social span{font-size:11.5px;font-weight:600;color:var(--label);text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* ============ ACTIONS ============ */
 .actions{display:grid;gap:10px}
 .action{
   display:flex;align-items:center;gap:15px;padding:17px;
@@ -246,7 +230,6 @@ section{padding:8px 0 0}
 .action-body span{display:block;font-size:13px;color:var(--label-2);margin-top:3px;letter-spacing:-.005em}
 .action-arrow{color:var(--label-3);font-size:22px;font-weight:300}
 
-/* ============ MODELS ============ */
 .models{display:grid;gap:14px}
 .model{
   border-radius:var(--radius-card);overflow:hidden;
@@ -307,7 +290,6 @@ section{padding:8px 0 0}
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-/* ============ TRUST ============ */
 .trust{
   border-radius:var(--radius-card);overflow:hidden;
   background:linear-gradient(180deg,#fff 0%,#fbfbfd 100%);
@@ -325,7 +307,6 @@ section{padding:8px 0 0}
 .trust-item strong{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--label)}
 .trust-item span{display:block;font-size:13px;color:var(--label-2);margin-top:4px;line-height:1.5}
 
-/* ============ TERMS ============ */
 .terms{
   border-radius:var(--radius-card);padding:17px 19px;
   background:linear-gradient(180deg,#fff 0%,#fbfbfd 100%);
@@ -335,7 +316,6 @@ section{padding:8px 0 0}
 .terms h3{font-size:13px;font-weight:700;color:var(--label);letter-spacing:-.01em;margin-bottom:8px}
 .terms p{font-size:12.5px;color:var(--label-2);line-height:1.6}
 
-/* ============ DETAIL HEADER ============ */
 .detail-header{
   position:sticky;top:0;z-index:10;
   background:rgba(242,242,247,0.78);
@@ -363,7 +343,6 @@ section{padding:8px 0 0}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--label);
 }
 
-/* ============ MODEL DETAIL ============ */
 .model-hero{
   height:270px;display:grid;place-items:center;position:relative;overflow:hidden;
   background:linear-gradient(135deg,#fafafa,#eaeaec);font-size:112px;
@@ -405,7 +384,6 @@ section{padding:8px 0 0}
 }
 .cta-block{display:grid;gap:10px;margin-bottom:24px}
 
-/* ============ WA BUTTON (liquid green) ============ */
 .wa-btn{
   display:flex;align-items:center;justify-content:center;gap:8px;
   background:linear-gradient(180deg,#31d977 0%,#25d366 100%);
@@ -453,7 +431,6 @@ section{padding:8px 0 0}
 }
 @keyframes btnPulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-/* ============ HARGA CARD ============ */
 .harga-card{
   border-radius:var(--radius-card);overflow:hidden;margin-bottom:22px;
   background:linear-gradient(180deg,#fff 0%,#fbfbfd 100%);
@@ -478,7 +455,6 @@ section{padding:8px 0 0}
 }
 .harga-cta:active{background:rgba(255,159,10,0.2)}
 
-/* ============ FILTER ============ */
 .filter-bar{padding:16px 0 12px;margin-bottom:6px}
 .search-wrap{margin-bottom:10px}
 .search-input{
@@ -518,7 +494,6 @@ section{padding:8px 0 0}
 }
 .cat-chip:active{transform:scale(.96)}
 
-/* ============ STOK ITEM ============ */
 .stok-item{
   display:flex;align-items:center;gap:13px;
   padding:15px;border-radius:18px;
@@ -550,7 +525,6 @@ section{padding:8px 0 0}
 
 .empty-state{padding:40px 20px;text-align:center;color:var(--label-2);font-size:14px}
 
-/* ============ KREDIT ============ */
 .kredit-card{
   border-radius:var(--radius-card);overflow:hidden;
   margin-bottom:10px;scroll-margin-top:80px;
@@ -606,7 +580,6 @@ section{padding:8px 0 0}
 }
 .kredit-body-inner{padding-top:16px}
 
-/* ============ DP SLIDER ============ */
 .dp-slider-wrap{
   border-radius:16px;padding:15px 17px;margin-bottom:16px;
   background:rgba(120,120,128,0.06);
@@ -708,7 +681,6 @@ section{padding:8px 0 0}
     0 2px 6px rgba(255,159,10,0.3);
 }
 
-/* ============ PROMO VIEW (liquid amber) ============ */
 .promo-view{display:none;margin-bottom:16px}
 .promo-banner{
   background:linear-gradient(135deg,rgba(255,159,10,0.16) 0%,rgba(255,159,10,0.06) 100%);
@@ -764,7 +736,6 @@ section{padding:8px 0 0}
 .kredit-card.promo-active .dp-slider-labels{opacity:.4}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2)}
 
-/* ============ TENOR LIST ============ */
 .tenor-list{
   border-radius:14px;overflow:hidden;margin-bottom:16px;
   background:rgba(120,120,128,0.05);
@@ -801,7 +772,6 @@ section{padding:8px 0 0}
 .tenor-row.is-selected .tenor-cicilan{color:var(--accent-2)}
 .tenor-row.is-selected .tenor-arrow{color:var(--accent-2)}
 
-/* ============ FLOAT WA (liquid glass) ============ */
 .float-wa{
   position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));
   width:62px;height:62px;border-radius:50%;
@@ -818,7 +788,6 @@ section{padding:8px 0 0}
 .float-wa svg{width:30px;height:30px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
 .float-wa.is-hidden{opacity:0;transform:scale(.6) translateY(24px);pointer-events:none;box-shadow:none}
 
-/* ============ SHEET (liquid glass) ============ */
 .sheet-backdrop{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.35);
@@ -1127,21 +1096,21 @@ function getCicilanHeader(name){
   if (!model) return null;
   const opts = getSliderDpOptions(model);
   if (!opts.length) return null;
-  
+
   const triggerDp = getPromoTriggerDp(name);
   if (triggerDp !== null && opts.includes(triggerDp)) {
     const tbl = model.tabel[String(triggerDp)];
     const t35 = tbl && tbl[35];
     if (t35) return { dp: triggerDp, tenor: 35, cicilan: t35 };
   }
-  
+
   const target = (model.harga || 0) * (CONFIG.dpDefaultPct / 100);
   const dpClose = opts.reduce((best, cur) => Math.abs(cur - target) < Math.abs(best - target) ? cur : best, opts[0]);
   const tbl = model.tabel[String(dpClose)];
   if (!tbl) return null;
   const tenors = Object.keys(tbl).map(Number).sort((a,b)=>b-a);
   if (!tenors.length) return null;
-  const t = 35 in tbl ? 35 : tenors[0];
+  const t = tbl[35] ? 35 : tenors[0];
   return { dp: dpClose, tenor: t, cicilan: tbl[String(t)] };
 }
 
@@ -1154,7 +1123,7 @@ function getImageForModel(name){ return CONFIG.images[name] || ''; }
 function imgTag(src, alt){ if (!src) return ''; return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`; }
 
 /* ============================================================
-   NAVIGATION
+   STATE & DOM REFS
    ============================================================ */
 const NAV_DURATION = 400;
 const app = document.getElementById('app');
@@ -1164,15 +1133,23 @@ let animating = false;
 let pendingKreditModel = null;
 let pendingSheetModel = null;
 
+const stokFilter = { q: '', cat: 'all' };
+const kreditFilter = { q: '', cat: 'all' };
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
 const waLink = msg => 'https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg || CONFIG.defaultMessage);
 
 function openWa(msg, btnEl){
   if (btnEl && btnEl.classList.contains('is-loading')) return;
-  if (btnEl) btnEl.classList.add('is-loading');
-  setTimeout(() => {
-    window.open(waLink(msg), '_blank', 'noopener');
-    if (btnEl) setTimeout(() => btnEl.classList.remove('is-loading'), 250);
-  }, 320);
+  if (btnEl) {
+    btnEl.classList.add('is-loading');
+    setTimeout(() => btnEl.classList.remove('is-loading'), 700);
+  }
+  const url = waLink(msg);
+  const win = window.open(url, '_blank', 'noopener');
+  if (!win) window.location.href = url;
 }
 
 function updateFloatWa(screen){
@@ -1232,9 +1209,9 @@ function updateKonsultasiBtn(card){
   const selDp = card.dataset.selDp;
   const selTenor = card.dataset.selTenor;
   const selCicilan = card.dataset.selCicilan;
-  
+
   btn.classList.remove('has-selection', 'promo-ready');
-  
+
   if (isPromo) {
     const p = CONFIG.promo.beatSeries;
     const cicilan = getPromoCicilan(name);
@@ -1242,13 +1219,13 @@ function updateKonsultasiBtn(card){
     btn.classList.add('promo-ready');
     return;
   }
-  
+
   if (selTenor && selCicilan && selDp) {
     btn.innerHTML = `✅ Ajukan Pilihan · ${formatRp(+selCicilan)}/bln · ${selTenor} bln`;
     btn.classList.add('has-selection');
     return;
   }
-  
+
   btn.innerHTML = `💬 Konsultasi Kredit`;
 }
 
@@ -1266,21 +1243,21 @@ function buildKonsultasiMsg(card){
   if (!btn) return CONFIG.defaultMessage;
   const name = btn.dataset.konsultasi;
   const isPromo = card.classList.contains('promo-active');
-  
+
   if (isPromo) {
     const p = CONFIG.promo.beatSeries;
     const cicilan = getPromoCicilan(name);
     return `Halo Dion, saya dari TikTok. Mau ambil PROMO ${name}: DP ${formatRp(p.dp)}, tenor ${p.tenor} bulan, cicilan ${formatRp(cicilan)}/bulan.`;
   }
-  
+
   const selDp = card.dataset.selDp;
   const selTenor = card.dataset.selTenor;
   const selCicilan = card.dataset.selCicilan;
-  
+
   if (selTenor && selCicilan && selDp) {
     return `Halo Dion, saya dari TikTok. Mau kredit ${name} dengan DP ${formatRp(+selDp)}, tenor ${selTenor} bulan, cicilan ${formatRp(+selCicilan)}/bulan.`;
   }
-  
+
   return `Halo Dion, saya dari TikTok. Mau konsultasi kredit ${name}.`;
 }
 
@@ -1345,7 +1322,7 @@ function renderFeaturedCards(){
     const meta = getModelMeta(name);
     const tagCls = meta.tag === 'PREMIUM' ? ' tag-dark' : '';
     return `
-      <a class="model" data-nav="/model/${encodeURIComponent(name)}">
+      <a class="model" data-nav="/model/${esc(name)}">
         <div class="model-img">
           ${imgTag(getImageForModel(name), name)}
           ${meta.tag ? `<span class="tag${tagCls}">${meta.tag}</span>` : ''}
@@ -1483,9 +1460,6 @@ function renderModelDetail(name){
 /* ============================================================
    STOK
    ============================================================ */
-const stokFilter = { q: '', cat: 'all' };
-const kreditFilter = { q: '', cat: 'all' };
-
 function filterModelsByState(f){
   let names = getAllModelNames();
   if (f.cat !== 'all') {
@@ -1580,12 +1554,12 @@ function renderDpSlider(name, currentDp){
   const minDp = opts[0];
   const maxDp = opts[opts.length - 1];
   const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
-  
+
   const triggerDp = getPromoTriggerDp(name);
   const isAtTrigger = triggerDp !== null && opts[idx] === triggerDp;
   const hasPromo = isBeatSeries(name) && isPromoAvailable(name);
   const p = CONFIG.promo.beatSeries;
-  
+
   return `
     <div class="dp-slider-wrap" data-dp-wrap="${esc(name)}">
       <div class="dp-display">
@@ -1643,7 +1617,7 @@ function renderPromoView(name){
 
 function renderKreditCardsList(){
   const names = filterModelsByState(kreditFilter);
-  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kata lain.</div>`;
+  if (!names.length) return `<div class="empty-state">Tidak ada model yang cocok. Coba kata kunci lain.</div>`;
   return names.map(name => {
     const data = getModelData(name);
     if (!data) return '';
@@ -1711,226 +1685,31 @@ function renderNotFound(){
    ROUTER
    ============================================================ */
 function renderRoute(route){
-  if (route === '/') return renderHome();
-  if (route.startsWith('/model/')) return renderModelDetail(decodeURIComponent(route.slice(7)));
+  if (!route || route === '/') return renderHome();
+  if (route.startsWith('/model/')) return renderModelDetail(route.slice(7));
   if (route === '/stok') return renderStok();
   if (route === '/kredit') return renderKredit();
   return renderNotFound();
 }
+
 function routeToHash(route){
   if (route.startsWith('/model/')) return '/model/' + encodeURIComponent(route.slice(7));
-  return route;
+  return route || '/';
 }
+
 function hashToRoute(hash){
-  const path = hash.startsWith('#') ? hash.slice(1) : hash;
-  if (path.startsWith('/model/')) return '/model/' + decodeURIComponent(path.slice(7));
-  return path || '/';
+  let path = hash.startsWith('#') ? hash.slice(1) : hash;
+  if (!path) return '/';
+  if (path.startsWith('/model/')) {
+    const raw = path.slice(7);
+    try { return '/model/' + decodeURIComponent(raw); }
+    catch (e) { return '/model/' + raw; }
+  }
+  return path;
 }
 
 /* ============================================================
    NAVIGATION ENGINE
    ============================================================ */
 function makeScreen(route){
-  const el = document.createElement('section');
-  el.className = 'screen';
-  el.dataset.route = route;
-  el.innerHTML = renderRoute(route);
-  const onScroll = () => { if (!el.classList.contains('is-active')) return; updateFloatWa(el); };
-  el.addEventListener('scroll', onScroll, { passive: true });
-  el._onScroll = onScroll;
-  setupStickyHeads(el);
-  return el;
-}
-
-function pushScreen(route, animate){
-  if (animate && animating) return;
-  const current = stack[stack.length - 1];
-  const el = makeScreen(route);
-  app.appendChild(el);
-  const afterActivate = () => {
-    animating = false;
-    updateFloatWa(el);
-    if (pendingKreditModel && route === '/kredit') {
-      const target = pendingKreditModel;
-      pendingKreditModel = null;
-      setTimeout(() => expandKreditModel(el, target), 120);
-    }
-  };
-  if (animate && current) {
-    animating = true;
-    void el.offsetWidth;
-    current.classList.remove('is-active');
-    current.classList.add('is-behind');
-    el.classList.add('is-active');
-    setTimeout(afterActivate, NAV_DURATION);
-  } else if (animate) {
-    animating = true;
-    el.classList.add('is-active');
-    setTimeout(afterActivate, NAV_DURATION);
-  } else {
-    el.classList.add('no-transition', 'is-active');
-    requestAnimationFrame(() => {
-      el.classList.remove('no-transition');
-      afterActivate();
-    });
-  }
-  stack.push(el);
-}
-
-function popScreen(animate){
-  if (animate && animating) return;
-  if (stack.length <= 1) return;
-  const current = stack.pop();
-  const prev = stack[stack.length - 1];
-  if (animate) {
-    animating = true;
-    current.classList.remove('is-active');
-    prev.classList.remove('is-behind');
-    prev.classList.add('is-active');
-    setTimeout(() => {
-      if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
-      current.remove();
-      animating = false;
-      updateFloatWa(prev);
-    }, NAV_DURATION);
-  } else {
-    if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
-    current.remove();
-    prev.classList.remove('is-behind');
-    prev.classList.add('is-active');
-    updateFloatWa(prev);
-  }
-}
-
-function navigate(route){
-  if (animating) return;
-  const current = stack[stack.length - 1];
-  if (current && current.dataset.route === route) return;
-  history.pushState({ index: stack.length, route }, '', '#' + routeToHash(route));
-  pushScreen(route, true);
-}
-
-function refreshActiveList(prefix){
-  const screen = stack[stack.length - 1];
-  if (!screen) return;
-  if (prefix === 'stok') {
-    const c = screen.querySelector('#stok-list-container');
-    if (c) c.innerHTML = renderStokList();
-  } else if (prefix === 'kredit') {
-    const c = screen.querySelector('#kredit-list-container');
-    if (c) c.innerHTML = renderKreditCardsList();
-  }
-}
-
-/* ============================================================
-   EVENTS
-   ============================================================ */
-app.addEventListener('click', e => {
-  if (animating) return;
-
-  const stokEl = e.target.closest('.stok-item');
-  if (stokEl) {
-    e.preventDefault();
-    const name = stokEl.dataset.model;
-    if (name) openActionSheet(name);
-    return;
-  }
-
-  const toggleEl = e.target.closest('[data-toggle-kredit]');
-  if (toggleEl) {
-    e.preventDefault();
-    const card = toggleEl.closest('.kredit-card');
-    if (!card) return;
-    const wasOpen = card.classList.contains('open');
-    card.parentElement.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
-    card.classList.toggle('open', !wasOpen);
-    return;
-  }
-
-  const tenorEl = e.target.closest('.tenor-row');
-  if (tenorEl) {
-    e.preventDefault();
-    const card = tenorEl.closest('.kredit-card');
-    if (!card || card.classList.contains('promo-active')) return;
-    const dp = tenorEl.dataset.dp;
-    const tenor = tenorEl.dataset.tenor;
-    const cicilan = tenorEl.dataset.cicilan;
-    if (!dp || !tenor || !cicilan) return;
-    
-    card.querySelectorAll('.tenor-row').forEach(r => {
-      r.classList.remove('is-selected');
-      r.setAttribute('aria-pressed', 'false');
-    });
-    tenorEl.classList.add('is-selected');
-    tenorEl.setAttribute('aria-pressed', 'true');
-    
-    card.dataset.selDp = dp;
-    card.dataset.selTenor = tenor;
-    card.dataset.selCicilan = cicilan;
-    
-    updateKonsultasiBtn(card);
-    return;
-  }
-
-  const konsulEl = e.target.closest('[data-konsultasi]');
-  if (konsulEl) {
-    e.preventDefault();
-    const card = konsulEl.closest('.kredit-card');
-    if (!card) return;
-    openWa(buildKonsultasiMsg(card), konsulEl);
-    return;
-  }
-
-  const promoBtn = e.target.closest('[data-promo-toggle]');
-  if (promoBtn) {
-    e.preventDefault();
-    const name = promoBtn.dataset.promoToggle;
-    const card = promoBtn.closest('.kredit-card');
-    if (!card) return;
-    const data = getModelData(name);
-    if (!data) return;
-    const wasActive = card.classList.contains('promo-active');
-    const p = CONFIG.promo.beatSeries;
-
-    if (!wasActive) {
-      resetSelection(card);
-      card.classList.add('promo-active');
-      const display = card.querySelector('[data-dp-value]');
-      if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9f0a;font-weight:800;margin-left:4px">PROMO</small>`;
-      const sub = card.querySelector('[data-dp-sub]');
-      if (sub) sub.textContent = 'Mode Promo Aktif';
-      updateKonsultasiBtn(card);
-    } else {
-      card.classList.remove('promo-active');
-      const triggerDp = getPromoTriggerDp(name);
-      const opts = getSliderDpOptions(data);
-      const targetDp = (triggerDp !== null && opts.includes(triggerDp)) ? triggerDp : getDefaultDp(name);
-      const targetIdx = opts.indexOf(targetDp);
-      const slider = card.querySelector('.dp-slider');
-      if (slider && targetIdx >= 0) {
-        slider.value = targetIdx;
-        const pct = opts.length > 1 ? (targetIdx / (opts.length - 1)) * 100 : 0;
-        slider.style.setProperty('--pct', pct + '%');
-      }
-      const display = card.querySelector('[data-dp-value]');
-      if (display) display.textContent = formatRp(targetDp);
-      const sub = card.querySelector('[data-dp-sub]');
-      if (sub) sub.textContent = 'Geser untuk ubah DP';
-      const tenorList = card.querySelector('.tenor-list');
-      if (tenorList) tenorList.innerHTML = renderTenorRows(name, targetDp);
-      const promoContainer = card.querySelector('[data-promo-container]');
-      if (promoContainer) promoContainer.classList.add('is-visible');
-      resetSelection(card);
-    }
-    return;
-  }
-
-  const catEl = e.target.closest('[data-cat]');
-  if (catEl) {
-    e.preventDefault();
-    const [prefix, cat] = catEl.dataset.cat.split(':');
-    const target = prefix === 'stok' ? stokFilter : kreditFilter;
-    target.cat = cat;
-    catEl.parentElement.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('is-active'));
-    catEl.classList.add('is-active');
-    refreshActiveList(
+  const el = document.createElement('
