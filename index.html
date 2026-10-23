@@ -63,7 +63,6 @@ body{
 button,a{touch-action:manipulation}
 button{font-family:inherit}
 
-/* ================= SCREEN — solid bg, no bleed-through ================= */
 .screen{
   position:absolute;inset:0;
   overflow-y:auto;overflow-x:hidden;
@@ -114,7 +113,6 @@ a{color:inherit;text-decoration:none}
 .hero-cta.is-loading::after{border-color:rgba(0,0,0,.2);border-top-color:var(--label)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ================= HERO ================= */
 .hero{
   background:
     radial-gradient(ellipse at 75% 15%,rgba(255,159,10,0.28) 0%,transparent 50%),
@@ -202,7 +200,6 @@ a{color:inherit;text-decoration:none}
     0 2px 6px rgba(255,159,10,0.3);
 }
 
-/* ================= SECTIONS ================= */
 section{padding:6px 0 0}
 .section-head{
   position:sticky;top:0;z-index:5;
@@ -228,7 +225,6 @@ section{padding:6px 0 0}
   margin:0;letter-spacing:-.005em;line-height:1.35;
 }
 
-/* ================= SOCIALS ================= */
 .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:20px}
 .social{
   display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -255,7 +251,6 @@ section{padding:6px 0 0}
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
-/* ================= ACTIONS ================= */
 .actions{display:grid;gap:9px}
 .action{
   display:flex;align-items:center;gap:14px;padding:15px;
@@ -284,7 +279,6 @@ section{padding:6px 0 0}
 }
 .action-arrow{color:var(--label-3);font-size:20px;font-weight:300}
 
-/* ================= MODELS ================= */
 .models{display:grid;gap:12px}
 .model{
   border-radius:var(--radius-card);overflow:hidden;
@@ -355,7 +349,6 @@ section{padding:6px 0 0}
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-/* ================= TRUST ================= */
 .trust{
   border-radius:var(--radius-card);overflow:hidden;
   background:linear-gradient(180deg,#fff 0%,#fbfbfd 100%);
@@ -380,7 +373,6 @@ section{padding:6px 0 0}
   margin-top:3px;line-height:1.45;
 }
 
-/* ================= TERMS ================= */
 .terms{
   border-radius:var(--radius-card);padding:15px 17px;
   background:linear-gradient(180deg,#fff 0%,#fbfbfd 100%);
@@ -393,7 +385,6 @@ section{padding:6px 0 0}
 }
 .terms p{font-size:12.5px;color:var(--label-2);line-height:1.55}
 
-/* ================= DETAIL HEADER ================= */
 .detail-header{
   position:sticky;top:0;z-index:10;
   background:rgba(242,242,247,0.78);
@@ -423,7 +414,6 @@ section{padding:6px 0 0}
   color:var(--label);
 }
 
-/* ================= MODEL DETAIL ================= */
 .model-hero{
   height:240px;display:grid;place-items:center;
   position:relative;overflow:hidden;
@@ -483,7 +473,6 @@ section{padding:6px 0 0}
 }
 .cta-block{display:grid;gap:9px;margin-bottom:22px}
 
-/* ================= WA BUTTON ================= */
 .wa-btn{
   display:flex;align-items:center;justify-content:center;gap:7px;
   background:linear-gradient(180deg,#31d977 0%,#25d366 100%);
@@ -530,7 +519,6 @@ section{padding:6px 0 0}
 }
 @keyframes btnPulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-/* ================= HARGA CARD ================= */
 .harga-card{
   border-radius:var(--radius-card);overflow:hidden;
   margin-bottom:20px;
@@ -559,7 +547,6 @@ section{padding:6px 0 0}
 }
 .harga-cta:active{background:rgba(255,159,10,0.2)}
 
-/* ================= FILTER ================= */
 .filter-bar{padding:14px 0 10px;margin-bottom:4px}
 .search-wrap{margin-bottom:9px}
 .search-input{
@@ -602,7 +589,6 @@ section{padding:6px 0 0}
 }
 .cat-chip:active{transform:scale(.96)}
 
-/* ================= STOK ITEM ================= */
 .stok-item{
   display:flex;align-items:center;gap:12px;
   padding:13px 14px;border-radius:16px;
@@ -637,7 +623,6 @@ section{padding:6px 0 0}
 }
 .empty-state{padding:36px 20px;text-align:center;color:var(--label-2);font-size:14px}
 
-/* ================= KREDIT CARD ================= */
 .kredit-card{
   border-radius:var(--radius-card);overflow:hidden;
   margin-bottom:9px;scroll-margin-top:70px;
@@ -694,7 +679,6 @@ section{padding:6px 0 0}
 }
 .kredit-body-inner{padding-top:14px}
 
-/* ================= DP SLIDER ================= */
 .dp-slider-wrap{
   border-radius:14px;padding:13px 15px;margin-bottom:14px;
   background:rgba(120,120,128,0.06);
@@ -771,7 +755,6 @@ section{padding:6px 0 0}
   font-size:13px;line-height:1;margin-top:1px;flex-shrink:0;
 }
 
-/* ================= PROMO ================= */
 .promo-container{display:none;margin-top:0}
 .promo-container.is-visible{display:block;animation:slideDown .35s var(--nav-easing) both}
 @keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
@@ -856,7 +839,6 @@ section{padding:6px 0 0}
 .kredit-card.promo-active .dp-slider-labels{opacity:.4}
 .kredit-card.promo-active .dp-display-label{color:var(--accent-2)}
 
-/* ================= TENOR LIST ================= */
 .tenor-list{
   border-radius:12px;overflow:hidden;margin-bottom:14px;
   background:rgba(120,120,128,0.05);
@@ -893,7 +875,6 @@ section{padding:6px 0 0}
 .tenor-row.is-selected .tenor-cicilan{color:var(--accent-2)}
 .tenor-row.is-selected .tenor-arrow{color:var(--accent-2)}
 
-/* ================= FLOAT WA ================= */
 .float-wa{
   position:fixed;right:18px;
   bottom:calc(18px + env(safe-area-inset-bottom));
@@ -911,7 +892,6 @@ section{padding:6px 0 0}
 .float-wa svg{width:28px;height:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
 .float-wa.is-hidden{opacity:0;transform:scale(.6) translateY(24px);pointer-events:none;box-shadow:none}
 
-/* ================= SHEET ================= */
 .sheet-backdrop{
   position:fixed;inset:0;
   background:rgba(0,0,0,0.35);
@@ -1012,7 +992,6 @@ section{padding:6px 0 0}
 }
 .sheet-cancel:active{transform:scale(.97);background:var(--surface-2)}
 
-/* ================= FOOTER & NOTFOUND ================= */
 footer{
   text-align:center;padding:38px 0 18px;
   font-size:11.5px;color:var(--label-3);letter-spacing:-.005em;
@@ -1024,7 +1003,6 @@ footer{
 }
 .not-found p{color:var(--label-2);margin-bottom:18px;font-size:14px}
 
-/* ================= FALLBACK ================= */
 @supports not ((backdrop-filter:blur(24px)) or (-webkit-backdrop-filter:blur(24px))){
   .section-head{background:rgba(242,242,247,0.98)}
   .detail-header{background:rgba(242,242,247,0.98)}
@@ -1098,7 +1076,13 @@ footer{
           }
         }
       },
-      images: { profil: "", "New BeAT CBS": "", "SCOOPY Energetic & Fashion": "", "All New Vario 125 CBS": "", "PCX 160 CBS": "", "ADV 160 CBS": "" }
+      // === GAMBAR ===
+      // profil diisi manual, model diambil otomatis dari folder img/
+      images: {
+        profil: "img/profil.jpg"
+      },
+      imageBase: "img/",
+      imageExt: "jpg"
     };
 
     function readMotorData() {
@@ -1219,7 +1203,19 @@ footer{
       if (!t) return [];
       return Object.keys(t).map(Number).sort(function(a,b){ return a-b; });
     }
-    function getImageForModel(name){ return CONFIG.images[name] || ''; }
+
+    // === GAMBAR: nama model -> slug -> file di folder img/ ===
+    function slugify(s) {
+      return String(s)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+    function getImageForModel(name) {
+      if (CONFIG.images[name]) return CONFIG.images[name];
+      if (!CONFIG.imageBase) return '';
+      return CONFIG.imageBase + slugify(name) + '.' + (CONFIG.imageExt || 'jpg');
+    }
 
     var app = document.getElementById('app');
     var floatWa = document.getElementById('floatWa');
@@ -1228,6 +1224,7 @@ footer{
     var animating = false;
     var pendingKreditModel = null;
     var pendingSheetModel = null;
+    var sheetPushedHistory = false;
     var historyOK = false;
     var stokFilter = { q: '', cat: 'all' };
     var kreditFilter = { q: '', cat: 'all' };
@@ -1304,12 +1301,27 @@ footer{
       if (sheetBackdrop) sheetBackdrop.classList.add('is-open');
       if (actionSheet) actionSheet.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      // Sisipkan history entry supaya back gesture / hardware back
+      // menutup sheet dulu, bukan langsung navigasi
+      try {
+        history.pushState({ actionSheet: true }, '', location.hash || '#/');
+        sheetPushedHistory = true;
+      } catch (e) {
+        sheetPushedHistory = false;
+      }
     }
-    function closeActionSheet(){
+
+    function closeActionSheet(skipHistory){
       if (sheetBackdrop) sheetBackdrop.classList.remove('is-open');
       if (actionSheet) actionSheet.classList.remove('is-open');
       document.body.style.overflow = '';
       pendingSheetModel = null;
+      if (sheetPushedHistory) {
+        sheetPushedHistory = false;
+        if (!skipHistory) {
+          try { history.back(); } catch (e) {}
+        }
+      }
     }
 
     function updateKonsultasiBtn(card){
@@ -1758,6 +1770,11 @@ footer{
 
     function goBack(){
       if (animating) return;
+      // Kalau sheet sedang terbuka, tombol kembali menutup sheet dulu
+      if (actionSheet && actionSheet.classList.contains('is-open')) {
+        closeActionSheet();
+        return;
+      }
       if (stack.length > 1) {
         if (historyOK) { try { history.back(); return; } catch (e) {} }
         popScreen(true);
@@ -1978,19 +1995,35 @@ footer{
     if (sheetCancel) sheetCancel.addEventListener('click', closeActionSheet);
     if (sheetBackdrop) sheetBackdrop.addEventListener('click', closeActionSheet);
 
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && actionSheet && actionSheet.classList.contains('is-open')) {
+        closeActionSheet();
+      }
+    });
+
     var sheetActionBtns = document.querySelectorAll('[data-sheet-action]');
     for (var si = 0; si < sheetActionBtns.length; si++) {
       (function(btn){
         btn.addEventListener('click', function(){
           var name = pendingSheetModel;
           var action = btn.getAttribute('data-sheet-action');
-          closeActionSheet();
-          if (!name) return;
+          var hadHistoryPush = sheetPushedHistory;
+          if (!name) { closeActionSheet(); return; }
           if (action === 'cash') {
+            closeActionSheet();
             openWa('Halo Dion, saya dari TikTok. Mau tanya harga cash & stok ' + name + '.', btn);
           } else if (action === 'kredit') {
             pendingKreditModel = name;
-            navigate('/kredit');
+            if (hadHistoryPush) {
+              // Ganti entry sheet menjadi /kredit (tanpa menumpuk history)
+              sheetPushedHistory = false;
+              try { history.replaceState({ route: '/kredit' }, '', '#/kredit'); } catch (e) {}
+              closeActionSheet(true);
+              pushScreen('/kredit', true);
+            } else {
+              closeActionSheet(true);
+              navigate('/kredit');
+            }
           }
         });
       })(sheetActionBtns[si]);
@@ -2004,6 +2037,11 @@ footer{
     }
 
     window.addEventListener('popstate', function(){
+      // Back gesture saat sheet terbuka → tutup sheet, jangan navigasi
+      if (actionSheet && actionSheet.classList.contains('is-open')) {
+        closeActionSheet(true);
+        return;
+      }
       var route = hashToRoute(location.hash || '');
       var current = stack[stack.length - 1];
       if (current && current.getAttribute('data-route') === route) return;
