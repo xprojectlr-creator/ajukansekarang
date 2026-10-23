@@ -1712,4 +1712,400 @@ function hashToRoute(hash){
    NAVIGATION ENGINE
    ============================================================ */
 function makeScreen(route){
-  const el = document.createElement('
+  const el = document.createElement('section');
+  el.className = 'screen';
+  el.dataset.route = route;
+  el.innerHTML = renderRoute(route);
+  const onScroll = () => { if (!el.classList.contains('is-active')) return; updateFloatWa(el); };
+  el.addEventListener('scroll', onScroll, { passive: true });
+  el._onScroll = onScroll;
+  setupStickyHeads(el);
+  return el;
+}
+
+function pushScreen(route, animate){
+  if (animate && animating) return;
+  const current = stack[stack.length - 1];
+  const el = makeScreen(route);
+  app.appendChild(el);
+
+  const afterActivate = () => {
+    animating = false;
+    updateFloatWa(el);
+    if (pendingKreditModel && route === '/kredit') {
+      const target = pendingKreditModel;
+      pendingKreditModel = null;
+      setTimeout(() => expandKreditModel(el, target), 120);
+    }
+  };
+
+  if (animate && current) {
+    animating = true;
+    void el.offsetWidth;
+    current.classList.remove('is-active');
+    current.classList.add('is-behind');
+    el.classList.add('is-active');
+    setTimeout(afterActivate, NAV_DURATION);
+  } else if (animate) {
+    animating = true;
+    el.classList.add('is-active');
+    setTimeout(afterActivate, NAV_DURATION);
+  } else {
+    el.classList.add('no-transition', 'is-active');
+    if (current) {
+      current.classList.add('no-transition');
+      current.classList.remove('is-active');
+      current.classList.add('is-behind');
+    }
+    requestAnimationFrame(() => {
+      el.classList.remove('no-transition');
+      if (current) current.classList.remove('no-transition');
+      afterActivate();
+    });
+  }
+  stack.push(el);
+}
+
+function popScreen(animate){
+  if (animate && animating) return;
+  if (stack.length <= 1) return;
+  const current = stack.pop();
+  const prev = stack[stack.length - 1];
+
+  if (animate) {
+    animating = true;
+    current.classList.remove('is-active');
+    prev.classList.remove('is-behind');
+    prev.classList.add('is-active');
+    setTimeout(() => {
+      if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+      current.remove();
+      animating = false;
+      updateFloatWa(prev);
+    }, NAV_DURATION);
+  } else {
+    if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+    current.remove();
+    prev.classList.remove('is-behind');
+    prev.classList.add('is-active');
+    updateFloatWa(prev);
+  }
+}
+
+function popTo(index){
+  if (index < 0 || index >= stack.length - 1) return;
+  while (stack.length - 1 > index + 1) {
+    const s = stack.pop();
+    if (s._onScroll) s.removeEventListener('scroll', s._onScroll);
+    s.remove();
+  }
+  popScreen(true);
+}
+
+function navigate(route){
+  if (animating) return;
+  const current = stack[stack.length - 1];
+  if (current && current.dataset.route === route) return;
+  history.pushState({ index: stack.length, route }, '', '#' + routeToHash(route));
+  pushScreen(route, true);
+}
+
+function goBack(){
+  if (stack.length > 1) {
+    history.back();
+  } else {
+    const current = stack[0];
+    if (current && current.dataset.route !== '/') {
+      history.replaceState({ index: 0, route: '/' }, '', '#/');
+      const home = makeScreen('/');
+      app.appendChild(home);
+      home.classList.add('no-transition', 'is-active');
+      current.classList.add('no-transition');
+      current.classList.remove('is-active');
+      current.classList.add('is-behind');
+      requestAnimationFrame(() => {
+        home.classList.remove('no-transition');
+        current.classList.remove('no-transition');
+        updateFloatWa(home);
+      });
+      stack.length = 0;
+      stack.push(home);
+      if (current._onScroll) current.removeEventListener('scroll', current._onScroll);
+      current.remove();
+    }
+  }
+}
+
+function refreshActiveList(prefix){
+  const screen = stack[stack.length - 1];
+  if (!screen) return;
+  if (prefix === 'stok') {
+    const c = screen.querySelector('#stok-list-container');
+    if (c) c.innerHTML = renderStokList();
+  } else if (prefix === 'kredit') {
+    const c = screen.querySelector('#kredit-list-container');
+    if (c) c.innerHTML = renderKreditCardsList();
+  }
+}
+
+/* ============================================================
+   EVENT HANDLERS
+   ============================================================ */
+function handleSliderInput(slider){
+  const card = slider.closest('.kredit-card');
+  if (!card || card.classList.contains('promo-active')) return;
+  const name = slider.dataset.model;
+  const data = getModelData(name);
+  if (!data) return;
+
+  const opts = getSliderDpOptions(data);
+  const idx = Math.max(0, Math.min(opts.length - 1, Number(slider.value)));
+  const dp = opts[idx];
+  const pct = opts.length > 1 ? (idx / (opts.length - 1)) * 100 : 0;
+
+  slider.style.setProperty('--pct', pct + '%');
+
+  const display = card.querySelector('[data-dp-value]');
+  if (display) display.textContent = formatRp(dp);
+
+  const tenorList = card.querySelector('[data-tenor-list]');
+  if (tenorList) tenorList.innerHTML = renderTenorRows(name, dp);
+
+  const promoContainer = card.querySelector('[data-promo-container]');
+  if (promoContainer) {
+    const triggerDp = getPromoTriggerDp(name);
+    if (triggerDp !== null && dp === triggerDp) promoContainer.classList.add('is-visible');
+    else promoContainer.classList.remove('is-visible');
+  }
+
+  resetSelection(card);
+}
+
+function handleSearchInput(input){
+  const prefix = input.dataset.search;
+  const val = input.value;
+  if (prefix === 'stok') stokFilter.q = val;
+  else if (prefix === 'kredit') kreditFilter.q = val;
+  else return;
+  refreshActiveList(prefix);
+}
+
+/* --- input / change delegation --- */
+app.addEventListener('input', e => {
+  if (e.target.closest('[data-search]')) { handleSearchInput(e.target); return; }
+  if (e.target.classList && e.target.classList.contains('dp-slider')) { handleSliderInput(e.target); return; }
+});
+
+/* --- click delegation --- */
+app.addEventListener('click', e => {
+  if (animating) return;
+
+  /* 1. Tombol kembali */
+  const backEl = e.target.closest('[data-back]');
+  if (backEl) {
+    e.preventDefault();
+    goBack();
+    return;
+  }
+
+  /* 2. Navigasi antar halaman */
+  const navEl = e.target.closest('[data-nav]');
+  if (navEl) {
+    e.preventDefault();
+    if (navEl.dataset.expandKredit) pendingKreditModel = navEl.dataset.expandKredit;
+    navigate(navEl.dataset.nav);
+    return;
+  }
+
+  /* 3. Tombol WhatsApp (data-msg) */
+  const msgEl = e.target.closest('[data-msg]');
+  if (msgEl) {
+    e.preventDefault();
+    openWa(msgEl.dataset.msg, msgEl);
+    return;
+  }
+
+  /* 4. Item stok → action sheet */
+  const stokEl = e.target.closest('.stok-item');
+  if (stokEl) {
+    e.preventDefault();
+    const name = stokEl.dataset.model;
+    if (name) openActionSheet(name);
+    return;
+  }
+
+  /* 5. Buka/tutup kartu kredit */
+  const toggleEl = e.target.closest('[data-toggle-kredit]');
+  if (toggleEl) {
+    e.preventDefault();
+    const card = toggleEl.closest('.kredit-card');
+    if (!card) return;
+    const wasOpen = card.classList.contains('open');
+    const parent = card.parentElement;
+    if (parent) parent.querySelectorAll('.kredit-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
+    card.classList.toggle('open', !wasOpen);
+    return;
+  }
+
+  /* 6. Pilih tenor */
+  const tenorEl = e.target.closest('.tenor-row');
+  if (tenorEl) {
+    e.preventDefault();
+    const card = tenorEl.closest('.kredit-card');
+    if (!card || card.classList.contains('promo-active')) return;
+    const dp = tenorEl.dataset.dp;
+    const tenor = tenorEl.dataset.tenor;
+    const cicilan = tenorEl.dataset.cicilan;
+    if (!dp || !tenor || !cicilan) return;
+
+    card.querySelectorAll('.tenor-row').forEach(r => {
+      r.classList.remove('is-selected');
+      r.setAttribute('aria-pressed', 'false');
+    });
+    tenorEl.classList.add('is-selected');
+    tenorEl.setAttribute('aria-pressed', 'true');
+
+    card.dataset.selDp = dp;
+    card.dataset.selTenor = tenor;
+    card.dataset.selCicilan = cicilan;
+
+    updateKonsultasiBtn(card);
+    return;
+  }
+
+  /* 7. Konsultasi via WhatsApp */
+  const konsulEl = e.target.closest('[data-konsultasi]');
+  if (konsulEl) {
+    e.preventDefault();
+    const card = konsulEl.closest('.kredit-card');
+    if (!card) return;
+    openWa(buildKonsultasiMsg(card), konsulEl);
+    return;
+  }
+
+  /* 8. Toggle promo */
+  const promoBtn = e.target.closest('[data-promo-toggle]');
+  if (promoBtn) {
+    e.preventDefault();
+    const name = promoBtn.dataset.promoToggle;
+    const card = promoBtn.closest('.kredit-card');
+    if (!card) return;
+    const data = getModelData(name);
+    if (!data) return;
+    const wasActive = card.classList.contains('promo-active');
+    const p = CONFIG.promo.beatSeries;
+
+    if (!wasActive) {
+      resetSelection(card);
+      card.classList.add('promo-active');
+      const display = card.querySelector('[data-dp-value]');
+      if (display) display.innerHTML = `${formatRp(p.dp)} <small style="font-size:10px;color:#ff9f0a;font-weight:800;margin-left:4px">PROMO</small>`;
+      const sub = card.querySelector('[data-dp-sub]');
+      if (sub) sub.textContent = 'Mode Promo Aktif';
+      updateKonsultasiBtn(card);
+    } else {
+      card.classList.remove('promo-active');
+      const triggerDp = getPromoTriggerDp(name);
+      const opts = getSliderDpOptions(data);
+      const targetDp = (triggerDp !== null && opts.includes(triggerDp)) ? triggerDp : getDefaultDp(name);
+      const targetIdx = opts.indexOf(targetDp);
+      const slider = card.querySelector('.dp-slider');
+      if (slider && targetIdx >= 0) {
+        slider.value = targetIdx;
+        const pct = opts.length > 1 ? (targetIdx / (opts.length - 1)) * 100 : 0;
+        slider.style.setProperty('--pct', pct + '%');
+      }
+      const display = card.querySelector('[data-dp-value]');
+      if (display) display.textContent = formatRp(targetDp);
+      const sub = card.querySelector('[data-dp-sub]');
+      if (sub) sub.textContent = 'Geser untuk ubah DP';
+      const tenorList = card.querySelector('[data-tenor-list]');
+      if (tenorList) tenorList.innerHTML = renderTenorRows(name, targetDp);
+      const promoContainer = card.querySelector('[data-promo-container]');
+      if (promoContainer) {
+        if (targetDp === triggerDp) promoContainer.classList.add('is-visible');
+        else promoContainer.classList.remove('is-visible');
+      }
+      resetSelection(card);
+    }
+    return;
+  }
+
+  /* 9. Filter kategori */
+  const catEl = e.target.closest('[data-cat]');
+  if (catEl) {
+    e.preventDefault();
+    const parts = catEl.dataset.cat.split(':');
+    const prefix = parts[0];
+    const cat = parts[1];
+    const target = prefix === 'stok' ? stokFilter : kreditFilter;
+    target.cat = cat;
+    const tabs = catEl.parentElement;
+    if (tabs) tabs.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('is-active'));
+    catEl.classList.add('is-active');
+    refreshActiveList(prefix);
+    return;
+  }
+});
+
+/* --- Action sheet --- */
+document.getElementById('sheetCancel').addEventListener('click', closeActionSheet);
+document.getElementById('sheetBackdrop').addEventListener('click', closeActionSheet);
+
+document.querySelectorAll('[data-sheet-action]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const name = pendingSheetModel;
+    const action = btn.dataset.sheetAction;
+    closeActionSheet();
+    if (!name) return;
+    if (action === 'cash') {
+      openWa(`Halo Dion, saya dari TikTok. Mau tanya harga cash & stok ${name}.`, btn);
+    } else if (action === 'kredit') {
+      pendingKreditModel = name;
+      navigate('/kredit');
+    }
+  });
+});
+
+/* --- Floating WhatsApp --- */
+if (floatWa) {
+  floatWa.addEventListener('click', e => {
+    e.preventDefault();
+    openWa(CONFIG.defaultMessage, null);
+  });
+}
+
+/* --- Browser back / forward --- */
+window.addEventListener('popstate', () => {
+  const route = hashToRoute(location.hash);
+  const current = stack[stack.length - 1];
+  if (current && current.dataset.route === route) return;
+
+  const idx = stack.findIndex(s => s.dataset.route === route);
+  if (idx >= 0 && idx < stack.length - 1) {
+    popTo(idx);
+  } else {
+    pushScreen(route, true);
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function init(){
+  const initialRoute = hashToRoute(location.hash || '#/');
+  history.replaceState({ index: 0, route: '/' }, '', '#/');
+  pushScreen('/', false);
+
+  if (initialRoute && initialRoute !== '/') {
+    history.pushState({ index: 1, route: initialRoute }, '', '#' + routeToHash(initialRoute));
+    pushScreen(initialRoute, false);
+  }
+
+  if (!Object.keys(DATA_MOTOR).length) {
+    console.warn('[Honda] data.js tidak memuat DATA_MOTOR — daftar model kosong.');
+  }
+})();
+</script>
+</body>
+</html>
